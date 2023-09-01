@@ -1,0 +1,1 @@
+import FornecedorDAO from "../Resistencia/FornecedoresDAO.js"
