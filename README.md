@@ -16,8 +16,10 @@ Comandos Git
   
 caminho
 - caminho ... -> remote -> add remote (https://github.com/MrBElga/SistemaReactLp2.git)
+- caminho ... -> check out -> "nome"
 criação de token 
  configurações -> deploy key
+
 
 
 
