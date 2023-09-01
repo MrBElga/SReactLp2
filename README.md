@@ -12,6 +12,8 @@ Comandos Git
 - git add -a
 - git config --global user.email "danieleliasrumin@gmail.com"
 - git config --global user.username "MrBElga"
+- git commit -m "msg"
+  
 caminho
 - caminho ... -> remote -> add remote (https://github.com/MrBElga/SistemaReactLp2.git)
 criação de token 
