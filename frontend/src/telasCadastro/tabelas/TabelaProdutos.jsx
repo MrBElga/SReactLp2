@@ -1,4 +1,4 @@
-import { Button, Container, Table } from "react-bootstrap";
+import { Container, Table } from "react-bootstrap";
 
 export default function TabelaProdutos(props) {
   return (
@@ -20,8 +20,6 @@ export default function TabelaProdutos(props) {
             <td>R$ 100,00</td>
             <td>50 unidades</td>
           </tr>
-
-
         </tbody>
       </Table>
     </Container>

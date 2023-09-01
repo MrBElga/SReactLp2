@@ -1,4 +1,4 @@
-import { Button, Container, Table } from "react-bootstrap";
+import { Container, Table } from "react-bootstrap";
 
 export default function TabelaFornecedores(props) {
   return (
@@ -24,7 +24,6 @@ export default function TabelaFornecedores(props) {
             <td>São Paulo/SP</td>
             <td>01010-000</td>
           </tr>
-          {/* Adicione mais linhas conforme necessário para exibir outros fornecedores */}
         </tbody>
       </Table>
     </Container>

@@ -1,4 +1,4 @@
-import { Button, Container, Table } from "react-bootstrap";
+import {Container, Table } from "react-bootstrap";
 
 export default function TabelaClientes(props) {
     return (

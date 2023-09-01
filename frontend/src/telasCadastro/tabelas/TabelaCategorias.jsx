@@ -1,4 +1,4 @@
-import { Button, Container, Table } from "react-bootstrap";
+import { Container, Table } from "react-bootstrap";
 
 export default function TabelaCategorias(props) {
   return (
@@ -15,7 +15,6 @@ export default function TabelaCategorias(props) {
             <td>Categoria A</td>
             <td>Descrição da Categoria A</td>
           </tr>
-          {/* Adicione mais linhas conforme necessário para exibir outras categorias */}
         </tbody>
       </Table>
     </Container>
