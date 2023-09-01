@@ -7,6 +7,14 @@ Instalando a biblioteca React:
 Criando seu projeto 
 - npx create-react-app <Nome>
 
+Comandos Git 
+- git init
+
+caminho
+- caminho ... -> remote -> add remote (https://github.com/MrBElga/SistemaReactLp2.git)
+criação de token 
+ configurações -> deploy key 
+
 Site para pegar icones
 
 phosphoricon
