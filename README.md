@@ -9,11 +9,14 @@ Criando seu projeto
 
 Comandos Git 
 - git init
-
+- git add -a
+- 
 caminho
 - caminho ... -> remote -> add remote (https://github.com/MrBElga/SistemaReactLp2.git)
 criação de token 
- configurações -> deploy key 
+ configurações -> deploy key
+
+
 
 Site para pegar icones
 
