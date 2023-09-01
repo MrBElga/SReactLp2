@@ -24,7 +24,7 @@ class Categoria {
     }
 
     set codigo(Cod) {
-        if (Cod > 0) // Corrigido para Cod
+        if (Cod > 0)
             this.#codigo = Cod;
     }
 
@@ -50,23 +50,23 @@ class Categoria {
 
     async gravar() {
         const categoriaDAO = new CategoriaDAO();
-        const id = await categoriaDAO.gravar(this); // Corrigido para passar a instância atual
+        const id = await categoriaDAO.gravar(this);
         this.#codigo = id;
     }
 
     async atualizar() {
         const categoriaDAO = new CategoriaDAO();
-        await categoriaDAO.atualizar(this); // Corrigido para passar a instância atual
+        await categoriaDAO.atualizar(this);
     }
 
     async excluir() {
         const categoriaDAO = new CategoriaDAO();
-        await categoriaDAO.excluir(this); // Corrigido para passar a instância atual
+        await categoriaDAO.excluir(this);
     }
 
     async consultar() {
         const categoriaDAO = new CategoriaDAO();
-        return await categoriaDAO.consultar(this); // Corrigido para passar a instância atual
+        return await categoriaDAO.consultar(this);
     }
 
     async consultarID(id) {
