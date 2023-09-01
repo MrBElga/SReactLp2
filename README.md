@@ -18,6 +18,8 @@ caminho
 - caminho ... -> remote -> add remote (https://github.com/MrBElga/SistemaReactLp2.git)
 criação de token 
  configurações -> deploy key
+- caminho ... -> check out -> "nome"
+- 
 
 
 
