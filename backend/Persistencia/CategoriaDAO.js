@@ -1,4 +1,3 @@
-import Categoria from "../Modelo/Categoria.js";
 import conectar from "./Conexao.js";
 
 export default class CategoriaDAO {
@@ -31,6 +30,7 @@ export default class CategoriaDAO {
 
     async consultar() {
         const conexao = conectar();
+        
         const sql = "SELECT * FROM categorias";
 
         try {

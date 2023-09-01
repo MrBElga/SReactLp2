@@ -1,7 +1,7 @@
-import express from "express";
-import CategoriaCTRL from "../Controladores/CategoriaCTRL.js";
+import { Router } from "express";
+import CategoriaCTRL from "../Controle/CategoriaCTRL.js";
 
-const router = express.Router();
+const router = new Router();
 const categoriaController = new CategoriaCTRL();
 
 router.post("/categorias", categoriaController.gravar);

@@ -1,6 +1,28 @@
 {
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Projeto backend LP2 CC FIPP",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "backend",
+    "mvc",
+    "rest-api",
+    "json",
+    "sistemas",
+    "distribuidos"
+  ],
+  "author": "ASKLAV",
+  "license": "ISC",
   "dependencies": {
-    "ejs": "^3.1.9",
-    "express": "^4.18.2"
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mysql2": "^2.3.3",
+    "mysql2-promise": "^0.1.4",
+    "nodemon": "^3.0.1"
   }
 }

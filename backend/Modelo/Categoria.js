@@ -1,4 +1,4 @@
-import CategoriaDAO from "../Resistencia/CategoriaDAO.js";
+import CategoriaDAO from "../Persistencia/CategoriaDAO.js";
 
 class Categoria {
     #codigo;
@@ -24,7 +24,7 @@ class Categoria {
     }
 
     set codigo(Cod) {
-        if (Cod > 0)
+        if (Cod > 0) 
             this.#codigo = Cod;
     }
 
@@ -50,7 +50,7 @@ class Categoria {
 
     async gravar() {
         const categoriaDAO = new CategoriaDAO();
-        const id = await categoriaDAO.gravar(this);
+        const id = await categoriaDAO.gravar(this); 
         this.#codigo = id;
     }
 
@@ -61,12 +61,12 @@ class Categoria {
 
     async excluir() {
         const categoriaDAO = new CategoriaDAO();
-        await categoriaDAO.excluir(this);
+        await categoriaDAO.excluir(this); 
     }
 
     async consultar() {
         const categoriaDAO = new CategoriaDAO();
-        return await categoriaDAO.consultar(this);
+        return await categoriaDAO.consultar(this); 
     }
 
     async consultarID(id) {

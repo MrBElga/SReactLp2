@@ -1,9 +1,11 @@
-import ClientesDAO from "../Resistencia/ClientesDAO.js";
+import ClientesDAO from "../Persistencia/ClientesDAO.js";
 
 class Clientes {
     #codigo;
     #cpf;
     #nome;
+    #telefone;
+    #celular;
     #endereco;
     #numero;
     #bairro;
@@ -12,10 +14,12 @@ class Clientes {
     #cep;
     #email;
 
-    constructor(cpf, nome, endereco, numero, bairro, cidade, uf, cep, email, codigo = 0) {
+    constructor(cpf, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email, codigo = 0) {
         this.#codigo = codigo;
         this.#cpf = cpf;
         this.#nome = nome;
+        this.#telefone = telefone;
+        this.#celular = celular;
         this.#endereco = endereco;
         this.#numero = numero;
         this.#bairro = bairro;
@@ -30,6 +34,8 @@ class Clientes {
             codigo: this.#codigo,
             cpf: this.#cpf,
             nome: this.#nome,
+            telefone: this.#telefone,
+            celular: this.#celular,
             endereco: this.#endereco,
             numero: this.#numero,
             bairro: this.#bairro,
@@ -62,6 +68,22 @@ class Clientes {
 
     set nome(nome) {
         this.#nome = nome;
+    }
+
+    get telefone() {
+        return this.#telefone;
+    }
+
+    set telefone(telefone) {
+        this.#telefone = telefone;
+    }
+
+    get celular() {
+        return this.#celular;
+    }
+
+    set celular(celular) {
+        this.#celular = celular;
     }
 
     get endereco() {
@@ -121,33 +143,36 @@ class Clientes {
     }
 
     toString() {
-        return `Cliente - Código: ${this.#codigo}, Nome: ${this.#nome}, CPF: ${this.#cpf}, Endereço: ${this.#endereco}, Número: ${this.#numero}, Bairro: ${this.#bairro}, Cidade: ${this.#cidade}, UF: ${this.#uf}, CEP: ${this.#cep}, Email: ${this.#email}`;
+        return `Cliente - Código: ${this.#codigo}, Nome: ${this.#nome}, CPF: ${this.#cpf}, Telefone: ${this.#telefone}, Celular: ${this.#celular}, Endereço: ${this.#endereco}, Número: ${this.#numero}, Bairro: ${this.#bairro}, Cidade: ${this.#cidade}, UF: ${this.#uf}, CEP: ${this.#cep}, Email: ${this.#email}`;
     }
 
-    async gravar() {
+    async gravar(conexao) {
         const clientesDAO = new ClientesDAO();
-        const id = await clientesDAO.gravar(this);
+      
+        const id = await clientesDAO.gravar(this,conexao);
         this.#codigo = id;
     }
 
-    async atualizar() {
+    async atualizar(conexao) {
         const clientesDAO = new ClientesDAO();
-        await clientesDAO.atualizar(this);
+        await clientesDAO.atualizar(this,conexao);
+        console.log(this)
     }
 
-    async excluir() {
+    async excluir(conexao) {
         const clientesDAO = new ClientesDAO();
-        await clientesDAO.excluir(this);
+        await clientesDAO.excluir(this,conexao);
     }
 
-    async consultar() {
+    async consultar(conexao) {
+        
         const clientesDAO = new ClientesDAO();
-        return await clientesDAO.consultar(this);
+        return await clientesDAO.consultar(conexao);
     }
 
-    async consultarID(id) {
+    async consultarID(id,conexao) {
         const clientesDAO = new ClientesDAO();
-        return await clientesDAO.consultarId(id);
+        return await clientesDAO.consultarId(id,conexao);
     }
 }
 

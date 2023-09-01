@@ -21,15 +21,6 @@ import mysql from 'mysql2/promise';
         keepAliveInitialDelay: 0
       });
 
-    /*
-    const conexao = await mysql.createConnection({
-        host:"localhost",
-        port:3306,
-        user:"root",
-        password:"",
-        database:"backend"
-    });*/
-
     global.pool = pool;
     return global.pool.getConnection();
 }

@@ -1,10 +1,8 @@
-import conectar from "./Conexao.js";
-
 export default class ProdutoDAO {
     constructor() {}
 
-    async gravar(produto) {
-        const conexao = conectar();
+    async gravar(produto,conexao) {
+     
         const sql = "INSERT INTO produtos (nome, descricao, preco, estoque, fornecedor_id) VALUES (?, ?, ?, ?, ?)";
         const valores = [produto.nome, produto.descricao, produto.preco, produto.estoque, produto.fornecedorId];
 
@@ -16,8 +14,8 @@ export default class ProdutoDAO {
         }
     }
 
-    async atualizar(produto) {
-        const conexao = conectar();
+    async atualizar(produto,conexao) {
+ 
         const sql = "UPDATE produtos SET nome = ?, descricao = ?, preco = ?, estoque = ?, fornecedor_id = ? WHERE codigo = ?";
         const valores = [produto.nome, produto.descricao, produto.preco, produto.estoque, produto.fornecedorId, produto.codigo];
 
@@ -28,8 +26,8 @@ export default class ProdutoDAO {
         }
     }
 
-    async consultar() {
-        const conexao = conectar();
+    async consultar(conexao) {
+    
         const sql = "SELECT * FROM produtos";
 
         try {
@@ -40,8 +38,8 @@ export default class ProdutoDAO {
         }
     }
 
-    async consultarID(id) {
-        const conexao = conectar();
+    async consultarID(id,conexao) {
+
         const sql = "SELECT * FROM produtos WHERE codigo = ?";
 
         try {
@@ -52,8 +50,8 @@ export default class ProdutoDAO {
         }
     }
 
-    async excluir(produto) {
-        const conexao = conectar();
+    async excluir(produto,conexao) {
+
         const sql = "DELETE FROM produtos WHERE codigo = ?";
 
         try {

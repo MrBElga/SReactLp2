@@ -1,4 +1,4 @@
-import FornecedorDAO from "../Persistencia/FornecedorDAO.js";
+import FornecedorDAO from "../Persistencia/FornecedoresDAO.js";
 
 class Fornecedor {
     #codigo;
@@ -146,30 +146,30 @@ class Fornecedor {
         return `Fornecedor - Código: ${this.#codigo}, Nome: ${this.#nome}, CPF: ${this.#cpf}, Email: ${this.#email}`;
     }
 
-    async gravar() {
+    async gravar(conexao) {
         const fornecedorDAO = new FornecedorDAO();
-        const id = await fornecedorDAO.gravar(this);
+        const id = await fornecedorDAO.gravar(this,conexao);
         this.#codigo = id;
     }
 
-    async atualizar() {
+    async atualizar(conexao) {
         const fornecedorDAO = new FornecedorDAO();
-        await fornecedorDAO.atualizar(this);
+        await fornecedorDAO.atualizar(this,conexao);
     }
 
-    async excluir() {
+    async excluir(conexao) {
         const fornecedorDAO = new FornecedorDAO();
-        await fornecedorDAO.excluir(this);
+        await fornecedorDAO.excluir(this,conexao);
     }
 
-    async consultar() {
+    async consultar(conexao) {
         const fornecedorDAO = new FornecedorDAO();
-        return await fornecedorDAO.consultar(this);
+        return await fornecedorDAO.consultar(this,conexao);
     }
 
-    async consultarID(id) {
+    async consultarID(id,conexao) {
         const fornecedorDAO = new FornecedorDAO();
-        return await fornecedorDAO.consultarID(id);
+        return await fornecedorDAO.consultarID(id,conexao);
     }
 }
 

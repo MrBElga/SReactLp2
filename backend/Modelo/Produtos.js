@@ -1,4 +1,4 @@
-import ProdutoDAO from "../Persistencia/ProdutoDAO.js";
+import ProdutoDAO from "../Persistencia/ProdutosDAO.js";
 
 class Produto {
     #codigo;
@@ -80,30 +80,30 @@ class Produto {
         return `Produto - Código: ${this.#codigo}, Nome: ${this.#nome}, Descrição: ${this.#descricao}, Preço: ${this.#preco}`;
     }
 
-    async gravar() {
+    async gravar(conexao) {
         const produtoDAO = new ProdutoDAO();
-        const id = await produtoDAO.gravar(this);
+        const id = await produtoDAO.gravar(this,conexao);
         this.#codigo = id;
     }
 
-    async atualizar() {
+    async atualizar(conexao) {
         const produtoDAO = new ProdutoDAO();
-        await produtoDAO.atualizar(this);
+        await produtoDAO.atualizar(this,conexao);
     }
 
-    async excluir() {
+    async excluir(conexao) {
         const produtoDAO = new ProdutoDAO();
-        await produtoDAO.excluir(this);
+        await produtoDAO.excluir(this,conexao);
     }
 
-    async consultar() {
+    async consultar(conexao) {
         const produtoDAO = new ProdutoDAO();
-        return await produtoDAO.consultar(this);
+        return await produtoDAO.consultar(this,conexao);
     }
 
-    async consultarID(id) {
+    async consultarID(id,conexao) {
         const produtoDAO = new ProdutoDAO();
-        return await produtoDAO.consultarID(id);
+        return await produtoDAO.consultarID(id),conexao;
     }
 }
 

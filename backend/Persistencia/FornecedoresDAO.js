@@ -1,10 +1,8 @@
-import conectar from "./Conexao.js";
-
 export default class FornecedorDAO {
     constructor() {}
 
-    async gravar(fornecedor) {
-        const conexao = conectar();
+    async gravar(fornecedor,conexao) {
+      
         const sql = "INSERT INTO fornecedores (cpf, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         const valores = [fornecedor.cpf, fornecedor.nome, fornecedor.telefone, fornecedor.celular, fornecedor.endereco, fornecedor.numero, fornecedor.bairro, fornecedor.cidade, fornecedor.uf, fornecedor.cep, fornecedor.email];
 
@@ -16,8 +14,8 @@ export default class FornecedorDAO {
         }
     }
 
-    async atualizar(fornecedor) {
-        const conexao = conectar();
+    async atualizar(fornecedor,conexao) {
+      
         const sql = "UPDATE fornecedores SET cpf = ?, nome = ?, telefone = ?, celular = ?, endereco = ?, numero = ?, bairro = ?, cidade = ?, uf = ?, cep = ?, email = ? WHERE codigo = ?";
         const valores = [fornecedor.cpf, fornecedor.nome, fornecedor.telefone, fornecedor.celular, fornecedor.endereco, fornecedor.numero, fornecedor.bairro, fornecedor.cidade, fornecedor.uf, fornecedor.cep, fornecedor.email, fornecedor.codigo];
 
@@ -28,8 +26,8 @@ export default class FornecedorDAO {
         }
     }
 
-    async consultar() {
-        const conexao = conectar();
+    async consultar(conexao) {
+        
         const sql = "SELECT * FROM fornecedores";
 
         try {
@@ -40,8 +38,8 @@ export default class FornecedorDAO {
         }
     }
 
-    async consultarID(id) {
-        const conexao = conectar();
+    async consultarID(id,conexao) {
+    
         const sql = "SELECT * FROM fornecedores WHERE codigo = ?";
 
         try {
@@ -52,8 +50,8 @@ export default class FornecedorDAO {
         }
     }
 
-    async excluir(fornecedor) {
-        const conexao = conectar();
+    async excluir(fornecedor,conexao) {
+     
         const sql = "DELETE FROM fornecedores WHERE codigo = ?";
 
         try {

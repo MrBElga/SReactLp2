@@ -1,13 +1,13 @@
-import express from "express";
-import ClientesCTRL from "../Controladores/ClientesCTRL.js";
+import { Router } from "express";
+import FornecedorCTRL from "../Controle/fornecedorCTRL.js";
 
-const router = express.Router();
-const clientesController = new ClientesCTRL();
+const router = new Router();
+const fornecedorController = new FornecedorCTRL();
 
-router.post("/clientes", clientesController.gravar);
-router.put("/clientes/:id", clientesController.atualizar);
-router.delete("/clientes/:id", clientesController.excluir);
-router.get("/clientes", clientesController.consultar);
-router.get("/clientes/:id", clientesController.consultarID);
+router.post("/fornecedor", fornecedorController.gravar);
+router.put("/fornecedor/:id", fornecedorController.atualizar);
+router.delete("/fornecedor/:id", fornecedorController.excluir);
+router.get("/fornecedor", fornecedorController.consultar);
+router.get("/fornecedor/:id", fornecedorController.consultarID);
 
 export default router;
