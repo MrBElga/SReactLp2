@@ -13,6 +13,9 @@ Comandos Git
 - git config --global user.email "danieleliasrumin@gmail.com"
 - git config --global user.username "MrBElga"
 - git commit -m "msg"
+- git branch --set-upstream-to=remote/master master 
+- git pull --set-upstream remote
+- git pull origin master --allow-unrelated-histories
   
 caminho
 - caminho ... -> remote -> add remote (https://github.com/MrBElga/SistemaReactLp2.git)
