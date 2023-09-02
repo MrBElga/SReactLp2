@@ -1,8 +1,8 @@
-import FornecedorDAO from "../Persistencia/FornecedorDAO.js";
+import FornecedorDAO from "../Persistencia/FornecedoresDAO.js";
 
 class Fornecedor {
     #codigo;
-    #cpf;
+    #cnpj;
     #nome;
     #telefone;
     #celular;
@@ -14,9 +14,9 @@ class Fornecedor {
     #cep;
     #email;
 
-    constructor(cpf, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email, codigo = 0) {
+    constructor(cnpj, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email, codigo = 0) {
         this.#codigo = codigo;
-        this.#cpf = cpf;
+        this.#cnpj = cnpj;
         this.#nome = nome;
         this.#telefone = telefone;
         this.#celular = celular;
@@ -32,7 +32,7 @@ class Fornecedor {
     toJSON() {
         return {
             codigo: this.#codigo,
-            cpf: this.#cpf,
+            cnpj: this.#cnpj,
             nome: this.#nome,
             telefone: this.#telefone,
             celular: this.#celular,
@@ -54,12 +54,12 @@ class Fornecedor {
         this.#codigo = codigo;
     }
 
-    get cpf() {
-        return this.#cpf;
+    get cnpj() {
+        return this.#cnpj;
     }
 
-    set cpf(cpf) {
-        this.#cpf = cpf;
+    set cnpj(cnpj) {
+        this.#cnpj = cnpj;
     }
 
     get nome() {
@@ -143,33 +143,33 @@ class Fornecedor {
     }
 
     toString() {
-        return `Fornecedor - Código: ${this.#codigo}, Nome: ${this.#nome}, CPF: ${this.#cpf}, Email: ${this.#email}`;
+        return `Fornecedor - Código: ${this.#codigo}, Nome: ${this.#nome}, cnpj: ${this.#cnpj}, Email: ${this.#email}`;
     }
 
-    async gravar() {
+    async gravar(conexao) {
         const fornecedorDAO = new FornecedorDAO();
-        const id = await fornecedorDAO.gravar(this);
+        const id = await fornecedorDAO.gravar(this,conexao);
         this.#codigo = id;
     }
 
-    async atualizar() {
+    async atualizar(conexao) {
         const fornecedorDAO = new FornecedorDAO();
-        await fornecedorDAO.atualizar(this);
+        await fornecedorDAO.atualizar(this,conexao);
     }
 
-    async excluir() {
+    async excluir(conexao) {
         const fornecedorDAO = new FornecedorDAO();
-        await fornecedorDAO.excluir(this);
+        await fornecedorDAO.excluir(this,conexao);
     }
 
-    async consultar() {
+    async consultar(conexao) {
         const fornecedorDAO = new FornecedorDAO();
-        return await fornecedorDAO.consultar(this);
+        return await fornecedorDAO.consultar(conexao);
     }
 
-    async consultarID(id) {
+    async consultarID(id,conexao) {
         const fornecedorDAO = new FornecedorDAO();
-        return await fornecedorDAO.consultarID(id);
+        return await fornecedorDAO.consultarID(id,conexao);
     }
 }
 

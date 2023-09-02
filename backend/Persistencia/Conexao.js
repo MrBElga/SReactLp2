@@ -10,8 +10,8 @@ import mysql from 'mysql2/promise';
         host: 'localhost',
         port: 3306,
         user: 'root',
-        database: 'backend',
-        password: '',
+        database: 'loja',
+        password: '123456789',
         waitForConnections: true,
         connectionLimit: 10,
         maxIdle: 10, 
@@ -20,15 +20,6 @@ import mysql from 'mysql2/promise';
         enableKeepAlive: true,
         keepAliveInitialDelay: 0
       });
-
-    /*
-    const conexao = await mysql.createConnection({
-        host:"localhost",
-        port:3306,
-        user:"root",
-        password:"",
-        database:"backend"
-    });*/
 
     global.pool = pool;
     return global.pool.getConnection();

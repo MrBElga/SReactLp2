@@ -1,7 +1,7 @@
-import express from "express";
-import ClientesCTRL from "../Controladores/ClientesCTRL.js";
+import { Router } from "express";
+import ClientesCTRL from "../Controle/ClientesCTRL.js";
 
-const router = express.Router();
+const router = new Router();
 const clientesController = new ClientesCTRL();
 
 router.post("/clientes", clientesController.gravar);

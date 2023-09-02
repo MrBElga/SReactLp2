@@ -11,7 +11,7 @@ CREATE TABLE  categorias (
 
 CREATE TABLE fornecedores (
     codigo INT AUTO_INCREMENT PRIMARY KEY,
-    cpf VARCHAR(14) NOT NULL,
+    cnpj VARCHAR(14) NOT NULL,
     nome VARCHAR(255) NOT NULL,
     telefone VARCHAR(14),
     celular VARCHAR(15),

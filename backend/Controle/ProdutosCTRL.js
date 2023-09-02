@@ -1,78 +1,112 @@
-import Produtos from "../Modelo/Produtos.js";
+import Produto from "../Modelo/Produtos.js";
 import conectar from "../Persistencia/Conexao.js";
 
-export default class ProdutosCTRL {
-    async gravar(requisicao, resposta) {
-        try {
-            const {
-                nome,
-                descricao,
-                preco,
-                estoque,
-                fornecedorId 
-            } = requisicao.body;
+export default class ProdutoCTRL {
 
-            const produto = new Produtos(nome, descricao, preco, estoque, fornecedorId);
-            await produto.gravar();
-            resposta.status(201).json(produto);
-        } catch (error) {
-            resposta.status(500).json({ mensagem: "Erro ao gravar produto", error: error.message });
+    async gravar(requisicao, resposta) {
+        const conexao = await conectar();
+        resposta.setHeader("Content-Type", "application/json");
+
+        if (requisicao.method === "POST") {
+            if (requisicao.is("application/json")) {
+                const {nome, descricao, preco, estoque,fornecedorId } = requisicao.body;
+
+                if (nome && descricao && preco && estoque && fornecedorId) {
+                    const produto = new Produto(nome, descricao, preco, estoque,fornecedorId);
+                    produto.gravar(conexao)
+                        .then(() => {
+                            resposta.json({
+                                "status": true,
+                                "mensagem": "Produto gravado com sucesso!"
+                            });
+                        })
+                        .catch((erro) => {
+                            resposta.json({
+                                "status": false,
+                                "mensagem": "Erro ao gravar o produto: " + erro.message
+                            });
+                        });
+                } else {
+                    resposta.json({
+                        "status": false,
+                        "mensagem": "Verifique a documentação da API e informe todos os dados necessários de um produto!"
+                    });
+                }
+            } else {
+                resposta.json({
+                    "status": false,
+                    "mensagem": "A requisição deve possuir um payload application/json"
+                });
+            }
+        } else {
+            resposta.json({
+                "status": false,
+                "mensagem": "Para registrar um produto utilize o método POST!"
+            });
         }
     }
 
     async atualizar(requisicao, resposta) {
-        try {
-            const {
-                codigo,
-                nome,
-                descricao,
-                preco,
-                estoque,
-                fornecedorId 
-            } = requisicao.body;
+        const conexao = await conectar();
+        resposta.setHeader("Content-Type", "application/json");
 
-            const produto = new Produtos(nome, descricao, preco, estoque, fornecedorId);
-            produto.codigo = codigo;
+        if (requisicao.method === "PUT") {
+            if (requisicao.is("application/json")) {
+                const { id } = requisicao.params;
+                const { nome, descricao, preco, estoque,fornecedor_id } = requisicao.body;
 
-            await produto.atualizar();
-            resposta.status(200).json(produto);
-        } catch (error) {
-            resposta.status(500).json({ mensagem: "Erro ao atualizar produto", error: error.message });
+                if (id && nome && descricao && preco && estoque && fornecedor_id ) {
+                    const produto = new Produto( nome, descricao, preco, estoque,fornecedor_id);
+                    produto.codigo = id;
+                    produto.atualizar(conexao)
+                        .then(() => {
+                            resposta.json({
+                                "status": true,
+                                "mensagem": "Produto atualizado com sucesso!"
+                            });
+                        })
+                        .catch((erro) => {
+                            resposta.json({
+                                "status": false,
+                                "mensagem": "Erro ao atualizar o produto: " + erro.message
+                            });
+                        });
+                } else {
+                    resposta.json({
+                        "status": false,
+                        "mensagem": "Verifique a documentação da API e informe todos os dados necessários de um produto!"
+                    });
+                }
+            } else {
+                resposta.json({
+                    "status": false,
+                    "mensagem": "A requisição deve possuir um payload application/json"
+                });
+            }
+        } else {
+            resposta.json({
+                "status": false,
+                "mensagem": "Para atualizar um produto utilize o método PUT!"
+            });
         }
     }
+    
+      // HTTP DELETE
+      async excluir(requisicao, resposta) {
+        const conexao = await conectar();
+        
+      }
+    
+      // HTTP GET
+      async consultar(requisicao, resposta) {
+        const conexao = await conectar();
+        
+      }
+    
+      // HTTP GET
+      async consultarID(requisicao, resposta) {
+        const conexao = await conectar();
+        
+      }
 
-    async excluir(requisicao, resposta) {
-        try {
-            const { codigo } = requisicao.body;
-            const produto = new Produtos();
-            produto.codigo = codigo;
-
-            await produto.excluir();
-            resposta.status(204).send();
-        } catch (error) {
-            resposta.status(500).json({ mensagem: "Erro ao excluir produto", error: error.message });
-        }
-    }
-
-    async consultar(requisicao, resposta) {
-        try {
-            const produtos = await Produtos.consultar();
-            resposta.status(200).json(produtos);
-        } catch (error) {
-            resposta.status(500).json({ mensagem: "Erro ao consultar produtos", error: error.message });
-        }
-    }
-
-    async consultarID(requisicao, resposta) {
-        try {
-            const { id } = requisicao.params;
-            const produto = new Produtos();
-            produto.codigo = id;
-
-            const produtoConsultado = await produto.consultarID();
-            resposta.status(200).json(produtoConsultado);
-        } catch (error) {
-            resposta.status(500).json({ mensagem: "Erro ao consultar produto por ID", error: error.message });
-        }
-    }
 }
