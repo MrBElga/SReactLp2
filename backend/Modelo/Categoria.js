@@ -48,30 +48,30 @@ class Categoria {
         return this.#nome + " " + this.#descricao + " " + this.#codigo;
     }
 
-    async gravar() {
+    async gravar(conexao) {
         const categoriaDAO = new CategoriaDAO();
-        const id = await categoriaDAO.gravar(this); 
+        const id = await categoriaDAO.gravar(this,conexao); 
         this.#codigo = id;
     }
 
-    async atualizar() {
+    async atualizar(conexao) {
         const categoriaDAO = new CategoriaDAO();
-        await categoriaDAO.atualizar(this);
+        await categoriaDAO.atualizar(this,conexao);
     }
 
-    async excluir() {
+    async excluir(conexao) {
         const categoriaDAO = new CategoriaDAO();
-        await categoriaDAO.excluir(this); 
+        await categoriaDAO.excluir(this,conexao); 
     }
 
-    async consultar() {
+    async consultar(conexao) {
         const categoriaDAO = new CategoriaDAO();
-        return await categoriaDAO.consultar(); 
+        return await categoriaDAO.consultar(conexao); 
     }
 
-    async consultarID(id) {
+    async consultarID(id,conexao) {
         const categoriaDAO = new CategoriaDAO();
-        return await categoriaDAO.consultarId(id);
+        return await categoriaDAO.consultarId(id.conexao);
     }
 }
 

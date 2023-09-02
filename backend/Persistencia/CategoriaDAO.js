@@ -1,10 +1,10 @@
-import conectar from "./Conexao.js";
+
 
 export default class CategoriaDAO {
     constructor() {}
 
-    async gravar(categoria) {
-        const conexao = conectar();
+    async gravar(categoria,conexao) {
+       
         const sql = "INSERT INTO categorias (nome, descricao) VALUES (?, ?)";
         const valores = [categoria.nome, categoria.descricao];
 
@@ -16,8 +16,8 @@ export default class CategoriaDAO {
         }
     }
 
-    async atualizar(categoria) {
-        const conexao = conectar();
+    async atualizar(categoria,conexao) {
+     
         const sql = "UPDATE categorias SET nome = ?, descricao = ? WHERE codigo = ?";
         const valores = [categoria.nome, categoria.descricao, categoria.codigo];
 
@@ -28,8 +28,7 @@ export default class CategoriaDAO {
         }
     }
 
-    async consultar() {
-        const conexao = conectar();
+    async consultar(conexao) {
         
         const sql = "SELECT * FROM categorias";
 
@@ -41,8 +40,8 @@ export default class CategoriaDAO {
         }
     }
 
-    async consultarID(id) {
-        const conexao = conectar();
+    async consultarID(id,conexao) {
+       
         const sql = "SELECT * FROM categorias WHERE codigo = ?";
 
         try {
@@ -53,8 +52,7 @@ export default class CategoriaDAO {
         }
     }
 
-    async excluir(categoria) {
-        const conexao = conectar();
+    async excluir(categoria,conexao) {
         const sql = "DELETE FROM categorias WHERE codigo = ?";
 
         try {

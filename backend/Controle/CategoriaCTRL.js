@@ -56,7 +56,8 @@ export default class CategoriaCTRL {
                 const { nome, descricao } = requisicao.body;
 
                 if (id && nome && descricao) {
-                    const categoria = new Categoria(nome, descricao, id);
+                    const categoria = new Categoria(nome, descricao);
+                    categoria.codigo = id;
                     categoria.atualizar(conexao)
                         .then(() => {
                             resposta.json({
@@ -99,7 +100,8 @@ export default class CategoriaCTRL {
                 const { id } = requisicao.params;
 
                 if (id) {
-                    const categoria = new Categoria("", "", id);
+                    const categoria = new Categoria();
+                    categoria.codigo = id;
                     categoria.excluir(conexao)
                         .then(() => {
                             resposta.json({
