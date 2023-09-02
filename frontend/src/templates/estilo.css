@@ -1,0 +1,16 @@
+body{
+    background-color: rgb(20, 20, 20);
+}
+
+.custom-dropdown-divider {
+    background-color: #333 !important; 
+}
+
+.custom-dropdown-item {
+    background-color: #333 !important; 
+    color: #fff !important; 
+}
+
+.custom-dropdown-item:hover {
+    background-color: #555 !important;
+}

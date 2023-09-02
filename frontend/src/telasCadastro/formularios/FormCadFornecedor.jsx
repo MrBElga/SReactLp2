@@ -6,7 +6,7 @@ export default function FormCadFornecedor(props) {
     <Container>
       <Form>
         <Row>
-          <Col>
+          <Col md={6}>
             <Form.Group>
               <FloatingLabel
                 controlId="floatingInput"
@@ -26,6 +26,27 @@ export default function FormCadFornecedor(props) {
               </Form.Control.Feedback>
             </Form.Group>
           </Col>
+        
+          <Col md={6}>
+            <Form.Group>
+              <FloatingLabel
+                controlId="floatingInput"
+                label="Email:"
+                className="mb-3"
+              >
+                <Form.Control
+                  type="email"
+                  placeholder="Informe o email"
+                  id="email"
+                  name="email"
+                />
+              </FloatingLabel>
+              <Form.Control.Feedback type="invalid">
+                Informe um email válido!
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+    
         </Row>
         <Row>
           <Col>
@@ -180,27 +201,7 @@ export default function FormCadFornecedor(props) {
             </Form.Group>
           </Col>
         </Row>
-        <Row>
-          <Col md={4}>
-            <Form.Group>
-              <FloatingLabel
-                controlId="floatingInput"
-                label="Email:"
-                className="mb-3"
-              >
-                <Form.Control
-                  type="email"
-                  placeholder="Informe o email"
-                  id="email"
-                  name="email"
-                />
-              </FloatingLabel>
-              <Form.Control.Feedback type="invalid">
-                Informe um email válido!
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Col>
-        </Row>
+    
         <Row>
           <Col md={6} offset={5} className="d-flex justify-content-end">
             <Button type="submit" variant="primary">
