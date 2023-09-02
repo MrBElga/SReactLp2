@@ -3,9 +3,9 @@ export default class FornecedorDAO {
 
     async gravar(fornecedor,conexao) {
       
-        const sql = "INSERT INTO fornecedores (cpf, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        const valores = [fornecedor.cpf, fornecedor.nome, fornecedor.telefone, fornecedor.celular, fornecedor.endereco, fornecedor.numero, fornecedor.bairro, fornecedor.cidade, fornecedor.uf, fornecedor.cep, fornecedor.email];
-
+        const sql = "INSERT INTO fornecedores (cnpj, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        const valores = [fornecedor.cnpj, fornecedor.nome, fornecedor.telefone, fornecedor.celular, fornecedor.endereco, fornecedor.numero, fornecedor.bairro, fornecedor.cidade, fornecedor.uf, fornecedor.cep, fornecedor.email];
+       
         try {
             const [result] = await conexao.execute(sql, valores);
             return result.insertId;
@@ -16,9 +16,9 @@ export default class FornecedorDAO {
 
     async atualizar(fornecedor,conexao) {
       
-        const sql = "UPDATE fornecedores SET cpf = ?, nome = ?, telefone = ?, celular = ?, endereco = ?, numero = ?, bairro = ?, cidade = ?, uf = ?, cep = ?, email = ? WHERE codigo = ?";
-        const valores = [fornecedor.cpf, fornecedor.nome, fornecedor.telefone, fornecedor.celular, fornecedor.endereco, fornecedor.numero, fornecedor.bairro, fornecedor.cidade, fornecedor.uf, fornecedor.cep, fornecedor.email, fornecedor.codigo];
-
+        const sql = "UPDATE fornecedores SET cnpj = ?, nome = ?, telefone = ?, celular = ?, endereco = ?, numero = ?, bairro = ?, cidade = ?, uf = ?, cep = ?, email = ? WHERE codigo = ?";
+        const valores = [fornecedor.cnpj, fornecedor.nome, fornecedor.telefone, fornecedor.celular, fornecedor.endereco, fornecedor.numero, fornecedor.bairro, fornecedor.cidade, fornecedor.uf, fornecedor.cep, fornecedor.email, fornecedor.codigo];
+        console.log(valores)
         try {
             await conexao.execute(sql, valores);
         } catch (error) {
@@ -53,7 +53,7 @@ export default class FornecedorDAO {
     async excluir(fornecedor,conexao) {
      
         const sql = "DELETE FROM fornecedores WHERE codigo = ?";
-
+      
         try {
             await conexao.execute(sql, [fornecedor.codigo]);
         } catch (error) {

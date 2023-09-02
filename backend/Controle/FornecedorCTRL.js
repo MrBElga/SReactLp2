@@ -9,10 +9,11 @@ export default class FornecedorCTRL {
 
         if (requisicao.method === "POST") {
             if (requisicao.is("application/json")) {
-                const { cnpj, razaoSocial, nomeFantasia, telefone, email, endereco, numero, bairro, cidade, uf, cep } = requisicao.body;
+                const { cnpj, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep,email } = requisicao.body;
 
-                if (cnpj && razaoSocial && nomeFantasia && telefone && email && endereco && numero && bairro && cidade && uf && cep) {
-                    const fornecedor = new Fornecedor(cnpj, razaoSocial, nomeFantasia, telefone, email, endereco, numero, bairro, cidade, uf, cep);
+                if ( cnpj && nome && telefone && celular && email && endereco && numero && bairro && cidade && uf && cep) {
+                    const fornecedor = new Fornecedor(cnpj, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email);
+                   
                     fornecedor.gravar(conexao)
                         .then(() => {
                             resposta.json({
@@ -52,11 +53,12 @@ export default class FornecedorCTRL {
 
         if (requisicao.method === "PUT") {
             if (requisicao.is("application/json")) {
-                const { cnpj } = requisicao.params;
-                const { razaoSocial, nomeFantasia, telefone, email, endereco, numero, bairro, cidade, uf, cep } = requisicao.body;
+                const { id } = requisicao.params;
+                const { cnpj, nome, telefone, celular, email, endereco, numero, bairro, cidade, uf, cep } = requisicao.body;
 
-                if (cnpj && razaoSocial && nomeFantasia && telefone && email && endereco && numero && bairro && cidade && uf && cep) {
-                    const fornecedor = new Fornecedor(cnpj, razaoSocial, nomeFantasia, telefone, email, endereco, numero, bairro, cidade, uf, cep);
+                if (cnpj && celular && nome && telefone && email && endereco && numero && bairro && cidade && uf && cep) {
+                    const fornecedor = new Fornecedor(cnpj, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep,email );
+                    fornecedor.codigo = id;
                     fornecedor.atualizar(conexao)
                         .then(() => {
                             resposta.json({
@@ -96,10 +98,11 @@ export default class FornecedorCTRL {
 
         if (requisicao.method === "DELETE") {
             if (requisicao.is("application/json")) {
-                const { cnpj } = requisicao.params;
+                const { id } = requisicao.params;
 
-                if (cnpj) {
-                    const fornecedor = new Fornecedor(cnpj);
+                if (id) {
+                    const fornecedor = new Fornecedor();
+                    fornecedor.codigo = id;
                     fornecedor.excluir(conexao)
                         .then(() => {
                             resposta.json({

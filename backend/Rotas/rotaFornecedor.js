@@ -1,5 +1,5 @@
 import { Router } from "express";
-import FornecedorCTRL from "../Controle/fornecedorCTRL.js";
+import FornecedorCTRL from "../Controle/FornecedorCTRL.js";
 
 const router = new Router();
 const fornecedorController = new FornecedorCTRL();

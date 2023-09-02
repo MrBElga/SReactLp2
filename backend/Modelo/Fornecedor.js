@@ -2,7 +2,7 @@ import FornecedorDAO from "../Persistencia/FornecedoresDAO.js";
 
 class Fornecedor {
     #codigo;
-    #cpf;
+    #cnpj;
     #nome;
     #telefone;
     #celular;
@@ -14,9 +14,9 @@ class Fornecedor {
     #cep;
     #email;
 
-    constructor(cpf, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email, codigo = 0) {
+    constructor(cnpj, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email, codigo = 0) {
         this.#codigo = codigo;
-        this.#cpf = cpf;
+        this.#cnpj = cnpj;
         this.#nome = nome;
         this.#telefone = telefone;
         this.#celular = celular;
@@ -32,7 +32,7 @@ class Fornecedor {
     toJSON() {
         return {
             codigo: this.#codigo,
-            cpf: this.#cpf,
+            cnpj: this.#cnpj,
             nome: this.#nome,
             telefone: this.#telefone,
             celular: this.#celular,
@@ -54,12 +54,12 @@ class Fornecedor {
         this.#codigo = codigo;
     }
 
-    get cpf() {
-        return this.#cpf;
+    get cnpj() {
+        return this.#cnpj;
     }
 
-    set cpf(cpf) {
-        this.#cpf = cpf;
+    set cnpj(cnpj) {
+        this.#cnpj = cnpj;
     }
 
     get nome() {
@@ -143,7 +143,7 @@ class Fornecedor {
     }
 
     toString() {
-        return `Fornecedor - Código: ${this.#codigo}, Nome: ${this.#nome}, CPF: ${this.#cpf}, Email: ${this.#email}`;
+        return `Fornecedor - Código: ${this.#codigo}, Nome: ${this.#nome}, cnpj: ${this.#cnpj}, Email: ${this.#email}`;
     }
 
     async gravar(conexao) {
@@ -164,7 +164,7 @@ class Fornecedor {
 
     async consultar(conexao) {
         const fornecedorDAO = new FornecedorDAO();
-        return await fornecedorDAO.consultar(this,conexao);
+        return await fornecedorDAO.consultar(conexao);
     }
 
     async consultarID(id,conexao) {
