@@ -25,6 +25,7 @@ class Categoria {
 
     set codigo(Cod) {
         if (Cod > 0) 
+        if (Cod > 0) 
             this.#codigo = Cod;
     }
 

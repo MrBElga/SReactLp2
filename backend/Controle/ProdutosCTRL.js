@@ -90,105 +90,23 @@ export default class ProdutoCTRL {
             });
         }
     }
-
-    async excluir(requisicao, resposta) {
+    
+      // HTTP DELETE
+      async excluir(requisicao, resposta) {
         const conexao = await conectar();
-        resposta.setHeader("Content-Type", "application/json");
-
-        if (requisicao.method === "DELETE") {
-            if (requisicao.is("application/json")) {
-                const { id } = requisicao.params;
-
-                if (id) {
-                    const produto = new Produto();
-                    produto.codigo = id;
-                    produto.excluir(conexao)
-                        .then(() => {
-                            resposta.json({
-                                "status": true,
-                                "mensagem": "Produto excluído com sucesso!"
-                            });
-                        })
-                        .catch((erro) => {
-                            resposta.json({
-                                "status": false,
-                                "mensagem": "Erro ao excluir o produto: " + erro.message
-                            });
-                        });
-                } else {
-                    resposta.json({
-                        "status": false,
-                        "mensagem": "Especifique na URL o código do produto que deseja excluir!"
-                    });
-                }
-            } else {
-                resposta.json({
-                    "status": false,
-                    "mensagem": "A requisição deve possuir um payload application/json"
-                });
-            }
-        } else {
-            resposta.json({
-                "status": false,
-                "mensagem": "Para excluir um produto utilize o método DELETE!"
-            });
-        }
-    }
-
-    async consultar(requisicao, resposta) {
+        
+      }
+    
+      // HTTP GET
+      async consultar(requisicao, resposta) {
         const conexao = await conectar();
-        resposta.type("application/json");
-
-        if (requisicao.method === "GET") {
-            const produto = new Produto();
-            produto.consultar(conexao)
-                .then((produtos) => {
-                    resposta.json(produtos);
-                })
-                .catch((erro) => {
-                    resposta.json({
-                        "status": false,
-                        "mensagem": "Erro ao consultar produtos: " + erro.message
-                    });
-                });
-        } else {
-            resposta.json({
-                "status": false,
-                "mensagem": "Para consultar produtos utilize o método GET!"
-            });
-        }
-    }
-
-    async consultarID(requisicao, resposta) {
+        
+      }
+    
+      // HTTP GET
+      async consultarID(requisicao, resposta) {
         const conexao = await conectar();
-        resposta.type("application/json");
+        
+      }
 
-        if (requisicao.method === "GET") {
-            const { codigo } = requisicao.params;
-
-            if (codigo) {
-                const produto = new Produto(codigo);
-                produto.consultarID(conexao)
-                    .then((produtoConsultado) => {
-                        resposta.json(produtoConsultado);
-                    })
-                    .catch((erro) => {
-                        resposta.json({
-                            "status": false,
-                            "mensagem": "Erro ao consultar produto por código: " + erro.message
-                        });
-                    });
-            } else {
-                resposta.json({
-                    "status": false,
-                    "mensagem": "Especifique na URL o código do produto que deseja consultar!"
-                });
-            }
-        } else {
-            resposta.json({
-                "status": false,
-                "mensagem": "Para consultar um produto por código utilize o método GET!"
-            });
-        }
-    }
 }

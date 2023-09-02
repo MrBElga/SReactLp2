@@ -22,6 +22,8 @@ caminho
 - caminho ... -> check out -> "nome"
 criação de token 
  configurações -> deploy key
+- caminho ... -> check out -> "nome"
+- 
 
 
 
