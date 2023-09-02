@@ -9,10 +9,10 @@ export default class ProdutoCTRL {
 
         if (requisicao.method === "POST") {
             if (requisicao.is("application/json")) {
-                const { codigo, nome, descricao, preco, estoque } = requisicao.body;
+                const {nome, descricao, preco, estoque,fornecedorId } = requisicao.body;
 
-                if (codigo && nome && descricao && preco && estoque !== undefined) {
-                    const produto = new Produto(codigo, nome, descricao, preco, estoque);
+                if (nome && descricao && preco && estoque && fornecedorId) {
+                    const produto = new Produto(nome, descricao, preco, estoque,fornecedorId);
                     produto.gravar(conexao)
                         .then(() => {
                             resposta.json({
@@ -52,11 +52,12 @@ export default class ProdutoCTRL {
 
         if (requisicao.method === "PUT") {
             if (requisicao.is("application/json")) {
-                const { codigo } = requisicao.params;
-                const { nome, descricao, preco, estoque } = requisicao.body;
+                const { id } = requisicao.params;
+                const { nome, descricao, preco, estoque,fornecedor_id } = requisicao.body;
 
-                if (codigo && nome && descricao && preco && estoque !== undefined) {
-                    const produto = new Produto(codigo, nome, descricao, preco, estoque);
+                if (id && nome && descricao && preco && estoque && fornecedor_id ) {
+                    const produto = new Produto( nome, descricao, preco, estoque,fornecedor_id);
+                    produto.codigo = id;
                     produto.atualizar(conexao)
                         .then(() => {
                             resposta.json({
@@ -96,10 +97,11 @@ export default class ProdutoCTRL {
 
         if (requisicao.method === "DELETE") {
             if (requisicao.is("application/json")) {
-                const { codigo } = requisicao.params;
+                const { id } = requisicao.params;
 
-                if (codigo) {
-                    const produto = new Produto(codigo);
+                if (id) {
+                    const produto = new Produto();
+                    produto.codigo = id;
                     produto.excluir(conexao)
                         .then(() => {
                             resposta.json({

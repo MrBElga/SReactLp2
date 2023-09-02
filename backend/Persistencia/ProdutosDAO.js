@@ -5,7 +5,7 @@ export default class ProdutoDAO {
      
         const sql = "INSERT INTO produtos (nome, descricao, preco, estoque, fornecedor_id) VALUES (?, ?, ?, ?, ?)";
         const valores = [produto.nome, produto.descricao, produto.preco, produto.estoque, produto.fornecedorId];
-
+        console.log(valores)
         try {
             const [result] = await conexao.execute(sql, valores);
             return result.insertId;

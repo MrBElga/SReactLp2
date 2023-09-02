@@ -165,10 +165,11 @@ export default class FornecedorCTRL {
         resposta.type("application/json");
 
         if (requisicao.method === "GET") {
-            const { cnpj } = requisicao.params;
+            const { id } = requisicao.params;
 
-            if (cnpj) {
-                const fornecedor = new Fornecedor(cnpj);
+            if (id) {
+                const fornecedor = new Fornecedor();
+                fornecedor.codigo = id;
                 fornecedor.consultarID(conexao)
                     .then((fornecedorConsultado) => {
                         resposta.json(fornecedorConsultado);

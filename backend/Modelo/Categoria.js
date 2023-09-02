@@ -66,7 +66,7 @@ class Categoria {
 
     async consultar() {
         const categoriaDAO = new CategoriaDAO();
-        return await categoriaDAO.consultar(this); 
+        return await categoriaDAO.consultar(); 
     }
 
     async consultarID(id) {
