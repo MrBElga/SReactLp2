@@ -2,8 +2,6 @@ import React from 'react';
 
 export default function Rodape(props) {
     const estiloRodape = {
-        backgroundColor: '#343a40', 
-        color: '#fff',
         padding: '10px', 
         borderRadius: '5px', 
         marginTop: '20px', 

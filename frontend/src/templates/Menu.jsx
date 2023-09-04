@@ -6,7 +6,7 @@ import './estilo.css';
 
 export default function Menu(props) {
     return (
-        <Navbar expand="lg" className="bg-dark navbar-dark">
+        <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
                 <Navbar.Brand href="/">
                     <img
