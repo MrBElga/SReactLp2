@@ -21,6 +21,7 @@ export default function TabelaClientes(props) {
                         <td>Rua das Flores, n° 2569</td>
                         <td>Presidente Prudente/SP</td>
                         <td>19015-000</td>
+                        
                     </tr>
                 </tbody>
             </Table>
