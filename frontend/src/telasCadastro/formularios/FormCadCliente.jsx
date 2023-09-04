@@ -11,7 +11,7 @@ import {
 export default function FormCadCliente(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Adicione o código para lidar com o envio do formulário aqui
+
   };
 
   return (
@@ -187,7 +187,9 @@ export default function FormCadCliente(props) {
             </Button>
           </Col>
           <Col md={6}>
-            <Button type="button" variant={"secondary"}>
+            <Button type="button" variant={"secondary"} onClick={()=>{
+                props.setExibirFormulario(false);
+            }}>
               Voltar
             </Button>
           </Col>
