@@ -20,6 +20,9 @@ export default function FormCadCliente(props) {
     uf: "SP",
     cep: ""
   } 
+  
+  const [validated, setValidated] = useState(false);
+
   const [cliente, setCliente] = useState({clienteInicial});
 
   function manipularMudancas(e){
@@ -29,14 +32,24 @@ export default function FormCadCliente(props) {
     });
   }
 
+
+
   function manipularSubmit(e){
+    const form = e.currentTarget;
+    if(form.checkValidity()){
+      //se todos os campos preenchidos manda os dados para o backends    
+      setCliente(clienteInicial);
+      setValidated(false);
+    }
+    else{
+      setValidated(true);
+    }
     e.stopPropagation();
     e.preventDefault();
   }
-
   return (
     <Container>
-      <Form  onSubmit={manipularSubmit}>
+      <Form  noValidate validated={validated} onSubmit={manipularSubmit}>
         <Row>
           <Col md={5}>
             <Form.Group>

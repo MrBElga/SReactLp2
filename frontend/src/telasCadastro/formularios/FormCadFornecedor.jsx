@@ -242,7 +242,7 @@ export default function FormCadFornecedor(props) {
                 value={fornecedor.uf}
                 onChange={manipularMudancas}
               >
-                <option value="SP" selected> São Paulo</option>
+                <option value="SP" selected > São Paulo</option>
                 <option value="AC">Acre</option>
                 <option value="AL">Alagoas</option>
                 <option value="AP">Amapá</option>
