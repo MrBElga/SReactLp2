@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Container, Button,Alert } from "react-bootstrap";
+import React from "react";
+import { Container,Alert } from "react-bootstrap";
 import Cabecalho from "../templates/Cabecalho";
 import Rodape from "../templates/Rodape";
 import Menu from "../templates/Menu";

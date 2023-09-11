@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Form, Row, Col, FloatingLabel, Button } from "react-bootstrap";
 
 export default function FormCadCategoria(props) {
-  const handleSubmit = (e) => {
+
+  const [categoria, setCategoria] = useState({
+    nomeCategoria: "",
+    descricao: ""
+  });
+
+  function manipularMudancas(e){
+    const componente = e.currentTarget;
+    setCategoria({
+      ...categoria,[componente.name]:componente.value
+    });
+  }
+
+  function manipularSubmit(e){
+    e.stopPropagation();
     e.preventDefault();
-   
-  };
+  }
 
   return (
     <Container>
-      <Form onSubmit={handleSubmit}>
+      <Form  onSubmit={manipularSubmit}>
         <Row>
           <Col>
             <Form.Group>
@@ -22,6 +35,8 @@ export default function FormCadCategoria(props) {
                   type="text"
                   placeholder="Informe o nome da categoria"
                   name="nomeCategoria"
+                  value={categoria.nomeCategoria}
+                  onChange={manipularMudancas}
                   required
                 />
               </FloatingLabel>
@@ -43,6 +58,8 @@ export default function FormCadCategoria(props) {
                   as="textarea"
                   placeholder="Informe a descrição da categoria"
                   name="descricao"
+                  value={categoria.descricao}
+                  onChange={manipularMudancas}
                 />
               </FloatingLabel>
               <Form.Control.Feedback type="invalid">
