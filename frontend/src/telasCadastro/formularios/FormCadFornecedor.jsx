@@ -34,7 +34,7 @@ export default function FormCadFornecedor(props) {
 
   function manipularSubmit(e){
     const form = e.currentTarget;
-    if(form.checkValidadity()){
+    if(form.checkValidity()){
       //se todos os campos preenchidos manda os dados para o backends    
       setFornecedor(fornecedoIn);
       setValidated(false);
@@ -237,6 +237,8 @@ export default function FormCadFornecedor(props) {
             <FloatingLabel label="UF:">
               <Form.Select 
                 aria-label="Unidades Federativas brasileiras"
+                id="uf"
+                name="uf"
                 value={fornecedor.uf}
                 onChange={manipularMudancas}
               >
@@ -275,7 +277,6 @@ export default function FormCadFornecedor(props) {
           <Col md={4}>
             <Form.Group>
               <FloatingLabel
-                 
                 label="CEP:"
                 className="mb-3"
               >
@@ -295,7 +296,6 @@ export default function FormCadFornecedor(props) {
             </Form.Group>
           </Col>
         </Row>
-
         <Row>
           <Col md={6} offset={5} className="d-flex justify-content-end">
             <Button type="submit" variant="primary">
