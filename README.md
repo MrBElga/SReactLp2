@@ -23,7 +23,9 @@ caminho
 criação de token 
  configurações -> deploy key
 - caminho ... -> check out -> "nome"
-- 
+
+git checkout(vai para uma branch caso ela não exista ele cria a branch)
+- git checkout -b  
 
 
 
