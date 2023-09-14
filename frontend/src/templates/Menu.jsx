@@ -1,65 +1,45 @@
 import React from 'react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import logo from './logo.png';
 import './estilo.css';
 
+import logo from "./Image/Logo/Logo3.png"
+
 export default function Menu(props) {
-    return (
-        <Navbar expand="lg" className="bg-body-tertiary">
-            <Container>
-                <Navbar.Brand href="/">
-                    <img
-                        src={logo}
-                        alt="Logo"
-                        height="30"
-                        className="d-inline-block align-top"
-                    />
-                    Menu
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                        <NavDropdown
-                            title="Cadastros"
-                            id="basic-nav-dropdown"
-                     
-                        >
-                            <NavDropdown.Item
-                                as={Link}
-                                to="/cliente"
-                             
-                            >
-                                Clientes
-                            </NavDropdown.Item>
-                            <NavDropdown.Divider className="custom-dropdown-divider" />
-                            <NavDropdown.Item
-                                as={Link}
-                                to="/fornecedor"
-                           
-                            >
-                                Fornecedores
-                            </NavDropdown.Item>
-                            <NavDropdown.Divider className="custom-dropdown-divider" />
-                            <NavDropdown.Item
-                                as={Link}
-                                to="/produto"
-                               
-                            >
-                                Produtos
-                            </NavDropdown.Item>
-                            <NavDropdown.Divider className="custom-dropdown-divider" /> 
-                            <NavDropdown.Item
-                                as={Link}
-                                to="/categoria"
-                            
-                            >
-                                Categorias
-                            </NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
-    );
+  return (
+    <Navbar bg="dark" variant="dark" expand="lg" className="navbar-style">
+      <Container>
+        <Navbar.Brand href="/" className="navbar-brand">
+          <img
+            src={logo}
+            alt="Logo"
+            height="60"
+            className="d-inline-block align-top"
+          />
+
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <NavDropdown
+              title="MENU"
+              id="basic-nav-dropdown"
+              className="nav-dropdown"
+            >
+              <NavDropdown.Item as={Link} to="/conta" className="nav-link">
+                CONTA
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/loja" className="nav-link">
+                LOJA
+              </NavDropdown.Item>
+              <NavDropdown.Divider className="nav-divider" />
+              <NavDropdown.Item as={Link} to="/forum" className="nav-link">
+                FORUM
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
 }

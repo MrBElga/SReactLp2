@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Container, Form, Row, Col, FloatingLabel, Button } from "react-bootstrap";
 
 export default function FormCadCategoria(props) {
-
-  const [categoria, setCategoria] = useState({
+  const categoriaIn ={
     nomeCategoria: "",
     descricao: ""
-  });
+  }
 
+ 
+  const [categoria, setCategoria] = useState(categoriaIn);
+  const [validated, setValidated] = useState(false);
   function manipularMudancas(e){
     const componente = e.currentTarget;
     setCategoria({
@@ -16,18 +18,28 @@ export default function FormCadCategoria(props) {
   }
 
   function manipularSubmit(e){
+    const form = e.currentTarget;
+    if(form.checkValidity()){
+    
+      //se todos os campos preenchidos manda os dados para o backends    
+      setCategoria(categoriaIn);
+      setValidated(false);
+    }
+    else{
+      setValidated(true);
+    }
     e.stopPropagation();
     e.preventDefault();
-  }
+  } 
 
   return (
     <Container>
-      <Form  onSubmit={manipularSubmit}>
+      <Form  noValidate validated={validated} onSubmit={manipularSubmit}>
         <Row>
           <Col>
             <Form.Group>
               <FloatingLabel
-                controlId="nomeCategoria"
+                
                 label="Nome da Categoria:"
                 className="mb-3"
               >

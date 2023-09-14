@@ -1,8 +1,7 @@
 import React from "react";
 import { Container,Alert } from "react-bootstrap";
-import Cabecalho from "../templates/Cabecalho";
-import Rodape from "../templates/Rodape";
-import Menu from "../templates/Menu";
+import Pagina from "../templates/Pagina"
+
 
 const estiloRodape = {
     padding: '10px', 
@@ -14,14 +13,13 @@ const estiloRodape = {
 export default function Tela404(props) {
   return (
     <>
-    <Cabecalho conteudo ='Sistema de Gestão Comercial' />
-    <Menu />
-    <Container style={estiloRodape}>
-    <Alert variant="danger"> 
-           PAGINA NÃO ENCONTRAdA!!
-        </Alert>    
-    </Container>
-    <Rodape conteudo="Rua X, 100 - Vila Tal - Presidente Prudente/SP - CNPJ 00.000.000/0001-00"/>
+    <Pagina>
+        <Container style={estiloRodape}>
+        <Alert variant="danger"> 
+              PAGINA NÃO ENCONTRAdA!!
+            </Alert>    
+        </Container>
+    </Pagina>
     </>
   );
 }

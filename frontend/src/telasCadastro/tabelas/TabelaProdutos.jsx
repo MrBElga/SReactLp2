@@ -1,9 +1,10 @@
 import { Container, Table } from "react-bootstrap";
 
 export default function TabelaProdutos(props) {
+  const { produtos } = props; 
+  
   return (
     <Container>
-     
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -14,12 +15,14 @@ export default function TabelaProdutos(props) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Produto A</td>
-            <td>Descrição do Produto A</td>
-            <td>R$ 100,00</td>
-            <td>50 unidades</td>
-          </tr>
+          {produtos.map((produto, index) => (
+            <tr key={index}>
+              <td>{produto.nomeProduto}</td>
+              <td>{produto.descricao}</td>  
+              <td>R$ {produto.preco}</td>
+              <td>{produto.quantidade} unidades</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </Container>

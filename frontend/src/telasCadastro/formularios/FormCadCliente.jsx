@@ -53,7 +53,7 @@ export default function FormCadCliente(props) {
         <Row>
           <Col md={5}>
             <Form.Group>
-              <FloatingLabel controlId="cpf" label="CPF:" className="mb-3">
+              <FloatingLabel label="CPF:" className="mb-3">
                 <Form.Control
                   type="text"
                   placeholder="000.000.000-00"
@@ -71,7 +71,7 @@ export default function FormCadCliente(props) {
 
           <Col md={7}>
             <Form.Group>
-              <FloatingLabel controlId="email" label="Email:" className="mb-3">
+              <FloatingLabel  label="Email:" className="mb-3">
                 <Form.Control
                   type="email"
                   placeholder="Informe o email"
@@ -90,7 +90,7 @@ export default function FormCadCliente(props) {
           <Col>
             <Form.Group>
               <FloatingLabel
-                controlId="nome"
+                
                 label="Nome Completo:"
                 className="mb-3"
               >
@@ -113,7 +113,7 @@ export default function FormCadCliente(props) {
           <Col md={10}>
             <Form.Group>
               <FloatingLabel
-                controlId="endereco"
+
                 label="Endereço:"
                 className="mb-3"
               >
@@ -132,7 +132,7 @@ export default function FormCadCliente(props) {
           </Col>
           <Col md={2}>
             <Form.Group>
-              <FloatingLabel controlId="numero" label="Número" className="mb-3">
+              <FloatingLabel label="Número" className="mb-3">
                 <Form.Control
                   type="number"
                   placeholder="Nº"
@@ -151,7 +151,7 @@ export default function FormCadCliente(props) {
           <Col md={4}>
             <Form.Group>
               <FloatingLabel
-                controlId="bairro"
+                
                 label="Bairro:"
                 className="mb-3"
               >
@@ -170,7 +170,7 @@ export default function FormCadCliente(props) {
           </Col>
           <Col md={5}>
             <Form.Group>
-              <FloatingLabel controlId="cidade" label="Cidade" className="mb-3">
+              <FloatingLabel  label="Cidade" className="mb-3">
                 <Form.Control
                   type="text"
                   placeholder="Cidade"
@@ -186,7 +186,7 @@ export default function FormCadCliente(props) {
           </Col>
           <Col md={3}>
             <Form.Group>
-              <FloatingLabel controlId="uf" label="UF:">
+              <FloatingLabel label="UF:">
                 <Form.Select
                   aria-label="Unidades Federativas brasileiras"
                   name="uf"
@@ -230,7 +230,7 @@ export default function FormCadCliente(props) {
         <Row>
           <Col md={4}>
             <Form.Group>
-              <FloatingLabel controlId="cep" label="CEP:" className="mb-3">
+              <FloatingLabel  label="CEP:" className="mb-3">
                 <Form.Control
                   type="text"
                   placeholder="00000-000"

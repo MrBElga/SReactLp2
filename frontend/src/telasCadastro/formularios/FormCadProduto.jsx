@@ -8,8 +8,10 @@ import {
   FloatingLabel,
 } from "react-bootstrap";
 
+
+
 export default function FormCadProduto(props) {
-  const [produto, setProduto] = useState({
+  const produtoIn={
     nomeProduto: "",
     descricao: "",
     preco: "",
@@ -19,7 +21,10 @@ export default function FormCadProduto(props) {
     custoUnitario: "",
     precoVenda: "",
     nomeFornecedor: "",
-  });
+  }
+  const [produto, setProduto] = useState(produtoIn);
+  const [produtosCadastrados, setProdutosCadastrados] = useState([]);
+  const [validated, setValidated] = useState(false);
 
   function manipularMudancas(e) {
     const componente = e.currentTarget;
@@ -29,15 +34,25 @@ export default function FormCadProduto(props) {
     });
   }
 
-  function manipularSubmit(e) {
-    console.log(produto);
+  function manipularSubmit(e){
+    const form = e.currentTarget;
+    if(form.checkValidity()){
+      //se todos os campos preenchidos manda os dados para o backends    
+      setProdutosCadastrados([...produtosCadastrados, produto]);
+      console.log(produto)
+      setProduto(produtoIn);
+      setValidated(false);
+      console.log(produtosCadastrados);
+    }
+    else{
+      setValidated(true);
+    }
     e.stopPropagation();
     e.preventDefault();
   }
-
   return (
     <Container>
-      <Form onSubmit={manipularSubmit}>
+      <Form noValidate validated={validated} onSubmit={manipularSubmit}>
         <Row>
           <Col>
             <Form.Group>
@@ -227,6 +242,7 @@ export default function FormCadProduto(props) {
           </Col>
         </Row>
       </Form>
+      
     </Container>
   );
 }
