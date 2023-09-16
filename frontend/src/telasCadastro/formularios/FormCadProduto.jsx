@@ -9,10 +9,8 @@ import {
   FloatingLabel,
 } from "react-bootstrap";
 
-
-
 export default function FormCadProduto(props) {
-  const produtoIn={
+  const estadoInicialProduto = {
     nomeProduto: "",
     descricao: "",
     preco: "",
@@ -21,10 +19,10 @@ export default function FormCadProduto(props) {
     numeroIdentificacao: "",
     custoUnitario: "",
     precoVenda: "",
-    nomeFornecedor: "",
-  }
-  const [produto, setProduto] = useState(produtoIn);
-  const [produtosCadastrados, setProdutosCadastrados] = useState([]);
+    nomeFornecedor: ""
+  };
+  
+  const [produto, setProduto] = useState(estadoInicialProduto);
   const [validated, setValidated] = useState(false);
 
   function manipularMudancas(e) {
@@ -38,12 +36,20 @@ export default function FormCadProduto(props) {
   function manipularSubmit(e){
     const form = e.currentTarget;
     if(form.checkValidity()){
-      //se todos os campos preenchidos manda os dados para o backends    
-      setProdutosCadastrados([...produtosCadastrados, produto]);
-      console.log(produto)
-      setProduto(produtoIn);
+      if (!props.modoEdicao) {
+        props.setProdutosCadastrados([...props.produtosCadastrados, produto]);
+      } else {
+        props.setProdutosCadastrados([
+          ...props.produtosCadastrados.filter(
+            (itemProduto) => itemProduto.nomeProduto !== produto.nomeProduto
+          ),
+          produto,
+        ]);
+        props.setModoEdicao(false);
+        props.setProdutoParaEdicao(estadoInicialProduto);
+      }
+      setProduto(estadoInicialProduto);
       setValidated(false);
-      console.log(produtosCadastrados);
     }
     else{
       setValidated(true);
@@ -51,17 +57,17 @@ export default function FormCadProduto(props) {
     e.stopPropagation();
     e.preventDefault();
   }
+
   return (
-    <Container>
+    <Container className="container">
       <Form noValidate validated={validated} onSubmit={manipularSubmit}>
         <Row>
-          <Col>
+          <Col md={6}>
             <Form.Group>
               <FloatingLabel label="Nome do Produto:" className="mb-3">
                 <Form.Control
                   type="text"
                   placeholder="Informe o nome do produto"
-                  id="nomeProduto"
                   name="nomeProduto"
                   value={produto.nomeProduto}
                   onChange={manipularMudancas}
@@ -73,18 +79,15 @@ export default function FormCadProduto(props) {
               </Form.Control.Feedback>
             </Form.Group>
           </Col>
-        </Row>
-        <Row>
-          <Col>
+          <Col md={6}>
             <Form.Group>
               <FloatingLabel label="Descrição:" className="mb-3">
                 <Form.Control
                   as="textarea"
                   placeholder="Informe a descrição do produto"
-                  id="descricao"
+                  name="descricao"
                   value={produto.descricao}
                   onChange={manipularMudancas}
-                  name="descricao"
                 />
               </FloatingLabel>
               <Form.Control.Feedback type="invalid">
@@ -94,14 +97,13 @@ export default function FormCadProduto(props) {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col md={6}>
             <Form.Group>
               <FloatingLabel label="Preço:" className="mb-3">
                 <Form.Control
                   type="number"
                   step="0.01"
                   placeholder="Informe o preço do produto"
-                  id="preco"
                   name="preco"
                   value={produto.preco}
                   onChange={manipularMudancas}
@@ -113,13 +115,12 @@ export default function FormCadProduto(props) {
               </Form.Control.Feedback>
             </Form.Group>
           </Col>
-          <Col>
+          <Col md={6}>
             <Form.Group>
               <FloatingLabel label="Quantidade em Estoque:" className="mb-3">
                 <Form.Control
                   type="number"
                   placeholder="Informe a quantidade em estoque"
-                  id="quantidade"
                   name="quantidade"
                   value={produto.quantidade}
                   onChange={manipularMudancas}
@@ -133,13 +134,12 @@ export default function FormCadProduto(props) {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col md={6}>
             <Form.Group>
               <FloatingLabel label="Tipo de Produto:" className="mb-3">
                 <Form.Control
                   type="text"
                   placeholder="Informe o tipo de produto"
-                  id="tipoProduto"
                   name="tipoProduto"
                   value={produto.tipoProduto}
                   onChange={manipularMudancas}
@@ -151,13 +151,12 @@ export default function FormCadProduto(props) {
               </Form.Control.Feedback>
             </Form.Group>
           </Col>
-          <Col>
+          <Col md={6}>
             <Form.Group>
               <FloatingLabel label="Número de Identificação:" className="mb-3">
                 <Form.Control
                   type="text"
                   placeholder="Informe o número de identificação"
-                  id="numeroIdentificacao"
                   name="numeroIdentificacao"
                   value={produto.numeroIdentificacao}
                   onChange={manipularMudancas}
@@ -171,14 +170,13 @@ export default function FormCadProduto(props) {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col md={6}>
             <Form.Group>
               <FloatingLabel label="Custo Unitário:" className="mb-3">
                 <Form.Control
                   type="number"
                   step="0.01"
                   placeholder="Informe o custo unitário"
-                  id="custoUnitario"
                   name="custoUnitario"
                   value={produto.custoUnitario}
                   onChange={manipularMudancas}
@@ -190,14 +188,13 @@ export default function FormCadProduto(props) {
               </Form.Control.Feedback>
             </Form.Group>
           </Col>
-          <Col>
+          <Col md={6}>
             <Form.Group>
               <FloatingLabel label="Preço de Venda:" className="mb-3">
                 <Form.Control
                   type="number"
                   step="0.01"
                   placeholder="Informe o preço de venda"
-                  id="precoVenda"
                   name="precoVenda"
                   value={produto.precoVenda}
                   onChange={manipularMudancas}
@@ -217,7 +214,6 @@ export default function FormCadProduto(props) {
                 <Form.Control
                   type="text"
                   placeholder="Informe o nome do fornecedor"
-                  id="nomeFornecedor"
                   name="nomeFornecedor"
                   value={produto.nomeFornecedor}
                   onChange={manipularMudancas}
@@ -231,19 +227,24 @@ export default function FormCadProduto(props) {
           </Col>
         </Row>
         <Row>
-          <Col md={6} offset={5} className="d-flex justify-content-end">
+          <Col md={6} className="d-flex justify-content-end">
             <Button type="submit" variant={"primary"}>
-              Cadastrar
+              {props.modoEdicao ? "Alterar" : "Cadastrar"}
             </Button>
           </Col>
-          <Col md={6} offset={5}>
-            <Button type="button" variant={"secondary"}>
+          <Col md={6}>
+            <Button
+              type="button"
+              variant={"secondary"}
+              onClick={() => {
+                props.exibirFormulario(false);
+              }}
+            >
               Voltar
             </Button>
           </Col>
         </Row>
       </Form>
-      
     </Container>
   );
 }

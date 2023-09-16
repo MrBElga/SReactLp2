@@ -1,36 +1,51 @@
-import React, { useState, useEffect } from "react";
-import { Container, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Container } from "react-bootstrap";
 import FormCadProduto from "./formularios/FormCadProduto";
 import TabelaProdutos from "./tabelas/TabelaProdutos";
-
 import Pagina from "../templates/Pagina";
 import "./tela.css";
 
 export default function TelaCadastroProduto(props) {
-  const [exibirFormulario, setExibirFormulario] = useState(true);
+  const [exibirFormulario, setExibirFormulario] = useState(false);
   const [produtosCadastrados, setProdutosCadastrados] = useState([]);
-  
-  const toggleFormulario = () => {
-    setExibirFormulario(!exibirFormulario);
-  };
-
-
-  useEffect(() => {
-    
-  }, [produtosCadastrados]);
+  const [produtoParaEdicao, setProdutoParaEdicao] = useState({
+    nomeProduto: "",
+    descricao: "",
+    preco: "",
+    quantidade: "",
+    tipoProduto: "",
+    numeroIdentificacao: "",
+    custoUnitario: "",
+    precoVenda: "",
+    nomeFornecedor: ""
+  });
+  const [modoEdicao, setModoEdicao] = useState(false);
 
   return (
     <>
       <Pagina>
         <Container className="container-centralizadoTelas">
           {exibirFormulario ? (
-            <FormCadProduto produtos={produtosCadastrados} setProdutos={setProdutosCadastrados} />
+            <FormCadProduto
+              exibirFormulario={setExibirFormulario}
+              setProdutosCadastrados={setProdutosCadastrados}
+              produtosCadastrados={produtosCadastrados}
+              setProdutoParaEdicao={setProdutoParaEdicao}
+              produtoParaEdicao={produtoParaEdicao}
+              modoEdicao={modoEdicao}
+              setModoEdicao={setModoEdicao}
+            />
           ) : (
-            <TabelaProdutos produtos={produtosCadastrados} />
+            <TabelaProdutos
+              exibirFormulario={setExibirFormulario}
+              setProdutosCadastrados={setProdutosCadastrados}
+              produtosCadastrados={produtosCadastrados}
+              setProdutoParaEdicao={setProdutoParaEdicao}
+              produtoParaEdicao={produtoParaEdicao}
+              modoEdicao={modoEdicao}
+              setModoEdicao={setModoEdicao}
+            />
           )}
-          <Button onClick={toggleFormulario}>
-            {exibirFormulario ? "Mostrar Tabela" : "Mostrar Formulário"}
-          </Button>
         </Container>
       </Pagina>
     </>
