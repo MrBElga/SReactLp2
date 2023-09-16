@@ -21,6 +21,7 @@
       uf: 'SP',
       cep: ''
     };
+    
     const [cliente, setCliente] = useState(estadoInicialCliente);
     const [validated, setValidated] = useState(false);
 
