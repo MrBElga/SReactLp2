@@ -1,11 +1,12 @@
 import { Container, Table } from "react-bootstrap";
+import "./tabela.css";
 
 export default function TabelaProdutos(props) {
   const { produtos } = props; 
   
   return (
     <Container>
-      <Table striped bordered hover>
+      <Table className="table-custom" striped bordered hover>
         <thead>
           <tr>
             <th>Nome do Produto</th>

@@ -3,6 +3,7 @@ import { Container, Button } from "react-bootstrap";
 import FormCadFornecedor from "./formularios/FormCadFornecedor";
 import TabelaFornecedor from "./tabelas/TabelaFornecedores";
 import Pagina from "../templates/Pagina";
+import "./tela.css";
 
 export default function TelaCadastroFornecedor(props) {
   const [exibirFormulario, setExibirFormulario] = useState(false);
@@ -14,7 +15,7 @@ export default function TelaCadastroFornecedor(props) {
   return (
     <>
     <Pagina>
-        <Container>
+        <Container className="container-centralizadoTelas">
           {exibirFormulario ? <FormCadFornecedor /> : <TabelaFornecedor />}
           <Button onClick={toggleFormulario}>
             {exibirFormulario ? "Mostrar Tabela" : "Mostrar Formulário"}

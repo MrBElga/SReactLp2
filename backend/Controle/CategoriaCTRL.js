@@ -48,7 +48,7 @@ export default class CategoriaCTRL {
 
     async atualizar(requisicao, resposta) {
         const conexao = await conectar();
-        resposta.setHeader("Content-Type", "application/json");
+        resposta.setHeader("Content-Type", "application/json");e
 
         if (requisicao.method === "PUT") {
             if (requisicao.is("application/json")) {

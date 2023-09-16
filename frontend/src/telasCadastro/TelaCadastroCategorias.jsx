@@ -3,6 +3,7 @@ import { Container, Button } from "react-bootstrap";
 import FormCadCategoria from "./formularios/FormCadCategorias";
 import TabelaCategorias from "./tabelas/TabelaCategorias";
 import Pagina from "../templates/Pagina";
+import "./tela.css";
 
 export default function TelaCadastroCategoria(props) {
   const [exibirFormulario, setExibirFormulario] = useState(false);
@@ -14,7 +15,7 @@ export default function TelaCadastroCategoria(props) {
   return (
     <>
     <Pagina>
-        <Container>
+        <Container  className="container-centralizadoTelas">
           {exibirFormulario ? <FormCadCategoria /> : <TabelaCategorias />}
           <Button onClick={toggleFormulario}>
             {exibirFormulario ? "Mostrar Tabela" : "Mostrar Formulário"}

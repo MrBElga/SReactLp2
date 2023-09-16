@@ -1,106 +1,128 @@
-/* estilo.css */
-
-/* Navbar styling */
 .navbar-style {
-    background-color: rgba(68, 68, 68, 0.747);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    padding: 20px; /* Increased padding for better appearance */
-    text-align: center;
-  }
+  background-color: rgba(39, 39, 39, 0.747) !important;
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  padding: 20px !important; 
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important; 
+  min-height: 80px !important; 
+}
+
+
   
-  /* Navbar brand text styling */
+
   .navbar-brand {
-    color: #b3ecff;
-    font-size: 20px;
+    color: #b3ecff !important;
+    font-size: 20px !important;
   }
   
-  /* NavDropdown styling */
+ 
   .nav-dropdown {
-    background-color: rgba(68, 68, 68, 0.747) !important; /* Override Bootstrap's default */
+    background-color: rgba(68, 68, 68, 0.747) !important; 
     color: #b3ecff !important;
   }
   
-  /* NavDivider styling */
+  
   .nav-divider {
-    background-color: #b3ecff !important; /* Override Bootstrap's default */
+    background-color: #b3ecff !important; 
   }
   
-  /* NavLink styling */
+ 
   .nav-link {
     color: #b3ecff !important;
   }
   
-  /* Active NavLink styling */
+  
   .nav-link.active {
-    background-color: rgba(68, 68, 68, 0.747) !important; /* Override Bootstrap's default */
+    background-color: rgba(68, 68, 68, 0.747) !important;
     color: #b3ecff !important;
   }
   
-  /* Hover effect for NavLinks (optional) */
+ 
   .nav-link:hover {
-    background-color: rgba(68, 68, 68, 0.747) !important; /* Override Bootstrap's default */
+    background-color: rgba(68, 68, 68, 0.747) !important; 
     color: #fff !important;
   }
   
 
-  /* estilo.css */
-
-/* Body background image and styling */
 body {
-    background-image: url(./Image/Background/700049.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: #000; /* Fallback background color */
-    color: #b3ecff; /* Default text color */
-    font-family: Arial, sans-serif; /* Specify your preferred font-family */
-    margin: 0;
-    padding: 0;
+    background-image: url(./Image/Background/700049.jpg) !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-color: #000 !important; 
+    color: #b3ecff !important; 
+    font-family: Arial, sans-serif !important; 
+    margin: 0 !important;
+    padding: 0 !important;
   }
   
-  /* Container styling */
+ 
   .container {
-    background-color: rgba(68, 68, 68, 0.705);
-    border-radius: 10px;
-    padding: 20px; /* Adjust padding as needed */
-    margin: 5px; /* Adjust margin as needed */
+    background-color: rgba(68, 68, 68, 0.705) !important;
+    border-radius: 10px !important;
+    padding: 20px !important; 
+    margin: 5px !important; 
   }
   
-  /* Form styling */
+
   form {
-    color: #b3ecff;
+    color: #b3ecff !important;
   }
   
-  /* Form label styling */
+  
   label {
-    color: #b3ecff;
+    color: #b3ecff !important;
   }
   
-  /* Form control styling (input fields, buttons, etc.) */
+
   .form-control {
-    background-color: rgba(68, 68, 68, 0.705);
-    border: none;
-    color: #b3ecff;
+    background-color: rgba(68, 68, 68, 0.705) !important;
+    border: none !important;
+    color: #b3ecff !important;
   }
   
-  /* Button styling */
+
   .btn {
-    background-color: #3498db;
-    color: #fff;
+    background-color: #3498db !important;
+    color: #fff !important;
   }
   
-  /* Button hover effect */
+
   .btn:hover {
-    background-color: #2980b9;
+    background-color: #2980b9 !important;
   }
   
-  /* Navbar styling (if needed) */
+
   .navbar {
-    background-color: rgba(68, 68, 68, 0.747);
-    color: #b3ecff;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    background-color: rgba(68, 68, 68, 0.747) !important;
+    color: #b3ecff !important;
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
   }
   
-  /* Other custom styles as needed */
+  .dropdown-right {
+    position: fixed !important; 
+    top: 100px;
+    right: 90px !important; 
+  }
   
+  .dropdown-menu {
+    background-color: rgba(44, 44, 44, 0.863) !important;
+    border: none !important;
+  }
+
+
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.cabecalho-animado {
+  animation: fade-in 1s ease-out;
+}

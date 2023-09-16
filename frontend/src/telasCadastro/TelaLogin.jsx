@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./tela.css";
 import FormLogin from "./formularios/FormLogin";
 import Pagina from "../templates/Pagina";
 

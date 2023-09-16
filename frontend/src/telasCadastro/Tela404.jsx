@@ -1,25 +1,18 @@
 import React from "react";
-import { Container,Alert } from "react-bootstrap";
-import Pagina from "../templates/Pagina"
-
-
-const estiloRodape = {
-    padding: '10px', 
-    borderRadius: '5px', 
-    marginTop: '20px', 
-    textAlign: 'center', 
-};
+import { Container, Alert } from "react-bootstrap";
+import Pagina from "../templates/Pagina";
+import "./tela.css";
 
 export default function Tela404(props) {
   return (
     <>
-    <Pagina>
-        <Container style={estiloRodape}>
-        <Alert variant="danger"> 
-              PAGINA NÃO ENCONTRAdA!!
-            </Alert>    
+      <Pagina>
+        <Container className="container-centralizado">
+          <Alert variant="info">
+            PÁGINA NÃO ENCONTRADA!!
+          </Alert>
         </Container>
-    </Pagina>
+      </Pagina>
     </>
   );
 }

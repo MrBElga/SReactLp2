@@ -4,6 +4,7 @@ import FormCadProduto from "./formularios/FormCadProduto";
 import TabelaProdutos from "./tabelas/TabelaProdutos";
 
 import Pagina from "../templates/Pagina";
+import "./tela.css";
 
 export default function TelaCadastroProduto(props) {
   const [exibirFormulario, setExibirFormulario] = useState(true);
@@ -21,7 +22,7 @@ export default function TelaCadastroProduto(props) {
   return (
     <>
       <Pagina>
-        <Container>
+        <Container className="container-centralizadoTelas">
           {exibirFormulario ? (
             <FormCadProduto produtos={produtosCadastrados} setProdutos={setProdutosCadastrados} />
           ) : (

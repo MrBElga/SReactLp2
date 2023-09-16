@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Form, Row, Col, Button } from "react-bootstrap";
+import "./form.css"
 
 export default function LoginForm() {
   const [formData, setFormData] = useState({
