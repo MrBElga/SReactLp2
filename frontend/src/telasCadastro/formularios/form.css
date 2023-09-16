@@ -64,3 +64,50 @@ label::after {
     border-radius: 10px !important;
     color: #b3ecffb9 !important;
   }
+
+  /* form.css */
+
+/* Estilize o container principal */
+.login-container {
+  text-align: center;
+  padding: 20px;
+}
+
+/* Estilize o contêiner do formulário */
+.container.border {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+/* Estilize a legenda */
+legend {
+  color: #b3ecff;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Estilize os campos de entrada */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Estilize os rótulos dos campos */
+.form-label {
+  font-weight: bold;
+}
+
+/* Estilize os botões */
+button[type="submit"] {
+  background-color: #17a2b8;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #128293;
+}

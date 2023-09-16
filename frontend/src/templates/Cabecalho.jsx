@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./estilo.css";
 
 const estiloRodape = {
-  backgroundColor: "rgba(68, 68, 68, 0.747)",
+  backgroundColor: "#000",
   color: "#b3ecff",
   padding: "10px",
   borderRadius: "5px",
-  marginTop: "20px",
+  marginTop: "2px",
   textAlign: "center",
 };
 

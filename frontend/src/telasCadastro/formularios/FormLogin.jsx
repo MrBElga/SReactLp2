@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Container, Form, Row, Col, Button } from "react-bootstrap";
-import "./form.css"
+import "./login.css";
 
 export default function LoginForm() {
   const [formData, setFormData] = useState({
     nickName: "",
     senha: ""
   });
-  
+
   const [validated, setValidated] = useState(false);
 
   const handleInputChange = (e) => {
@@ -22,31 +22,21 @@ export default function LoginForm() {
     e.preventDefault();
     const form = e.currentTarget;
     if (form.checkValidity()) {
-      // Perform login or validation logic here
+  
       console.log("Form is valid. Submitting data:", formData);
     }
     setValidated(true);
   };
 
   return (
-    <Container>
-      <div
-        className="container border m-5"
-        style={{
-          backgroundColor: "rgba(68, 68, 68, 0.705)",
-          borderRadius: "10px",
-        }}
-      >
-        <Form
-          noValidate
-          validated={validated}
-          onSubmit={handleSubmit}
-        >
+    <Container className="login-container">
+      <div className="container border m-5">
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <fieldset>
             <legend style={{ color: "#b3ecff" }}>Login</legend>
 
             <Row>
-              <Col md={5}>
+              <Col md={10}>
                 <Form.Group controlId="nickName">
                   <Form.Label>NICKNAME:</Form.Label>
                   <Form.Control
@@ -57,14 +47,14 @@ export default function LoginForm() {
                     required
                   />
                   <Form.Control.Feedback type="invalid">
-                    Please provide a nickname.
+                    insira o nickname.
                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>
             </Row>
 
             <Row>
-              <Col md={4}>
+              <Col md={10}>
                 <Form.Group controlId="senha">
                   <Form.Label>SENHA:</Form.Label>
                   <Form.Control
@@ -75,14 +65,14 @@ export default function LoginForm() {
                     required
                   />
                   <Form.Control.Feedback type="invalid">
-                    Please provide a password.
+                    insira a senha.
                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>
             </Row>
 
-            <Row className="m-3">
-              <Col md={{ offset: 3 }}>
+            <Row >
+              <Col >
                 <Button type="submit" variant="info">
                   LOGIN
                 </Button>
