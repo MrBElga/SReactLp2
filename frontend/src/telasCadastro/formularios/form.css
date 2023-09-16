@@ -1,36 +1,30 @@
-/* form.css */
-
 label::after {
     display: none !important;
     
   }
   
-  /* Os estilos restantes do rótulo flutuante */
   .floating-label .floating-label-text {
     background-color: rgba(0, 0, 0, 0.1) !important;
     color: #000 !important;
     transition: background-color 0.3s !important;
     border: #fff !important;
   }
-  /* Estilo para os inputs */
+
   .form-input {
     background-color: rgba(0, 0, 0, 0.1) !important;
     color: #b3ecff !important;
   }
   
-  /* Estilo para o container */
   .container {
     background-color: rgba(44, 44, 44, 0.938) !important;
     color: #b3ecff !important;
   }
-  
-  /* Estilo para o select de UF */
+ 
   select[name="uf"] {
     background-color: rgba(44, 44, 44, 0.863) !important;
     color: #b3ecff !important;
   }
   
-  /* Estilo para os botões */
   .btn {
     background-color: #3498db !important;
     color: #fff !important;
@@ -40,7 +34,6 @@ label::after {
     background-color: #2980b9 !important;
   }
   
-  /* Estilo para os controles de formulário */
   .form-control {
     background-color: rgba(0, 0, 0, 0.1) !important;
     border-color: #b3ecff !important;
@@ -54,4 +47,3 @@ label::after {
     border-radius: 10px !important;
     color: #b3ecff !important;
   }
-  
