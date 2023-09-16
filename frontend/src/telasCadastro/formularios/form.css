@@ -1,17 +1,25 @@
 label::after {
     display: none !important;
-    
+    border-color: #b3ecff !important;
+    border-radius: 10px !important;
+    color: #b3ecff !important;
   }
-  
+
+
   .floating-label .floating-label-text {
     background-color: rgba(0, 0, 0, 0.1) !important;
     color: #000 !important;
     transition: background-color 0.3s !important;
-    border: #fff !important;
+    border:solid !important;
+    border-color: #b3ecff !important;
+    border-radius: 10px !important;
+   
   }
 
   .form-input {
     background-color: rgba(0, 0, 0, 0.1) !important;
+    border-color: #b3ecff !important;
+    border-radius: 10px !important;
     color: #b3ecff !important;
   }
   
@@ -22,7 +30,9 @@ label::after {
  
   select[name="uf"] {
     background-color: rgba(44, 44, 44, 0.863) !important;
-    color: #b3ecff !important;
+    border:solid 1px !important;
+    border-color: #b3ecff9a !important;
+    color: #b3ecffb9 !important;
   }
   
   .btn {
@@ -36,14 +46,21 @@ label::after {
   
   .form-control {
     background-color: rgba(0, 0, 0, 0.1) !important;
+    border:solid !important;
     border-color: #b3ecff !important;
-    border-radius: 10px !important;
     color: #b3ecff !important;
   }
   
   .form-control:focus {
     background-color: rgba(0, 0, 0, 0.1) !important;
+    border:solid !important;
     border-color: #b3ecff !important;
-    border-radius: 10px !important;
     color: #b3ecff !important;
+  }
+
+  .form-floating{
+    border:solid 3px !important;
+    border-color: #b3ecff9a !important;
+    border-radius: 10px !important;
+    color: #b3ecffb9 !important;
   }
