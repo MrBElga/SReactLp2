@@ -27,6 +27,8 @@ criação de token
 git checkout(vai para uma branch caso ela não exista ele cria a branch)
 - git checkout -b  
 
+- git branch (veririficar a branch)
+
 
 
 
