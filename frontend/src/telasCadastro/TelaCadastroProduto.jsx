@@ -1,29 +1,53 @@
 import React, { useState } from "react";
-import { Container, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import FormCadProduto from "./formularios/FormCadProduto";
 import TabelaProdutos from "./tabelas/TabelaProdutos";
-import Cabecalho from "../templates/Cabecalho";
-import Rodape from "../templates/Rodape";
-import Menu from "../templates/Menu";
+import Pagina from "../templates/Pagina";
+import "./tela.css";
+
 export default function TelaCadastroProduto(props) {
   const [exibirFormulario, setExibirFormulario] = useState(false);
-
-  const toggleFormulario = () => {
-    setExibirFormulario(!exibirFormulario);
-  };
+  const [produtosCadastrados, setProdutosCadastrados] = useState([]);
+  const [produtoParaEdicao, setProdutoParaEdicao] = useState({
+    nomeProduto: "",
+    descricao: "",
+    preco: "",
+    quantidade: "",
+    tipoProduto: "",
+    numeroIdentificacao: "",
+    custoUnitario: "",
+    precoVenda: "",
+    nomeFornecedor: ""
+  });
+  const [modoEdicao, setModoEdicao] = useState(false);
 
   return (
     <>
-    <Cabecalho conteudo='Sistema de Gestão Comercial' />
-    <Menu />
-    <Container>
-      {exibirFormulario ? <FormCadProduto /> : <TabelaProdutos />}
-      <Button onClick={toggleFormulario}>
-        {exibirFormulario ? "Mostrar Tabela" : "Mostrar Formulário"}
-      </Button>
-    </Container>
-    <Rodape conteudo="Rua X, 100 - Vila Tal - Presidente Prudente/SP - CNPJ 00.000.000/0001-00"/>
+      <Pagina>
+        <Container className="container-centralizadoTelas">
+          {exibirFormulario ? (
+            <FormCadProduto
+              exibirFormulario={setExibirFormulario}
+              setProdutosCadastrados={setProdutosCadastrados}
+              produtosCadastrados={produtosCadastrados}
+              setProdutoParaEdicao={setProdutoParaEdicao}
+              produtoParaEdicao={produtoParaEdicao}
+              modoEdicao={modoEdicao}
+              setModoEdicao={setModoEdicao}
+            />
+          ) : (
+            <TabelaProdutos
+              exibirFormulario={setExibirFormulario}
+              setProdutosCadastrados={setProdutosCadastrados}
+              produtosCadastrados={produtosCadastrados}
+              setProdutoParaEdicao={setProdutoParaEdicao}
+              produtoParaEdicao={produtoParaEdicao}
+              modoEdicao={modoEdicao}
+              setModoEdicao={setModoEdicao}
+            />
+          )}
+        </Container>
+      </Pagina>
     </>
   );
-
 }

@@ -1,9 +1,34 @@
-import { Container, Table } from "react-bootstrap";
+import { Container, Table, Button } from "react-bootstrap";
+import "./tabela.css";
 
 export default function TabelaCategorias(props) {
+  function excluirCategoria(categoria) {
+    if (window.confirm("Deseja realmente excluir esse Fornecedor?")) {
+      props.setListaCategoria(
+        props.listaCategoria.filter(
+          (itemLista) => itemLista.nomeCategoria !== categoria.nomeCategoria
+        )
+      );
+    }
+  }
+  function editarCategoria(categoria){
+
+    props.setCategoriaParaEdicao(categoria);
+    props.setModoEdicao(true)
+    props.exibirFormulario(true);
+  }
   return (
     <Container>
-      <Table striped bordered hover>
+      <Button
+        type="button"
+        onClick={() => {
+          props.exibirFormulario(true);
+        }}
+        variant="primary"
+      >
+        Novo Fornecedor
+      </Button>
+      <Table className="table-custom" striped bordered hover>
         <thead>
           <tr>
             <th>Nome da Categoria</th>
@@ -11,10 +36,26 @@ export default function TabelaCategorias(props) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Categoria A</td>
-            <td>Descrição da Categoria A</td>
-          </tr>
+          {props.listaCategoria.map((categoria) => {
+            return (
+              <tr key={categoria.nomeCategoria}>
+                <td>{categoria.nomeCategoria}</td>
+                <td>{categoria.descricao}</td>
+
+                <td>
+                  <Button
+                    className="btn-excluir"
+                    onClick={() => {
+                      excluirCategoria(categoria);
+                    }}
+                  >
+                    Excluir
+                  </Button>
+                  <Button className="btn-editar" onClick={()=>{ editarCategoria(categoria)}} >Editar</Button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     </Container>

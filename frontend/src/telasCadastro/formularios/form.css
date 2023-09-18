@@ -1,0 +1,123 @@
+label::after {
+  display: none !important;
+  border-color: #b3ecff !important;
+  border-radius: 10px !important;
+  color: #b3ecff !important;
+}
+
+.divEstilo{
+  top: 1px;
+  justify-content: space-between;
+  align-items: center !important;
+}
+
+.row{
+  padding: 1px;
+  justify-content: space-between !important;
+
+  align-items: center!important;
+}
+
+.floating-label .floating-label-text {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  color: #000 !important;
+  transition: background-color 0.3s !important;
+  border: solid !important;
+  border-color: #b3ecff !important;
+  border-radius: 10px !important;
+
+}
+
+.form-input {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  border-color: #b3ecff !important;
+  border-radius: 10px !important;
+  color: #b3ecff !important;
+}
+
+.container {
+  background-color: rgba(44, 44, 44, 0.938) !important;
+  color: #b3ecff !important;
+  align-items: flex-start !important;
+}
+
+select[name="uf"] {
+
+  background-color: rgba(44, 44, 44, 0.863) !important;
+  border: solid 1px !important;
+  border-color: #b3ecff9a !important;
+  color: #b3ecffb9 !important;
+}
+
+.btn {
+  background-color: #3498db !important;
+  color: #fff !important;
+}
+
+.btn:hover {
+  background-color: #2980b9 !important;
+}
+
+.form-control {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  border: solid !important;
+  border-color: #b3ecff !important;
+  color: #b3ecff !important;
+}
+
+.form-control:focus {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  border: solid !important;
+  border-color: #b3ecff !important;
+  color: #b3ecff !important;
+}
+
+.form-floating {
+  border: solid 3px !important;
+  border-color: #b3ecff9a !important;
+  border-radius: 10px !important;
+  color: #b3ecffb9 !important;
+}
+
+
+.login-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.container.border {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+legend {
+  color: #b3ecff;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Estilize os campos de entrada */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Estilize os rótulos dos campos */
+.form-label {
+  font-weight: bold;
+}
+
+/* Estilize os botões */
+button[type="submit"] {
+  background-color: #17a2b8;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #128293;
+}

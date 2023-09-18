@@ -1,25 +1,69 @@
-import { Container, Table } from "react-bootstrap";
+import { Container, Table, Button } from "react-bootstrap";
+import "./tabela.css";
 
 export default function TabelaProdutos(props) {
+  function excluirProduto(produto) {
+    if (window.confirm("Deseja realmente excluir este produto?")) {
+      props.setProdutosCadastrados(
+        props.produtosCadastrados.filter(((itemProduto) => itemProduto.nomeProduto !== produto.nomeProduto))
+      );
+    }
+  }
+  function editarProduto(produto){
+
+    props.setProdutoParaEdicao(produto);
+    props.setModoEdicao(true)
+    props.exibirFormulario(true);
+  }
   return (
     <Container>
-     
-      <Table striped bordered hover>
+      <Button
+        type="button"
+        onClick={() => {
+          props.exibirFormulario(true);
+        }}
+        variant="primary"
+      >
+        Novo Produto
+      </Button>
+      <Table className="table-custom" striped bordered hover>
         <thead>
           <tr>
             <th>Nome do Produto</th>
             <th>Descrição</th>
             <th>Preço</th>
             <th>Quantidade em Estoque</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Produto A</td>
-            <td>Descrição do Produto A</td>
-            <td>R$ 100,00</td>
-            <td>50 unidades</td>
-          </tr>
+          {props.produtosCadastrados.map((produto) => {
+            return (
+              <tr key={produto.nomeProduto}>
+                <td>{produto.nomeProduto}</td>
+                <td>{produto.descricao}</td>
+                <td>R$ {produto.preco}</td>
+                <td>{produto.quantidade} unidades</td>
+                <td>{produto.tipoProduto}</td>
+                <td>{produto.numeroIdentificacao}</td>
+                <td>{produto.custoUnitario}</td>
+                <td>{produto.precoVenda}</td>
+                <td>{produto.nomeFornecedor}</td>
+
+                <td>
+                  <Button
+                    className="btn-excluir"
+                    onClick={() => {
+                      excluirProduto(produto);
+                    }}
+                  >
+                    Excluir
+                  </Button>
+                  <Button className="btn-editar"  onClick={()=>{ editarProduto(produto)}}>Editar</Button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     </Container>

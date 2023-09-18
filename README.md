@@ -23,7 +23,11 @@ caminho
 criação de token 
  configurações -> deploy key
 - caminho ... -> check out -> "nome"
-- 
+
+git checkout(vai para uma branch caso ela não exista ele cria a branch)
+- git checkout -b  
+
+- git branch (veririficar a branch)
 
 
 
@@ -58,3 +62,7 @@ exemplo de importação
 react router 
 
     npm install react-router-dom
+
+
+  npm install react-icons --save
+
