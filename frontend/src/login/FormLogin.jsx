@@ -22,14 +22,13 @@ export default function LoginForm() {
     e.preventDefault();
     const form = e.currentTarget;
     if (form.checkValidity()) {
-  
       console.log("Form is valid. Submitting data:", formData);
     }
     setValidated(true);
   };
 
   return (
-    <Container className="login-container">
+    <Container className="login-container" style={{ margin: 0 }}>
       <div className="container border m-5">
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <fieldset>
@@ -47,7 +46,7 @@ export default function LoginForm() {
                     required
                   />
                   <Form.Control.Feedback type="invalid">
-                    insira o nickname.
+                    Insira o nickname.
                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>
@@ -65,14 +64,14 @@ export default function LoginForm() {
                     required
                   />
                   <Form.Control.Feedback type="invalid">
-                    insira a senha.
+                    Insira a senha.
                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>
             </Row>
 
             <Row className="rowLogin">
-              <Col >
+              <Col>
                 <Button type="submit" variant="info">
                   LOGIN
                 </Button>
