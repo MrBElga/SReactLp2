@@ -202,6 +202,7 @@
               <Form.Group>
                 <FloatingLabel label="UF:">
                   <Form.Select
+                    className="divEstilo"
                     aria-label="Unidades Federativas brasileiras"
                     name="uf"
                     value={cliente.uf}

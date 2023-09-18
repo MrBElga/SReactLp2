@@ -35,7 +35,7 @@ export default function LoginForm() {
           <fieldset>
             <legend style={{ color: "#b3ecff" }}>Login</legend>
 
-            <Row>
+            <Row className="rowLogin">
               <Col md={10}>
                 <Form.Group controlId="nickName">
                   <Form.Label>NICKNAME:</Form.Label>
@@ -53,7 +53,7 @@ export default function LoginForm() {
               </Col>
             </Row>
 
-            <Row>
+            <Row className="rowLogin">
               <Col md={10}>
                 <Form.Group controlId="senha">
                   <Form.Label>SENHA:</Form.Label>
@@ -71,7 +71,7 @@ export default function LoginForm() {
               </Col>
             </Row>
 
-            <Row >
+            <Row className="rowLogin">
               <Col >
                 <Button type="submit" variant="info">
                   LOGIN

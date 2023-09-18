@@ -5,9 +5,17 @@ label::after {
   color: #b3ecff !important;
 }
 
+.divEstilo{
+  top: 1px;
+  justify-content: space-between;
+  align-items: center !important;
+}
+
 .row{
-  justify-content: left!important;
-  align-items: flex-end!important;
+  padding: 1px;
+  justify-content: space-between !important;
+
+  align-items: center!important;
 }
 
 .floating-label .floating-label-text {
@@ -34,6 +42,7 @@ label::after {
 }
 
 select[name="uf"] {
+
   background-color: rgba(44, 44, 44, 0.863) !important;
   border: solid 1px !important;
   border-color: #b3ecff9a !important;
