@@ -5,7 +5,7 @@ import TelaCadastroCliente from './telasCadastro/TelaCadastroCliente';
 import TelaCadastroFornecedor from './telasCadastro/TelaCadastroFornecedor';
 import TelaCadastroProduto from './telasCadastro/TelaCadastroProduto';
 import TelaCadastroCategoria from './telasCadastro/TelaCadastroCategorias';
-import TelaLogin from './telasCadastro/TelaLogin'
+import TelaLogin from './login/TelaLogin'
 import Tela404 from './telasCadastro/Tela404';
 import Pagina from './templates/Pagina';
 import Sistema from './Sistema'

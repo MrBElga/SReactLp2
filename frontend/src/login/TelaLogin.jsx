@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import "./tela.css";
-import FormLogin from "./formularios/FormLogin";
+import "../telasCadastro/tela.css";
+import FormLogin from "./FormLogin";
 import Pagina from "../templates/Pagina";
 
 export default function TelaCadastroCategoria(props) {

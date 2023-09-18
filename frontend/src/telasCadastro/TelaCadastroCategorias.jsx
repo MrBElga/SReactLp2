@@ -10,7 +10,7 @@ export default function TelaCadastroCategoria(props) {
   const [listaCategoria, setListaCategoria] = useState([]);
   const [categoriaParaEdicao, setCategoriaParaEdicao] = useState({
     nomeCategoria: "",
-    descricao: "",
+    descricao: ""
   });
   const [modoEdicao, setModoEdicao] = useState(false);
   return (

@@ -10,7 +10,8 @@
   } from "react-bootstrap";
 
   export default function FormCadCliente(props) {
-    const estadoInicialCliente = {
+    const estadoInicialCliente = props.clienteParaEdicao;
+    const clienteVazio = {
       cpf: '',
       nome: '',
       email: '',
@@ -20,8 +21,7 @@
       cidade: '',
       uf: 'SP',
       cep: ''
-    };
-    
+    }
     const [cliente, setCliente] = useState(estadoInicialCliente);
     const [validated, setValidated] = useState(false);
 
@@ -40,7 +40,9 @@
         if (!props.modoEdicao) {
           console.log(cliente)
           props.setListaClientes([...props.listaClientes, cliente]);
-        } else {
+        } 
+        else 
+        {
   
 
           props.setListaClientes([
@@ -62,7 +64,7 @@
             cep: ''
           });
         }
-        setCliente(estadoInicialCliente);
+        setCliente(clienteVazio);
         setValidated(false);
       } else {
         setValidated(true);
@@ -239,7 +241,7 @@
               </Form.Group>
             </Col>
           </Row>
-          <Row>
+          <Row className="Row">
             <Col md={4}>
               <Form.Group>
                 <FloatingLabel label="CEP:" className="mb-3">
@@ -257,7 +259,7 @@
               </Form.Group>
             </Col>
           </Row>
-          <Row>
+          <Row className="Row">
             <Col md={6} className="d-flex justify-content-end">
               <Button type="submit" variant={"primary"}>
                 {props.modoEdicao ? "Alterar" : "Cadastrar"}

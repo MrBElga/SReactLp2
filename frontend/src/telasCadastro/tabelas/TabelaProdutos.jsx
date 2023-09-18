@@ -9,7 +9,12 @@ export default function TabelaProdutos(props) {
       );
     }
   }
+  function editarProduto(produto){
 
+    props.setProdutoParaEdicao(produto);
+    props.setModoEdicao(true)
+    props.exibirFormulario(true);
+  }
   return (
     <Container>
       <Button
@@ -54,7 +59,7 @@ export default function TabelaProdutos(props) {
                   >
                     Excluir
                   </Button>
-                  <Button className="btn-editar">Editar</Button>
+                  <Button className="btn-editar"  onClick={()=>{ editarProduto(produto)}}>Editar</Button>
                 </td>
               </tr>
             );

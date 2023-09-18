@@ -1,79 +1,81 @@
 label::after {
-    display: none !important;
-    border-color: #b3ecff !important;
-    border-radius: 10px !important;
-    color: #b3ecff !important;
-  }
+  display: none !important;
+  border-color: #b3ecff !important;
+  border-radius: 10px !important;
+  color: #b3ecff !important;
+}
+
+.row{
+  justify-content: left!important;
+  align-items: flex-end!important;
+}
+
+.floating-label .floating-label-text {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  color: #000 !important;
+  transition: background-color 0.3s !important;
+  border: solid !important;
+  border-color: #b3ecff !important;
+  border-radius: 10px !important;
+
+}
+
+.form-input {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  border-color: #b3ecff !important;
+  border-radius: 10px !important;
+  color: #b3ecff !important;
+}
+
+.container {
+  background-color: rgba(44, 44, 44, 0.938) !important;
+  color: #b3ecff !important;
+  align-items: flex-start !important;
+}
+
+select[name="uf"] {
+  background-color: rgba(44, 44, 44, 0.863) !important;
+  border: solid 1px !important;
+  border-color: #b3ecff9a !important;
+  color: #b3ecffb9 !important;
+}
+
+.btn {
+  background-color: #3498db !important;
+  color: #fff !important;
+}
+
+.btn:hover {
+  background-color: #2980b9 !important;
+}
+
+.form-control {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  border: solid !important;
+  border-color: #b3ecff !important;
+  color: #b3ecff !important;
+}
+
+.form-control:focus {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  border: solid !important;
+  border-color: #b3ecff !important;
+  color: #b3ecff !important;
+}
+
+.form-floating {
+  border: solid 3px !important;
+  border-color: #b3ecff9a !important;
+  border-radius: 10px !important;
+  color: #b3ecffb9 !important;
+}
 
 
-  .floating-label .floating-label-text {
-    background-color: rgba(0, 0, 0, 0.1) !important;
-    color: #000 !important;
-    transition: background-color 0.3s !important;
-    border:solid !important;
-    border-color: #b3ecff !important;
-    border-radius: 10px !important;
-   
-  }
-
-  .form-input {
-    background-color: rgba(0, 0, 0, 0.1) !important;
-    border-color: #b3ecff !important;
-    border-radius: 10px !important;
-    color: #b3ecff !important;
-  }
-  
-  .container {
-    background-color: rgba(44, 44, 44, 0.938) !important;
-    color: #b3ecff !important;
-  }
- 
-  select[name="uf"] {
-    background-color: rgba(44, 44, 44, 0.863) !important;
-    border:solid 1px !important;
-    border-color: #b3ecff9a !important;
-    color: #b3ecffb9 !important;
-  }
-  
-  .btn {
-    background-color: #3498db !important;
-    color: #fff !important;
-  }
-  
-  .btn:hover {
-    background-color: #2980b9 !important;
-  }
-  
-  .form-control {
-    background-color: rgba(0, 0, 0, 0.1) !important;
-    border:solid !important;
-    border-color: #b3ecff !important;
-    color: #b3ecff !important;
-  }
-  
-  .form-control:focus {
-    background-color: rgba(0, 0, 0, 0.1) !important;
-    border:solid !important;
-    border-color: #b3ecff !important;
-    color: #b3ecff !important;
-  }
-
-  .form-floating{
-    border:solid 3px !important;
-    border-color: #b3ecff9a !important;
-    border-radius: 10px !important;
-    color: #b3ecffb9 !important;
-  }
-
-  /* form.css */
-
-/* Estilize o container principal */
 .login-container {
   text-align: center;
   padding: 20px;
 }
 
-/* Estilize o contêiner do formulário */
 .container.border {
   background-color: #fff;
   border-radius: 5px;
@@ -81,7 +83,6 @@ label::after {
   padding: 20px;
 }
 
-/* Estilize a legenda */
 legend {
   color: #b3ecff;
   font-size: 24px;

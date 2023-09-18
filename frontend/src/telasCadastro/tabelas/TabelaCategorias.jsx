@@ -11,6 +11,12 @@ export default function TabelaCategorias(props) {
       );
     }
   }
+  function editarCategoria(categoria){
+
+    props.setCategoriaParaEdicao(categoria);
+    props.setModoEdicao(true)
+    props.exibirFormulario(true);
+  }
   return (
     <Container>
       <Button
@@ -45,7 +51,7 @@ export default function TabelaCategorias(props) {
                   >
                     Excluir
                   </Button>
-                  <Button className="btn-editar">Editar</Button>
+                  <Button className="btn-editar" onClick={()=>{ editarCategoria(categoria)}} >Editar</Button>
                 </td>
               </tr>
             );

@@ -1,56 +1,49 @@
-/* tabela.css */
 .table-custom {
-    width: 100% !important;
-    margin-bottom: 1rem !important;
-    color: #333 !important;
-    border-collapse: collapse !important;
-  }
-  
-  /* Estilo para as células do cabeçalho */
-  .table-custom thead th {
-    background-color: #343a40 !important;
-    color: #fff !important;
-    font-weight: bold !important;
-    text-align: center !important;
-    vertical-align: middle !important;
-  }
-  
-  /* Estilo para as células do corpo */
-  .table-custom tbody td {
-    vertical-align: middle !important;
-  }
-  
-  /* Estilo para as linhas com listras */
-  .table-custom tbody tr:nth-child(odd) {
-    background-color: #f8f9fa !important;
-  }
-  
-  /* Estilo para o botão Excluir */
-  .btn-excluir {
-    background-color: #dc3545 !important;
-    color: #fff !important;
-    transition: background-color 0.3s, color 0.3s; /* Adicione uma transição suave */
-  }
-  
-  /* Estilo de hover para o botão Excluir */
-  .btn-excluir:hover {
-    background-color: #c82333 !important; /* Cor mais escura no hover */
-  }
-  
-  /* Estilo para o botão Editar */
-  .btn-editar {
-    background-color: #ffc107 !important;
-    color: #212529 !important;
-    transition: background-color 0.3s, color 0.3s; /* Adicione uma transição suave */
-  }
-  
-  /* Estilo de hover para o botão Editar */
-  .btn-editar:hover {
-    background-color: #e0a800 !important; /* Cor mais escura no hover */
-  }
-  
-  /* Estilo para os botões na célula Ações */
-  .table-custom .btn {
-    margin-right: 5px !important;
-  }
-  
+  width: 100% !important;
+  margin-bottom: 1rem !important;
+  color: #333 !important;
+  border-collapse: collapse !important;
+}
+
+.table-custom thead th {
+  background-color: #343a40 !important;
+  color: #fff !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+.table-custom tbody td {
+  vertical-align: middle !important;
+}
+
+.table-custom tbody tr:nth-child(odd) {
+  background-color: #f8f9fa !important;
+}
+
+.btn-excluir {
+  background-color: #dc3545 !important;
+  color: #fff !important;
+  transition: background-color 0.3s, color 0.3s;
+
+}
+
+.btn-excluir:hover {
+  background-color: #c82333 !important;
+
+}
+
+.btn-editar {
+  background-color: #ffc107 !important;
+  color: #212529 !important;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-editar:hover {
+  background-color: #e0a800 !important
+}
+
+
+.table-custom .btn {
+  margin-right: 5px !important;
+}

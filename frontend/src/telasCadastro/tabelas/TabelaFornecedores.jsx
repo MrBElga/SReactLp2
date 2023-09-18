@@ -11,6 +11,12 @@ export default function TabelaFornecedores(props) {
       );
     }
   }
+  function editarFornecedor(fornecedor){
+
+    props.setFornecedorPAraEdicao(fornecedor);
+    props.setModoEdicao(true);
+    props.exibirFormulario(true);
+  }
   return (
     <Container>
       <Button
@@ -57,7 +63,7 @@ export default function TabelaFornecedores(props) {
                   </Button>
                 </td>
                 <td>
-                  <Button className="btn-editar">Editar</Button>
+                <Button className="btn-editar"  onClick={()=>{ editarFornecedor(fornecedor);}}>Editar</Button>
                 </td>
               </tr>
             );

@@ -9,6 +9,13 @@ export default function TabelaClientes(props) {
             );
         }
     }
+
+    function editarCliente(cliente){
+
+      props.setClienteParaEdicao(cliente);
+      props.setModoEdicao(true)
+      props.exibirFormulario(true);
+    }
     return (
         <Container>
           <Button
@@ -53,7 +60,7 @@ export default function TabelaClientes(props) {
                       >
                         Excluir
                       </Button>
-                      <Button className="btn-editar">Editar</Button>
+                      <Button className="btn-editar"  onClick={()=>{ editarCliente(cliente)}}>Editar</Button>
                     </td>
                   </tr>
                 );

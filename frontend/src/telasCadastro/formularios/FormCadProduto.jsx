@@ -10,17 +10,7 @@ import {
 } from "react-bootstrap";
 
 export default function FormCadProduto(props) {
-  const estadoInicialProduto = {
-    nomeProduto: "",
-    descricao: "",
-    preco: "",
-    quantidade: "",
-    tipoProduto: "",
-    numeroIdentificacao: "",
-    custoUnitario: "",
-    precoVenda: "",
-    nomeFornecedor: ""
-  };
+  const estadoInicialProduto = props.produtoParaEdicao;
   
   const [produto, setProduto] = useState(estadoInicialProduto);
   const [validated, setValidated] = useState(false);

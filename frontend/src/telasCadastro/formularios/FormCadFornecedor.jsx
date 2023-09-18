@@ -10,20 +10,7 @@ import {
 } from "react-bootstrap";
 
 export default function FormCadFornecedor(props) {
-  const estadoInicialFornecedor = {
-    nome: "",
-    cnpj: "",
-    email: "",
-    telefone: "",
-    celular: "",
-    endereco: "",
-    numero: "",
-    bairro: "",
-    cidade: "",
-    uf: "SP",
-    cep: "",
-  };
-
+  const estadoInicialFornecedor = props.fornecedorParaEdicao;
   const [fornecedor, setFornecedor] = useState(estadoInicialFornecedor);
   const [validated, setValidated] = useState(false);
 

@@ -1,19 +1,9 @@
 import React, { useState } from "react";
-import {
-  Container,
-  Form,
-  Row,
-  Col,
-  FloatingLabel,
-  Button,
-} from "react-bootstrap";
+import {Container,Form,Row,Col,FloatingLabel,Button} from "react-bootstrap";
 import "./form.css";
 
 export default function FormCadCategoria(props) {
-  const categoriaIn = {
-    nomeCategoria: "",
-    descricao: "",
-  };
+  const categoriaIn = props.categoriaParaEdicao;
 
   const [categoria, setCategoria] = useState(categoriaIn);
   const [validated, setValidated] = useState(false);
@@ -42,7 +32,7 @@ export default function FormCadCategoria(props) {
         props.setModoEdicao(false);
         props.setCategoriaParaEdicao({
           nomeCategoria: "",
-          descricao: "",
+          descricao: ""
         });
       }
       setCategoria(categoriaIn);
