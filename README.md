@@ -7,6 +7,15 @@ Instalando a biblioteca React:
 Criando seu projeto 
 - npx create-react-app <Nome>
 
+react icon
+- npm install react-icons --save
+
+react router 
+- npm install react-router-dom
+
+instalação bootstrap
+- npm install react-bootstrap bootstrap
+
 Comandos Git 
 - git init
 - git add -a
@@ -26,10 +35,7 @@ criação de token
 
 git checkout(vai para uma branch caso ela não exista ele cria a branch)
 - git checkout -b  
-
 - git branch (veririficar a branch)
-
-
 
 
 Site para pegar icones
@@ -48,21 +54,9 @@ React Bootstrap
 
     https://react-bootstrap.netlify.app/
 
-instalação bootstrap
-
-    npm install react-bootstrap bootstrap
-
 exemplo de importação
 
     import Button from 'react-bootstrap/Button';
     
     // or less ideally
     import { Button } from 'react-bootstrap';
-
-react router 
-
-    npm install react-router-dom
-
-
-  npm install react-icons --save
-
