@@ -33,7 +33,7 @@ export default function FormCadFornecedor(props) {
       } else {
 
         props.setListaFornecedores([...props.listaFornecedores.filte(
-          (itemFornecedor) => itemFornecedor.cnpj !== fornecedor.cnpj
+          (itemFornecedor) => itemFornecedor.cnpj === fornecedor.cnpj
         ),fornecedor]);
         props.setModoEdicao(false);
         props.setFornecedorPAraEdicao({
@@ -57,6 +57,7 @@ export default function FormCadFornecedor(props) {
     else {
       setValidated(true);
     }
+    props.setExibirAlert(true);
     e.stopPropagation();
     e.preventDefault();
   }

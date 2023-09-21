@@ -10,7 +10,9 @@
   } from "react-bootstrap";
 
   export default function FormCadCliente(props) {
+
     const estadoInicialCliente = props.clienteParaEdicao;
+
     const clienteVazio = {
       cpf: '',
       nome: '',
@@ -38,37 +40,22 @@
       if (form.checkValidity()) {
  
         if (!props.modoEdicao) {
-          console.log(cliente)
           props.setListaClientes([...props.listaClientes, cliente]);
+          props.setExibirAlert(true);
         } 
         else 
         {
-  
-
-          props.setListaClientes([
-            ...props.listaClientes.filter(
-              (itemCliente) => itemCliente.cpf !== cliente.cpf
-            ),
-            cliente,
-          ]);
+          props.setListaClientes([...props.listaClientes.filter((itemCliente)=>itemCliente.cpf === cliente.cpf),cliente]);
           props.setModoEdicao(false);
-          props.setClienteParaEdicao({
-            cpf: '',
-            nome: '',
-            email: '',
-            endereco: '',
-            numero: '',
-            bairro: '',
-            cidade: '',
-            uf: 'SP',
-            cep: ''
-          });
+          props.setClienteParaEdicao(clienteVazio);
         }
         setCliente(clienteVazio);
         setValidated(false);
+        props.setExibirAlert(true);
       } else {
         setValidated(true);
       }
+    
       e.stopPropagation();
       e.preventDefault();
     }

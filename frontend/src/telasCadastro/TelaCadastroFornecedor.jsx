@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Container } from "react-bootstrap";
+import React, { useState,useEffect } from "react";
+import { Container,Alert } from "react-bootstrap";
 import FormCadFornecedor from "./formularios/FormCadFornecedor";
 import TabelaFornecedor from "./tabelas/TabelaFornecedores";
 import Pagina from "../templates/Pagina";
@@ -7,6 +7,7 @@ import "./tela.css";
 
 export default function TelaCadastroFornecedor(props) {
   const [exibirFormulario, setExibirFormulario] = useState(false);
+  const [exibirAlert, setExibirAlert] = useState(false);
   const [listaFornecedores, setListaFornecedores] = useState([]);
   const [fornecedorParaEdicao, setFornecedorPAraEdicao] = useState({
     nome:"",
@@ -23,6 +24,19 @@ export default function TelaCadastroFornecedor(props) {
   });
   const [modoEdicao, setModoEdicao] = useState(false);
 
+  const exibirAlertTemporariamente = () => {
+    setExibirAlert(true);
+    setTimeout(() => {
+      setExibirAlert(false);
+    }, 3000);
+  };
+
+  useEffect(() => {
+    if (exibirAlert) {
+      exibirAlertTemporariamente();
+    }
+  }, [exibirAlert]);
+
   return (
     <>
       <Pagina>
@@ -36,6 +50,8 @@ export default function TelaCadastroFornecedor(props) {
               setFornecedorPAraEdicao={setFornecedorPAraEdicao}
               modoEdicao={modoEdicao}
               setModoEdicao={setModoEdicao}
+              exibirAlert={exibirAlert}
+              setExibirAlert={setExibirAlert}
             />
           ) : (
             <TabelaFornecedor
@@ -49,6 +65,11 @@ export default function TelaCadastroFornecedor(props) {
             />
           )}
         </Container>
+        {
+          exibirAlert&&( <Alert variant="success">
+                          Categoria cadastrada com sucesso!!
+                        </Alert>)
+        }
       </Pagina>
     </>
   );

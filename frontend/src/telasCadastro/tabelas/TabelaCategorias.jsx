@@ -33,6 +33,7 @@ export default function TabelaCategorias(props) {
           <tr>
             <th>Nome da Categoria</th>
             <th>Descrição</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -41,7 +42,7 @@ export default function TabelaCategorias(props) {
               <tr key={categoria.nomeCategoria}>
                 <td>{categoria.nomeCategoria}</td>
                 <td>{categoria.descricao}</td>
-
+                
                 <td>
                   <Button
                     className="btn-excluir"

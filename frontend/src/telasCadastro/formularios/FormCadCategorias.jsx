@@ -40,6 +40,7 @@ export default function FormCadCategoria(props) {
     } else {
       setValidated(true);
     }
+    props.setExibirAlert(true);
     e.stopPropagation();
     e.preventDefault();
   }

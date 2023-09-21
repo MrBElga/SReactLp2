@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container } from "react-bootstrap";
+import { Container,Alert } from "react-bootstrap";
 import FormCadProduto from "./formularios/FormCadProduto";
 import TabelaProdutos from "./tabelas/TabelaProdutos";
 import Pagina from "../templates/Pagina";
@@ -7,6 +7,7 @@ import "./tela.css";
 
 export default function TelaCadastroProduto(props) {
   const [exibirFormulario, setExibirFormulario] = useState(false);
+  const [exibirAlert, setExibirAlert] = useState(false);
   const [produtosCadastrados, setProdutosCadastrados] = useState([]);
   const [produtoParaEdicao, setProdutoParaEdicao] = useState({
     nomeProduto: "",
@@ -47,6 +48,11 @@ export default function TelaCadastroProduto(props) {
             />
           )}
         </Container>
+        {
+          exibirAlert&&( <Alert variant="success">
+                          Categoria cadastrada com sucesso!!
+                        </Alert>)
+        }
       </Pagina>
     </>
   );
