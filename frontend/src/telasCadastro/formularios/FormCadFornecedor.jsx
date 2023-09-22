@@ -33,7 +33,7 @@ export default function FormCadFornecedor(props) {
       } else {
 
         props.setListaFornecedores([...props.listaFornecedores.filte(
-          (itemFornecedor) => itemFornecedor.cnpj === fornecedor.cnpj
+          (itemFornecedor) => itemFornecedor.cnpj !== fornecedor.cnpj
         ),fornecedor]);
         props.setModoEdicao(false);
         props.setFornecedorPAraEdicao({
@@ -300,8 +300,8 @@ export default function FormCadFornecedor(props) {
             <Button type="submit" variant="primary">
               {props.modoEdicao ? "Alterar" : "Cadastrar"}
             </Button>
-          </Col>
-          <Col md={6}>
+        
+          
             <Button
               type="button"
               variant="secondary"

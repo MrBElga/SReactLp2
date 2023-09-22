@@ -45,7 +45,7 @@
         } 
         else 
         {
-          props.setListaClientes([...props.listaClientes.filter((itemCliente)=>itemCliente.cpf === cliente.cpf),cliente]);
+          props.setListaClientes([...props.listaClientes.filter((itemCliente)=>itemCliente.cpf !== cliente.cpf),cliente]);
           props.setModoEdicao(false);
           props.setClienteParaEdicao(clienteVazio);
         }

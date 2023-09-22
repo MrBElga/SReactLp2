@@ -31,7 +31,7 @@ export default function FormCadProduto(props) {
       } else {
         props.setProdutosCadastrados([
           ...props.produtosCadastrados.filter(
-            (itemProduto) => itemProduto.nomeProduto === produto.nomeProduto
+            (itemProduto) => itemProduto.nomeProduto !== produto.nomeProduto
           ),
           produto,
         ]);
@@ -222,8 +222,7 @@ export default function FormCadProduto(props) {
             <Button type="submit" variant={"primary"}>
               {props.modoEdicao ? "Alterar" : "Cadastrar"}
             </Button>
-          </Col>
-          <Col md={6}>
+      
             <Button
               type="button"
               variant={"secondary"}

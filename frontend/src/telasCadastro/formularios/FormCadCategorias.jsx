@@ -25,7 +25,7 @@ export default function FormCadCategoria(props) {
         props.setListaCategoria([
           ...props.listaCategoria.filter(
             (itemCategoria) =>
-              itemCategoria.nomeCategoria === categoria.nomeCategoria
+              itemCategoria.nomeCategoria !== categoria.nomeCategoria
           ),
           categoria,
         ]);
