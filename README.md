@@ -16,7 +16,13 @@ react router
 instalação bootstrap
 - npm install react-bootstrap bootstrap
 
+-clonar repo
+-criar um repositorio
+-mandar para o remoto
+e mandar para outra origen
+
 Comandos Git 
+
 - git init
 - git add -a
 - git config --global user.email "danieleliasrumin@gmail.com"
