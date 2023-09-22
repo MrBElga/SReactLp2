@@ -10,13 +10,14 @@ import Tela404 from './telasCadastro/Tela404';
 import Pagina from './templates/Pagina';
 import Sistema from './Sistema'
 
+
 function App() {
   return (
     <div>
       <Sistema>
+        <Route path='/login' element={<TelaLogin />}/>
         <Route path='*' element={<Tela404 />}/>
         <Route path='/' element={<Pagina />}/>
-        <Route path='/login' element={<TelaLogin />}/>
         <Route path="/cliente" element={<TelaCadastroCliente />} />
         <Route path="/fornecedor" element={<TelaCadastroFornecedor />} />
         <Route path="/produto" element={<TelaCadastroProduto />} />
