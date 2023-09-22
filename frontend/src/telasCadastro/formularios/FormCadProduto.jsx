@@ -31,7 +31,7 @@ export default function FormCadProduto(props) {
       } else {
         props.setProdutosCadastrados([
           ...props.produtosCadastrados.filter(
-            (itemProduto) => itemProduto.nomeProduto !== produto.nomeProduto
+            (itemProduto) => itemProduto.nomeProduto === produto.nomeProduto
           ),
           produto,
         ]);
@@ -40,6 +40,7 @@ export default function FormCadProduto(props) {
       }
       setProduto(estadoInicialProduto);
       setValidated(false);
+      props.setExibirAlert(true);
     }
     else{
       setValidated(true);

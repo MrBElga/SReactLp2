@@ -25,7 +25,7 @@ export default function FormCadCategoria(props) {
         props.setListaCategoria([
           ...props.listaCategoria.filter(
             (itemCategoria) =>
-              itemCategoria.nomeCategoria !== categoria.nomeCategoria
+              itemCategoria.nomeCategoria === categoria.nomeCategoria
           ),
           categoria,
         ]);
@@ -37,10 +37,11 @@ export default function FormCadCategoria(props) {
       }
       setCategoria(categoriaIn);
       setValidated(false);
+      props.setExibirAlert(true);
     } else {
       setValidated(true);
     }
-    props.setExibirAlert(true);
+    
     e.stopPropagation();
     e.preventDefault();
   }

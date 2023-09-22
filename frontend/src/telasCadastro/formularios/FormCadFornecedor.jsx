@@ -52,12 +52,12 @@ export default function FormCadFornecedor(props) {
       }
         setFornecedor(estadoInicialFornecedor);
         setValidated(false);
-     
+        props.setExibirAlert(true);
     } 
     else {
       setValidated(true);
     }
-    props.setExibirAlert(true);
+    
     e.stopPropagation();
     e.preventDefault();
   }

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Container,Alert } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Alert } from "react-bootstrap";
 import FormCadProduto from "./formularios/FormCadProduto";
 import TabelaProdutos from "./tabelas/TabelaProdutos";
 import Pagina from "../templates/Pagina";
@@ -18,10 +18,21 @@ export default function TelaCadastroProduto(props) {
     numeroIdentificacao: "",
     custoUnitario: "",
     precoVenda: "",
-    nomeFornecedor: ""
+    nomeFornecedor: "",
   });
   const [modoEdicao, setModoEdicao] = useState(false);
+  const exibirAlertTemporariamente = () => {
+    setExibirAlert(true);
+    setTimeout(() => {
+      setExibirAlert(false);
+    }, 3000);
+  };
 
+  useEffect(() => {
+    if (exibirAlert) {
+      exibirAlertTemporariamente();
+    }
+  }, [exibirAlert]);
   return (
     <>
       <Pagina>
@@ -35,6 +46,8 @@ export default function TelaCadastroProduto(props) {
               produtoParaEdicao={produtoParaEdicao}
               modoEdicao={modoEdicao}
               setModoEdicao={setModoEdicao}
+              exibirAlert={exibirAlert}
+              setExibirAlert={setExibirAlert}
             />
           ) : (
             <TabelaProdutos
@@ -48,11 +61,9 @@ export default function TelaCadastroProduto(props) {
             />
           )}
         </Container>
-        {
-          exibirAlert&&( <Alert variant="success">
-                          Categoria cadastrada com sucesso!!
-                        </Alert>)
-        }
+        {exibirAlert && (
+          <Alert variant="success">Categoria cadastrada com sucesso!!</Alert>
+        )}
       </Pagina>
     </>
   );
