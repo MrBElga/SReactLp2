@@ -64,7 +64,7 @@ export default function TelaCadastroCliente(props) {
           )}
           {
             exibirAlert&&( <Alert variant="success">
-                            Categoria cadastrada com sucesso!!
+                            Cliente cadastrada com sucesso!!
                           </Alert>)
           }
         </Container>

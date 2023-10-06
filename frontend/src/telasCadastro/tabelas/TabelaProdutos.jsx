@@ -32,7 +32,12 @@ export default function TabelaProdutos(props) {
             <th>Nome do Produto</th>
             <th>Descrição</th>
             <th>Preço</th>
-            <th>Quantidade em Estoque</th>
+            <th>Qtd Estoque</th>
+            <th>tipo</th>
+            <th>nmr Identificacao</th>
+            <th>custo Unitario</th>
+            <th>preco Venda</th>
+            <th>Fornecedor</th>
             <th>Ações</th>
           </tr>
         </thead>

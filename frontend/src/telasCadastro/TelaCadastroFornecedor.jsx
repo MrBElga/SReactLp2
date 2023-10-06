@@ -67,7 +67,7 @@ export default function TelaCadastroFornecedor(props) {
         </Container>
         {
           exibirAlert&&( <Alert variant="success">
-                          Categoria cadastrada com sucesso!!
+                          Fornecedor cadastrada com sucesso!!
                         </Alert>)
         }
       </Pagina>

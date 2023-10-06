@@ -7,12 +7,15 @@ import {
   Col,
   FloatingLabel,
   Button,
+  Alert,
 } from "react-bootstrap";
 
 export default function FormCadFornecedor(props) {
   const estadoInicialFornecedor = props.fornecedorParaEdicao;
   const [fornecedor, setFornecedor] = useState(estadoInicialFornecedor);
   const [validated, setValidated] = useState(false);
+  const [cnpjDuplicado, setCnpjDuplicado] = useState(false);
+  const [emailDuplicado, setEmailDuplicado] = useState(false);
 
   function manipularMudancas(e) {
     const componente = e.currentTarget;
@@ -24,40 +27,46 @@ export default function FormCadFornecedor(props) {
 
   function manipularSubmit(e) {
     const form = e.currentTarget;
+
     if (form.checkValidity()) {
+      const cnpjExistente = props.listaFornecedores.some(
+        (itemFornecedor) => itemFornecedor.cnpj === fornecedor.cnpj
+      );
+      const emailExistente = props.listaFornecedores.some(
+        (itemFornecedor) => itemFornecedor.email === fornecedor.email
+      );
 
       if (!props.modoEdicao) {
-        console.log(fornecedor);
-        
-        props.setListaFornecedores([...props.listaFornecedores,fornecedor]);
+        if (cnpjExistente) {
+          setCnpjDuplicado(true);
+        } else if (emailExistente) {
+          setEmailDuplicado(true);
+        } else {
+          props.setListaFornecedores([...props.listaFornecedores, fornecedor]);
+          setFornecedor(estadoInicialFornecedor);
+          setValidated(false);
+          props.setExibirAlert(true);
+          props.exibirFormulario(false);
+        }
       } else {
-
-        props.setListaFornecedores([...props.listaFornecedores.filte(
-          (itemFornecedor) => itemFornecedor.cnpj !== fornecedor.cnpj
-        ),fornecedor]);
+        props.setListaFornecedores([
+          ...props.listaFornecedores.filter(
+            (itemFornecedor) => itemFornecedor.cnpj !== fornecedor.cnpj
+          ),
+          fornecedor,
+        ]);
         props.setModoEdicao(false);
-        props.setFornecedorPAraEdicao({
-          nome: "",
-          cnpj: "",
-          email: "",
-          telefone: "",
-          celular: "",
-          endereco: "",
-          numero: "",
-          bairro: "",
-          cidade: "",
-          uf: "SP",
-          cep: "",
-        }); 
-      }
+       
+        
         setFornecedor(estadoInicialFornecedor);
         setValidated(false);
         props.setExibirAlert(true);
-    } 
-    else {
+        props.exibirFormulario(false);
+     
+      }
+    } else {
       setValidated(true);
     }
-    
     e.stopPropagation();
     e.preventDefault();
   }
@@ -68,10 +77,10 @@ export default function FormCadFornecedor(props) {
         <Row>
           <Col md={6}>
             <Form.Group>
-              <FloatingLabel label="nome:" className="mb-3">
+              <FloatingLabel label="Nome:" className="mb-3">
                 <Form.Control
                   type="text"
-                  placeholder="Informe o cnpj"
+                  placeholder="Informe o nome"
                   id="nome"
                   name="nome"
                   value={fornecedor.nome}
@@ -86,10 +95,10 @@ export default function FormCadFornecedor(props) {
           </Col>
           <Col md={6}>
             <Form.Group>
-              <FloatingLabel label="cnpj:" className="mb-3">
+              <FloatingLabel label="CNPJ:" className="mb-3">
                 <Form.Control
                   type="text"
-                  placeholder="Informe o cnpj"
+                  placeholder="Informe o CNPJ"
                   id="cnpj"
                   name="cnpj"
                   value={fornecedor.cnpj}
@@ -98,7 +107,7 @@ export default function FormCadFornecedor(props) {
                 />
               </FloatingLabel>
               <Form.Control.Feedback type="invalid">
-                Informe o cnpj!
+                Informe o CNPJ!
               </Form.Control.Feedback>
             </Form.Group>
           </Col>
@@ -300,8 +309,7 @@ export default function FormCadFornecedor(props) {
             <Button type="submit" variant="primary">
               {props.modoEdicao ? "Alterar" : "Cadastrar"}
             </Button>
-        
-          
+
             <Button
               type="button"
               variant="secondary"
@@ -313,6 +321,16 @@ export default function FormCadFornecedor(props) {
             </Button>
           </Col>
         </Row>
+        {cnpjDuplicado && (
+          <Alert variant="danger">
+            O CNPJ já existe. Por favor, escolha outro CNPJ.
+          </Alert>
+        )}
+        {emailDuplicado && (
+          <Alert variant="danger">
+            O email já existe. Por favor, escolha outro email.
+          </Alert>
+        )}
       </Form>
     </Container>
   );

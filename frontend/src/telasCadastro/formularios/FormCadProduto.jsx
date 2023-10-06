@@ -28,6 +28,8 @@ export default function FormCadProduto(props) {
     if(form.checkValidity()){
       if (!props.modoEdicao) {
         props.setProdutosCadastrados([...props.produtosCadastrados, produto]);
+        props.setExibirAlert(true);
+        props.exibirFormulario(false);
       } else {
         props.setProdutosCadastrados([
           ...props.produtosCadastrados.filter(
@@ -37,10 +39,12 @@ export default function FormCadProduto(props) {
         ]);
         props.setModoEdicao(false);
         props.setProdutoParaEdicao(estadoInicialProduto);
+        props.setExibirAlert(true);
+        props.exibirFormulario(false);
       }
       setProduto(estadoInicialProduto);
       setValidated(false);
-      props.setExibirAlert(true);
+   
     }
     else{
       setValidated(true);

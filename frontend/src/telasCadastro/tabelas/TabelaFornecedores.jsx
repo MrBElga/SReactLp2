@@ -61,8 +61,7 @@ export default function TabelaFornecedores(props) {
                   >
                     Excluir
                   </Button>
-                </td>
-                <td>
+                
                 <Button className="btn-editar"  onClick={()=>{ editarFornecedor(fornecedor);}}>Editar</Button>
                 </td>
               </tr>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Container,Form,Row,Col,FloatingLabel,Button} from "react-bootstrap";
+import { Container, Form, Row, Col, FloatingLabel, Button, Alert } from "react-bootstrap";
 import "./form.css";
 
 export default function FormCadCategoria(props) {
@@ -7,6 +7,7 @@ export default function FormCadCategoria(props) {
 
   const [categoria, setCategoria] = useState(categoriaIn);
   const [validated, setValidated] = useState(false);
+  const [categoriaDuplicada, setCategoriaDuplicada] = useState(false); // Estado para controlar a categoria duplicada
 
   function manipularMudancas(e) {
     const componente = e.currentTarget;
@@ -18,15 +19,16 @@ export default function FormCadCategoria(props) {
 
   function manipularSubmit(e) {
     const form = e.currentTarget;
-    let categoriaDuplicada = false;
-  
+
     if (form.checkValidity()) {
       if (!props.modoEdicao) {
-      
         if (props.listaCategoria.some(itemCategoria => itemCategoria.nomeCategoria === categoria.nomeCategoria)) {
-          categoriaDuplicada = true;
+     
+          setCategoriaDuplicada(true);
         } else {
           props.setListaCategoria([...props.listaCategoria, categoria]);
+          props.setExibirAlert(true);
+          props.exibirFormulario(false);
         }
       } else {
         props.setListaCategoria([
@@ -37,15 +39,17 @@ export default function FormCadCategoria(props) {
           categoria,
         ]);
         props.setModoEdicao(false);
+     
         props.setCategoriaParaEdicao({
           nomeCategoria: "",
           descricao: ""
         });
+        props.setExibirAlert(true);
+        props.exibirFormulario(false);
       }
-      
+  
       setCategoria(categoriaIn);
       setValidated(false);
-      props.setExibirAlert(!categoriaDuplicada); 
     } else {
       setValidated(true);
     }
@@ -57,6 +61,7 @@ export default function FormCadCategoria(props) {
   return (
     <Container>
       <Form noValidate validated={validated} onSubmit={manipularSubmit}>
+       
         <Row>
           <Col>
             <Form.Group>
@@ -99,22 +104,27 @@ export default function FormCadCategoria(props) {
           </Col>
         </Row>
         <Row>
-            <Col md={6} className="d-flex justify-content-end">
-              <Button type="submit" variant={"primary"}>
-                {props.modoEdicao ? "Alterar" : "Cadastrar"}
-              </Button>
-          
-              <Button
-                type="button"
-                variant={"secondary"}
-                onClick={() => {
-                  props.exibirFormulario(false);
-                }}
-              >
-                Voltar
-              </Button>
-            </Col>
-          </Row>
+          <Col md={6} className="d-flex justify-content-end">
+            <Button type="submit" variant={"primary"}>
+              {props.modoEdicao ? "Alterar" : "Cadastrar"}
+            </Button>
+
+            <Button
+              type="button"
+              variant={"secondary"}
+              onClick={() => {
+                props.exibirFormulario(false);
+              }}
+            >
+              Voltar
+            </Button>
+          </Col>
+        </Row>
+        {categoriaDuplicada && (
+          <Alert variant="danger">
+            Nome da categoria já existe. Por favor, escolha outro nome.
+          </Alert>
+        )}
       </Form>
     </Container>
   );

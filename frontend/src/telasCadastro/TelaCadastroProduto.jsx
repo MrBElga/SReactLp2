@@ -62,7 +62,7 @@ export default function TelaCadastroProduto(props) {
           )}
         </Container>
         {exibirAlert && (
-          <Alert variant="success">Categoria cadastrada com sucesso!!</Alert>
+          <Alert variant="success">Produto cadastrada com sucesso!!</Alert>
         )}
       </Pagina>
     </>

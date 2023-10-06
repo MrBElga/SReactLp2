@@ -24,7 +24,7 @@ export default function LoginForm(props) {
     const form = e.currentTarget;
     if (form.checkValidity()) {
 
-      console.log("Form is valid. Submitting data:", formData);
+      console.log("valido:", formData);
     }
     setUsuario({
       nome: formData.nickName,

@@ -39,7 +39,6 @@ export default function TelaCadastroCategoria(props) {
               listaCategoria={listaCategoria}
               setListaCategoria={setListaCategoria}
               categoriaParaEdicao={categoriaParaEdicao}
-              
               setCategoriaParaEdicao={setCategoriaParaEdicao}
               modoEdicao={modoEdicao}
               setModoEdicao={setModoEdicao}
@@ -55,6 +54,8 @@ export default function TelaCadastroCategoria(props) {
               setCategoriaParaEdicao={setCategoriaParaEdicao}
               modoEdicao={modoEdicao}
               setModoEdicao={setModoEdicao}
+                exibirAlert={exibirAlert}
+              setExibirAlert={setExibirAlert}
             />
           )}
         </Container>
