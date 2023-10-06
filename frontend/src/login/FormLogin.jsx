@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext,useState } from "react";
 import { Container, Form, Row, Col, Button } from "react-bootstrap";
 import "./login.css";
+import ContextoUsuario from "../contextos/ContextoGlobal";
 
-export default function LoginForm() {
+export default function LoginForm(props) {
   const [formData, setFormData] = useState({
     nickName: "",
     senha: ""
   });
-
+  const [usuario, setUsuario] = useContext(ContextoUsuario);
   const [validated, setValidated] = useState(false);
 
   const handleInputChange = (e) => {
@@ -22,8 +23,13 @@ export default function LoginForm() {
     e.preventDefault();
     const form = e.currentTarget;
     if (form.checkValidity()) {
+
       console.log("Form is valid. Submitting data:", formData);
     }
+    setUsuario({
+      nome: formData.nickName,
+      logado: true,
+    });
     setValidated(true);
   };
 
