@@ -14,7 +14,7 @@ export default function Pagina(props) {
                 }
                 {props.children} 
             </div>
-            <Rodape conteudo="Rua X, 100 - Vila Tal - Presidente Prudente/SP - CNPJ 00.000.000/0001-00"/>
+            <Rodape conteudo="Rua Avenida Doutora Ruth Cardoso, 101 - Bairro Pinheiros - São Paulo/SP - CNPJ 59.143.742/0001-19"/>
         </>
     )
 }
