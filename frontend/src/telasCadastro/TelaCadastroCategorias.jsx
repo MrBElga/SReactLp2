@@ -39,6 +39,7 @@ export default function TelaCadastroCategoria(props) {
               listaCategoria={listaCategoria}
               setListaCategoria={setListaCategoria}
               categoriaParaEdicao={categoriaParaEdicao}
+              
               setCategoriaParaEdicao={setCategoriaParaEdicao}
               modoEdicao={modoEdicao}
               setModoEdicao={setModoEdicao}

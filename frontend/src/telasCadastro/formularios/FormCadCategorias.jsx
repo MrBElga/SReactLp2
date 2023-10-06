@@ -18,9 +18,16 @@ export default function FormCadCategoria(props) {
 
   function manipularSubmit(e) {
     const form = e.currentTarget;
+    let categoriaDuplicada = false;
+  
     if (form.checkValidity()) {
       if (!props.modoEdicao) {
-        props.setListaCategoria([...props.listaCategoria, categoria]);
+      
+        if (props.listaCategoria.some(itemCategoria => itemCategoria.nomeCategoria === categoria.nomeCategoria)) {
+          categoriaDuplicada = true;
+        } else {
+          props.setListaCategoria([...props.listaCategoria, categoria]);
+        }
       } else {
         props.setListaCategoria([
           ...props.listaCategoria.filter(
@@ -35,9 +42,10 @@ export default function FormCadCategoria(props) {
           descricao: ""
         });
       }
+      
       setCategoria(categoriaIn);
       setValidated(false);
-      props.setExibirAlert(true);
+      props.setExibirAlert(!categoriaDuplicada); 
     } else {
       setValidated(true);
     }

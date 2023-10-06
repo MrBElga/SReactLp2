@@ -1,0 +1,38 @@
+.homepage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+
+    min-height: 100vh;
+  }
+  
+  .carousel {
+    max-width: 80%;
+  }
+  
+  .carousel-caption {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 5px;
+  }
+  
+  iframe {
+    max-width: 100%;
+  }
+  
+ 
+  h2 {
+    margin-top: 0;
+  }
+  
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  Button {
+    margin-top: 10px;
+  }
+  

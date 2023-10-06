@@ -1,64 +1,96 @@
-  import React, { useState } from "react";
-  import "./form.css"
-  import {
-    Button,
-    Container,
-    Form,
-    Row,
-    Col,
-    FloatingLabel,
-  } from "react-bootstrap";
+import React, { useState } from "react";
+import "./form.css";
+import {
+  Button,
+  Container,
+  Form,
+  Row,
+  Col,
+  FloatingLabel,
+  Alert,
+} from "react-bootstrap";
 
-  export default function FormCadCliente(props) {
+export default function FormCadCliente(props) {
+  const estadoInicialCliente = props.clienteParaEdicao;
 
-    const estadoInicialCliente = props.clienteParaEdicao;
+  const clienteVazio = {
+    cpf: "",
+    nome: "",
+    email: "",
+    endereco: "",
+    numero: "",
+    bairro: "",
+    cidade: "",
+    uf: "SP",
+    cep: "",
+  };
+  const [cliente, setCliente] = useState(estadoInicialCliente);
+  const [validated, setValidated] = useState(false);
+  const [cpfError, setCpfError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [showAlertErro, setShowAlertErro] = useState(false);
 
-    const clienteVazio = {
-      cpf: '',
-      nome: '',
-      email: '',
-      endereco: '',
-      numero: '',
-      bairro: '',
-      cidade: '',
-      uf: 'SP',
-      cep: ''
-    }
-    const [cliente, setCliente] = useState(estadoInicialCliente);
-    const [validated, setValidated] = useState(false);
 
-    function manipularMudancas(e) {
-      const componente = e.currentTarget;
-      setCliente({
-        ...cliente,
-        [componente.name]: componente.value,
-      });
-    }
 
-    function manipularSubmit(e) {
-      const form = e.currentTarget;
-      if (form.checkValidity()) {
- 
-        if (!props.modoEdicao) {
-          props.setListaClientes([...props.listaClientes, cliente]);
-          props.setExibirAlert(true);
-        } 
-        else 
-        {
-          props.setListaClientes([...props.listaClientes.filter((itemCliente)=>itemCliente.cpf !== cliente.cpf),cliente]);
-          props.setModoEdicao(false);
-          props.setClienteParaEdicao(clienteVazio);
-        }
+  function manipularMudancas(e) {
+    const componente = e.currentTarget;
+    setCliente({
+      ...cliente,
+      [componente.name]: componente.value,
+    });
+  }
+
+  function verificarExistenciaCPF(cpf) {
+    return props.listaClientes.some((itemCliente) => itemCliente.cpf === cpf);
+  }
+
+  function verificarExistenciaEmail(email) {
+    return props.listaClientes.some((itemCliente) => itemCliente.email === email);
+  }
+
+  function manipularSubmit(e) {
+    const form = e.currentTarget;
+    if (form.checkValidity()) {
+      setCpfError("");
+      setEmailError("");
+
+      if (props.modoEdicao) {
+        props.setListaClientes([
+          ...props.listaClientes.filter(
+            (itemCliente) => itemCliente.cpf !== cliente.cpf
+          ),
+          cliente,
+        ]);
+        props.setModoEdicao(false);
+        props.setClienteParaEdicao(clienteVazio);
         setCliente(clienteVazio);
-        setValidated(false);
         props.setExibirAlert(true);
       } else {
-        setValidated(true);
+        if (verificarExistenciaCPF(cliente.cpf)) {
+          setCpfError("CPF já cadastrado!");
+          setShowAlertErro(true);
+          setValidated(false);
+        } else if (verificarExistenciaEmail(cliente.email)) {
+          setEmailError("Email já cadastrado!");
+          setShowAlertErro(true);
+          setValidated(false);
+        } else {
+          props.setListaClientes([...props.listaClientes, cliente]);
+          setCliente(clienteVazio);
+          setValidated(false);
+          setShowAlertErro(false);
+          props.setExibirAlert(true);
+          props.exibirFormulario(false);
+        }
       }
-    
-      e.stopPropagation();
-      e.preventDefault();
+    } else {
+      setValidated(true);
     }
+
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
     return (
       <Container  className="container">
         <Form noValidate validated={validated} onSubmit={manipularSubmit}>
@@ -258,13 +290,23 @@
                 variant={"secondary"}
                 onClick={() => {
                   props.exibirFormulario(false);
+                 
+                  setShowAlertErro(false)
                 }}
               >
                 Voltar
               </Button>
             </Col>
           </Row>
+       
+       {showAlertErro && (
+        <Alert variant="danger" onClose={() => setShowAlertErro(false)} dismissible>
+          {emailError||cpfError}
+        
+        </Alert>
+      )}
         </Form>
+
       </Container>
     );
   }

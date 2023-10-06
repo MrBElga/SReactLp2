@@ -41,7 +41,7 @@ export default function TelaCadastroCliente(props) {
         <Container className="container-centralizadoTelas">
           {exibirFormulario ? (
             <FormCadCliente
-              exibirFormulario={setExibirFormulario} 
+              exibirFormulario={setExibirFormulario}
               listaClientes={listaClientes}
               setListaClientes={setListaClientes}
               clienteParaEdicao={clienteParaEdicao}
