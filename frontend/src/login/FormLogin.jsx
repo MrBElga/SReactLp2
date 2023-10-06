@@ -28,6 +28,7 @@ export default function LoginForm(props) {
     }
     setUsuario({
       nome: formData.nickName,
+      senha: formData.senha,
       logado: true,
     });
     setValidated(true);
