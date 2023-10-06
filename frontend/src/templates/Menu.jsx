@@ -103,7 +103,7 @@ export default function Menu(props) {
             as={Link}
             to="/categoria"
             className="nav-link"
-            eventKey="produtos"
+            eventKey="Categoria"
           >
           <img src={iconMappings.categoria} alt="categoria" className="menu-icon" /> Categoria
 
