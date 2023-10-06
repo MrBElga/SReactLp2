@@ -26,7 +26,7 @@ export default function TabelaCategorias(props) {
         }}
         variant="primary"
       >
-        Novo Fornecedor
+        Nova Categoria
       </Button>
       <Table className="table-custom" striped bordered hover>
         <thead>

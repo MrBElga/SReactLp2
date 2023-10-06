@@ -6,7 +6,7 @@ import './menu.css';
 import logo from "./Image/Logo/Logo3.png"
 import configIcon from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/1_Menu-1/Config.svg';
 import configIconOn from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/1_Menu-1/Config_on.svg';
-
+import categoriaIcon from  './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/3_Menu-2/Invite.svg';
 import loginIcon from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/3_Menu-2/Logout.svg';
 import clienteIcon from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/3_Menu-2/Party & Profile.svg';
 import fornecedorIcon from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/3_Menu-2/Equipment.svg';
@@ -14,9 +14,11 @@ import produtosIcon from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.3
 import forumIcon from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/1_Menu-1/Message.svg';
 import contaIcon from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/1_Menu-1/Man.svg';
 
+
 import loginIconOn from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/3_Menu-2/Logout_on.svg';
 import clienteIconOn from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/3_Menu-2/Party & Profile_on.svg';
 import fornecedorIconOn from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/3_Menu-2/Equipment_on.svg';
+import categoriaIconOn from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/3_Menu-2/Invite_on.svg';
 import produtosIconOn from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/3_Menu-2/Items_on.svg';
 import forumIconOn from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/1_Menu-1/Message_on.svg';
 import contaIconOn from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/1_Menu-1/Man_on.svg';
@@ -36,6 +38,7 @@ export default function Menu(props) {
     login: activeIcon === 'login' ? loginIconOn : loginIcon,
     cliente: activeIcon === 'cliente' ? clienteIconOn : clienteIcon,
     fornecedor: activeIcon === 'fornecedor' ? fornecedorIconOn : fornecedorIcon,
+    categoria: activeIcon === 'categoria' ? categoriaIconOn : categoriaIcon,
     produtos: activeIcon === 'produtos' ? produtosIconOn : produtosIcon,
     forum: activeIcon === 'forum' ? forumIconOn : forumIcon,
     conta: activeIcon === 'conta' ? contaIconOn : contaIcon,
@@ -67,7 +70,7 @@ export default function Menu(props) {
               id="basic-nav-dropdown"
               className="nav-dropdown dropdown-right"
               show={isMenuActive}
-              onMouseLeave={handleMouseLeave} // Adicione esta linha para l
+              onMouseLeave={handleMouseLeave}
               >
           <NavDropdown.Item
             as={Link}
@@ -75,7 +78,8 @@ export default function Menu(props) {
             className="nav-link"
             eventKey="login"
           >
-            <img src={iconMappings.login} alt="login" className="menu-icon" /> Login
+          <img src={iconMappings.login} alt="login" className="menu-icon" /> Login
+          
           </NavDropdown.Item>
           <NavDropdown.Item
             as={Link}
@@ -83,7 +87,8 @@ export default function Menu(props) {
             className="nav-link"
             eventKey="cliente"
           >
-            <img src={iconMappings.cliente} alt="cliente" className="menu-icon" /> Cliente
+          <img src={iconMappings.cliente} alt="cliente" className="menu-icon" /> Cliente
+
           </NavDropdown.Item>
           <NavDropdown.Item
             as={Link}
@@ -91,7 +96,17 @@ export default function Menu(props) {
             className="nav-link"
             eventKey="fornecedor"
           >
-            <img src={iconMappings.fornecedor} alt="fornecedor" className="menu-icon" /> Fornecedor
+          <img src={iconMappings.fornecedor} alt="fornecedor" className="menu-icon" /> Fornecedor
+
+          </NavDropdown.Item>
+          <NavDropdown.Item
+            as={Link}
+            to="/categoria"
+            className="nav-link"
+            eventKey="produtos"
+          >
+          <img src={iconMappings.categoria} alt="categoria" className="menu-icon" /> Categoria
+
           </NavDropdown.Item>
           <NavDropdown.Item
             as={Link}
@@ -99,7 +114,8 @@ export default function Menu(props) {
             className="nav-link"
             eventKey="produtos"
           >
-            <img src={iconMappings.produtos} alt="produtos" className="menu-icon" /> Produtos
+          <img src={iconMappings.produtos} alt="produtos" className="menu-icon" /> Produtos
+
           </NavDropdown.Item>
           <NavDropdown.Item
             as={Link}
@@ -107,7 +123,8 @@ export default function Menu(props) {
             className="nav-link"
             eventKey="forum"
           >
-            <img src={iconMappings.forum} alt="forum" className="menu-icon" /> Forum
+          <img src={iconMappings.forum} alt="forum" className="menu-icon" /> Forum
+
           </NavDropdown.Item>
           <NavDropdown.Item
             as={Link}
@@ -115,7 +132,7 @@ export default function Menu(props) {
             className="nav-link"
             eventKey="conta"
           >
-            <img src={iconMappings.conta} alt="conta" className="menu-icon" /> Conta
+          <img src={iconMappings.conta} alt="conta" className="menu-icon" /> Conta
           </NavDropdown.Item>
         </NavDropdown>
       )}
