@@ -19,6 +19,9 @@ function App() {
     nome: "",
     avatar: avatarNaoLogado,
     senha: "",
+    level: "",
+    progesso:"",
+    nivel: "",
     logado: false
   });
 

@@ -1,5 +1,5 @@
-import React, { useContext,useState } from "react";
-import { Container, Form, Row, Col, Button } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Container, Form, Row, Col, Button, Alert } from "react-bootstrap";
 import "./login.css";
 import ContextoUsuario from "../contextos/ContextoGlobal";
 
@@ -10,6 +10,7 @@ export default function LoginForm(props) {
   });
   const [usuario, setUsuario] = useContext(ContextoUsuario);
   const [validated, setValidated] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -22,16 +23,17 @@ export default function LoginForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
-    if (form.checkValidity()) {
 
-      console.log("valido:", formData);
+    if (form.checkValidity() && formData.nickName.trim() !== "" && formData.senha.trim() !== "") {
+      setUsuario({
+        nome: formData.nickName,
+        senha: formData.senha,
+        logado: true,
+      });
+      setValidated(true);
+    } else {
+      setShowError(true);
     }
-    setUsuario({
-      nome: formData.nickName,
-      senha: formData.senha,
-      logado: true,
-    });
-    setValidated(true);
   };
 
   return (
@@ -55,6 +57,7 @@ export default function LoginForm(props) {
                   <Form.Control.Feedback type="invalid">
                     Insira o nickname.
                   </Form.Control.Feedback>
+                  
                 </Form.Group>
               </Col>
             </Row>
@@ -73,10 +76,13 @@ export default function LoginForm(props) {
                   <Form.Control.Feedback type="invalid">
                     Insira a senha.
                   </Form.Control.Feedback>
+                  
                 </Form.Group>
               </Col>
             </Row>
-
+            {showError  && (
+                    <Alert variant="danger">Usuario ou senha invalida.</Alert>
+                  )}
             <Row className="rowLogin">
               <Col>
                 <Button type="submit" variant="info">

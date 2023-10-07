@@ -36,3 +36,35 @@
     margin-top: 10px;
   }
   
+  .custom-modal {
+    color: black;
+    max-width: 80%;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0)!important; 
+  }
+  .custom-modal-bg {
+    background-color: rgba(0, 0, 0, 0) !important;
+    max-width: 80%;
+    margin: 0 auto;
+    border-radius: 5px;
+  }
+
+  .modal-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0)!important; 
+  }
+  
+  .modal-button {
+    margin-top: 20px;
+  }
+  
+  .modal-body {
+    text-align: justify;
+    font-size: 18px;
+    line-height: 1.5;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0)!important; 
+  }

@@ -17,10 +17,13 @@
     padding: 20px;
     margin: 20px auto;
     max-width: 300px;
+    align-items: start!important
   }
   
   .info-usuario p {
     margin: 5px 0;
+    text-align: left!important;
+    align-items: start!important
   }
   
   a {

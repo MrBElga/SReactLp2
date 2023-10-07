@@ -35,7 +35,7 @@ export default function Menu(props) {
   const mouseFora = () => {  
     setTimeout(() => {
       setActiveIcon(null);
-    }, 10000);
+    }, 5000);
   };
 
   const deslogar = () => {
