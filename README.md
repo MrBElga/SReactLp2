@@ -12,5 +12,6 @@ Front
 - Produtos
   - Adcionar Fotos nos produtos
 Back
+  - adcionar as novas funcionalidades
   - adicionar Banco de dados
   - Usuario
