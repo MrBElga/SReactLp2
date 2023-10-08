@@ -142,7 +142,7 @@ const ForumPage = () => {
                           className="forum-ability-icon"
                           aria-label={ability}
                         >
-                          {/* Ícone de habilidade, por exemplo, um ícone de espada */}
+                        
                         </IconButton>
                       ))}
                     </div>
