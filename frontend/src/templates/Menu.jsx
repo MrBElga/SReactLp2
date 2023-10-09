@@ -60,7 +60,7 @@ export default function Menu(props) {
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="navbar-style">
-      <Navbar.Brand href="/Home" className="navbar-brand">
+      <Navbar.Brand href="/home" className="navbar-brand">
         <img src={logo} alt="Logo" height="60" className="d-inline-block align-top" />
       </Navbar.Brand>
 
