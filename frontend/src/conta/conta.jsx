@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
-import { LinearProgress, Typography, Box } from '@mui/material';
+import { LinearProgress, Typography } from '@mui/material';
 import './conta.css';
-import { Link } from 'react-router-dom';
 import ContextoUsuario from '../contextos/ContextoGlobal';
 import Pagina from '../templates/Pagina';
 import avatarProvisorio from '../templates/Image/SAO_icons/SAO_Icons_v3.300/1_Menu-1/Man_on.svg';

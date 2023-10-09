@@ -9,9 +9,6 @@ import {
 } from "@mui/material";
 import Pagina from "../templates/Pagina";
 import "./forum.css";
-import ShareIcon from "@mui/icons-material/Share";
-import CommentIcon from "@mui/icons-material/Comment";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 
 
 const users = [

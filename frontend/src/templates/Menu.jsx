@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './menu.css';
 import ContextoUsuario from "../contextos/ContextoGlobal";
 
@@ -35,7 +35,7 @@ export default function Menu(props) {
   const mouseFora = () => {  
     setTimeout(() => {
       setActiveIcon(null);
-    }, 5000);
+    }, 2000);
   };
 
   const deslogar = () => {
@@ -60,7 +60,7 @@ export default function Menu(props) {
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="navbar-style">
-      <Navbar.Brand href="/" className="navbar-brand">
+      <Navbar.Brand href="/Home" className="navbar-brand">
         <img src={logo} alt="Logo" height="60" className="d-inline-block align-top" />
       </Navbar.Brand>
 
