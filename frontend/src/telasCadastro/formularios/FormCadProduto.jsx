@@ -13,7 +13,17 @@ import { adicionar, atualizar} from '../../redux/produtoReducer';
 
 export default function FormCadProduto(props) {
   const estadoInicialProduto = props.produtoParaEdicao;
-  
+  const ProdutoVazio = {
+    nomeProduto: "",
+    descricao: "",
+    preco: "",
+    quantidade: "",
+    tipoProduto: "",
+    numeroIdentificacao: "",
+    custoUnitario: "",
+    precoVenda: "",
+    nomeFornecedor: "",
+  }
   const [produto, setProduto] = useState(estadoInicialProduto);
   const [validated, setValidated] = useState(false);
 
@@ -38,11 +48,11 @@ export default function FormCadProduto(props) {
       } else {
         dispatch(atualizar(produto));
         props.setModoEdicao(false);
-        props.setProdutoParaEdicao(estadoInicialProduto);
-        props.setExibirAlert(true);
+        props.setProdutoParaEdicao(ProdutoVazio);
+        props.setExibirAlert(true);   
         props.exibirFormulario(false);
       }
-      setProduto(estadoInicialProduto);
+      setProduto(ProdutoVazio); 
       setValidated(false);
    
     }

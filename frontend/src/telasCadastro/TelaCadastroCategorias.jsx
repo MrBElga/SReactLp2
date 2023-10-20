@@ -8,7 +8,6 @@ import "./tela.css";
 export default function TelaCadastroCategoria(props) {
   const [exibirFormulario, setExibirFormulario] = useState(false);
   const [exibirAlert, setExibirAlert] = useState(false);
-  const [listaCategoria, setListaCategoria] = useState([]);
   const [categoriaParaEdicao, setCategoriaParaEdicao] = useState({
     nomeCategoria: "",
     descricao: ""

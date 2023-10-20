@@ -6,6 +6,11 @@ import { adicionar, atualizar } from "../../redux/categoriaReducer";
 
 export default function FormCadCategoria(props) {
   const categoriaIn = props.categoriaParaEdicao;
+  const categoriaVazia = {
+    nome:"",
+    descricao:"",
+  };
+
 
   const [categoria, setCategoria] = useState(categoriaIn);
   const [validated, setValidated] = useState(false);
@@ -27,12 +32,17 @@ export default function FormCadCategoria(props) {
     if (form.checkValidity()) {
         if (!props.modoEdicao) {
           dispatch(adicionar(categoria));
+          setCategoria(categoriaVazia);
         } else {
           dispatch(atualizar(categoria));
-          props.setModoEdicao(false);
+          setValidated(false);
+          props.setCategoriaParaEdicao(categoriaVazia)
         }
-      setCategoria(categoriaIn);
+    
       setValidated(false);
+      props.setExibirAlert(true);
+      props.setModoEdicao(false);
+      props.exibirFormulario(false);
     } else {
       setValidated(true);
     }

@@ -13,10 +13,10 @@ const categoriaSlice = createSlice({
             state.listaCategorias.push(action.payload);
         },
         remover: (state, action) => {
-            state.listaCategorias = state.listaCategorias.filter(categoria => categoria.id !== action.payload.id);
+            state.listaCategorias = state.listaCategorias.filter(categoria => categoria.nome !== action.payload.nome);
         },
         atualizar: (state, action) => {
-            const listaTemporariaCategorias = state.listaCategorias.filter(categoria => categoria.id !== action.payload.id);
+            const listaTemporariaCategorias = state.listaCategorias.filter(categoria => categoria.nome !== action.payload.nome);
             state.listaCategorias = [...listaTemporariaCategorias, action.payload];
         }
     }

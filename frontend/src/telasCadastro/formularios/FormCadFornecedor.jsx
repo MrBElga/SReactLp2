@@ -14,6 +14,19 @@ import { adicionar, atualizar} from '../../redux/fornecedorReducer';
 
 export default function FormCadFornecedor(props) {
   const estadoInicialFornecedor = props.fornecedorParaEdicao;
+  const FornecedorVazio ={
+    nome:"",
+    cnpj: "",
+    email: "",
+    telefone: "",
+    celular: "",
+    endereco: "",
+    numero: "",
+    bairro: "",
+    cidade: "",
+    uf: "SP",
+    cep: ""
+  }
   const [fornecedor, setFornecedor] = useState(estadoInicialFornecedor);
   const [validated, setValidated] = useState(false);
   const [cnpjDuplicado, setCnpjDuplicado] = useState(false);
@@ -48,7 +61,7 @@ export default function FormCadFornecedor(props) {
           setEmailDuplicado(true);
         } else {
           dispatch(adicionar(fornecedor));
-          setFornecedor(estadoInicialFornecedor);
+          setFornecedor(FornecedorVazio);
           setValidated(false);
           props.setExibirAlert(true);
           props.exibirFormulario(false);
@@ -56,7 +69,7 @@ export default function FormCadFornecedor(props) {
       } else {
         dispatch(atualizar(fornecedor));
         props.setModoEdicao(false);
-        setFornecedor(estadoInicialFornecedor);
+        setFornecedor(FornecedorVazio);
         setValidated(false);
         props.setExibirAlert(true);
         props.exibirFormulario(false);

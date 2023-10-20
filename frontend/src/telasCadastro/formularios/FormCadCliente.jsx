@@ -26,6 +26,7 @@ export default function FormCadCliente(props) {
     uf: "SP",
     cep: "",
   };
+
   const [cliente, setCliente] = useState(estadoInicialCliente);
   const [validated, setValidated] = useState(false);
   const [cpfError, setCpfError] = useState("");
@@ -61,7 +62,9 @@ export default function FormCadCliente(props) {
         props.setModoEdicao(false);
         props.setClienteParaEdicao(clienteVazio);
         setCliente(clienteVazio);
+        props.exibirFormulario(false);  
         props.setExibirAlert(true);
+
       } else {
         if (verificarExistenciaCPF(cliente.cpf)) {
           setCpfError("CPF já cadastrado!");
