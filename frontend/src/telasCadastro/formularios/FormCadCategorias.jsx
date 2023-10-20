@@ -7,15 +7,13 @@ import { adicionar, atualizar } from "../../redux/categoriaReducer";
 export default function FormCadCategoria(props) {
   const categoriaIn = props.categoriaParaEdicao;
   const categoriaVazia = {
-    nome:"",
+    nomeCategoria:"",
     descricao:"",
   };
-
-
   const [categoria, setCategoria] = useState(categoriaIn);
   const [validated, setValidated] = useState(false);
-  const [categoriaDuplicada, setCategoriaDuplicada] = useState(false);
-  const { status, mendagem, listaCategoria } = useSelector((state) => state.categoria);
+  const [categoriaDuplicada, setCategoriaDuplicada] = useState(false); 
+  const { status, mendagem, listaCategorias } = useSelector((state) => state.categoria);
   const dispatch = useDispatch();
 
   function manipularMudancas(e) {
@@ -30,22 +28,33 @@ export default function FormCadCategoria(props) {
     const form = e.currentTarget;
 
     if (form.checkValidity()) {
-        if (!props.modoEdicao) {
-          dispatch(adicionar(categoria));
-          setCategoria(categoriaVazia);
+      if (!props.modoEdicao) {
+        if (listaCategorias.some(itemCategoria => itemCategoria.nomeCategoria === categoria.nomeCategoria)) {
+     
+          setCategoriaDuplicada(true);
         } else {
-          dispatch(atualizar(categoria));
-          setValidated(false);
-          props.setCategoriaParaEdicao(categoriaVazia)
+          dispatch(adicionar(categoria));
+          props.setExibirAlert(true);
+          props.exibirFormulario(false);
         }
-    
+      } else {
+        dispatch(atualizar(categoria));
+        props.setModoEdicao(false);
+     
+        props.setCategoriaParaEdicao({
+          nomeCategoria: "",
+          descricao: ""
+        });
+        props.setExibirAlert(true);
+        props.exibirFormulario(false);
+      }
+  
+      setCategoria(categoriaIn);
       setValidated(false);
-      props.setExibirAlert(true);
-      props.setModoEdicao(false);
-      props.exibirFormulario(false);
     } else {
       setValidated(true);
     }
+    
     e.stopPropagation();
     e.preventDefault();
   }

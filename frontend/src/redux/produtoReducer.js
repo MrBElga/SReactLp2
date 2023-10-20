@@ -13,10 +13,10 @@ const produtoSlice = createSlice({
             state.listaProdutos.push(action.payload);
         },
         remover: (state, action) => {
-            state.listaProdutos = state.listaProdutos.filter(produto => produto.id !== action.payload.id);
+            state.listaProdutos = state.listaProdutos.filter(produto => produto.nomeProduto !== action.payload.nomeProduto);
         },
         atualizar: (state, action) => {
-            const listaTemporariaProdutos = state.listaProdutos.filter(produto => produto.id !== action.payload.id);
+            const listaTemporariaProdutos = state.listaProdutos.filter(produto => produto.nomeProduto !== action.payload.nomeProduto);
             state.listaProdutos = [...listaTemporariaProdutos, action.payload];
         }
     }

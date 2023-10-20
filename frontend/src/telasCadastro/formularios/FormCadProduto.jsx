@@ -26,9 +26,9 @@ export default function FormCadProduto(props) {
   }
   const [produto, setProduto] = useState(estadoInicialProduto);
   const [validated, setValidated] = useState(false);
-
   const {status,mensagem,listaProdutos} = useSelector((state)=>state.cliente);
   const dispatch = useDispatch();
+
 
   function manipularMudancas(e) {
     const componente = e.currentTarget;
@@ -49,10 +49,10 @@ export default function FormCadProduto(props) {
         dispatch(atualizar(produto));
         props.setModoEdicao(false);
         props.setProdutoParaEdicao(ProdutoVazio);
-        props.setExibirAlert(true);   
+        props.setExibirAlert(true);
         props.exibirFormulario(false);
       }
-      setProduto(ProdutoVazio); 
+      setProduto(ProdutoVazio);
       setValidated(false);
    
     }

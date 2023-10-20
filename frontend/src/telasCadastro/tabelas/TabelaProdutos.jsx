@@ -1,4 +1,5 @@
-import { Container, Table, Button } from "react-bootstrap";
+import { Container, Table, Button, Modal } from "react-bootstrap";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { remover } from "../../redux/produtoReducer";
 import "./tabela.css";
@@ -6,11 +7,27 @@ import "./tabela.css";
 export default function TabelaProdutos(props) {
   const {status,mensagem,listaProdutos} = useSelector(state=>state.produto);
   const dispatch = useDispatch();
-
+  const [showModal, setShowModal] = useState(false);
+  const [produtoToDelete, setProdutoToDelete] = useState(null)
+  const customModalStyle = {
+    color: "black", 
+  };
   function excluirProduto(produto) {
-    if (window.confirm("Deseja realmente excluir este produto?")) {
-      dispatch(remover(produto));
+    setProdutoToDelete(produto);
+    setShowModal(true);
+  }
+
+  function confirmarExclusao() {
+    if (produtoToDelete) {
+      dispatch(remover(produtoToDelete));
+      setShowModal(false);
+      setProdutoToDelete(null);
     }
+  }
+
+  function cancelarExclusao() {
+    setShowModal(false);
+    setProdutoToDelete(null);
   }
 
   function editarProduto(produto){
@@ -74,6 +91,22 @@ export default function TabelaProdutos(props) {
           })}
         </tbody>
       </Table>
+      <Modal show={showModal} onHide={cancelarExclusao} centered>
+        <Modal.Header closeButton>
+          <Modal.Title  style={customModalStyle}>Confirmar Exclusão</Modal.Title>
+        </Modal.Header>
+        <Modal.Body  style={customModalStyle}>
+          Tem certeza de que deseja excluir este produto?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={cancelarExclusao}>
+            Cancelar
+          </Button>
+          <Button variant="danger" onClick={confirmarExclusao}>
+            Excluir
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 }

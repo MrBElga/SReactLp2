@@ -1,23 +1,39 @@
-import { Container, Table, Button } from "react-bootstrap";
-import "./tabela.css";
+import React, { useState } from "react";
+import { Container, Table, Button, Modal } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { remover } from "../../redux/categoriaReducer";
-
+import "./tabela.css";
 
 export default function TabelaCategorias(props) {
   const { status, mensagem, listaCategorias } = useSelector((state) => state.categoria);
   const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
+  const [categoriaToDelete, setCategoriaToDelete] = useState(null);
 
   function excluirCategoria(categoria) {
-    if (window.confirm("Deseja realmente excluir esse Fornecedor?")) {
-      dispatch(remover(categoria));
+    setCategoriaToDelete(categoria);
+    setShowModal(true);
+  }
+
+  function confirmarExclusao() {
+    if (categoriaToDelete) {
+      dispatch(remover(categoriaToDelete));
+      setShowModal(false);
+      setCategoriaToDelete(null);
     }
   }
-  function editarCategoria(categoria){
+
+  function cancelarExclusao() {
+    setShowModal(false);
+    setCategoriaToDelete(null);
+  }
+
+  function editarCategoria(categoria) {
     props.setCategoriaParaEdicao(categoria);
-    props.setModoEdicao(true)
+    props.setModoEdicao(true);
     props.exibirFormulario(true);
   }
+
   return (
     <Container>
       <Button
@@ -29,7 +45,7 @@ export default function TabelaCategorias(props) {
       >
         Nova Categoria
       </Button>
-      <Table className="table-custom" striped bordered hover>
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th>Nome da Categoria</th>
@@ -53,13 +69,31 @@ export default function TabelaCategorias(props) {
                   >
                     Excluir
                   </Button>
-                  <Button className="btn-editar" onClick={()=>{ editarCategoria(categoria)}} >Editar</Button>
+                  <Button className="btn-editar" onClick={() => { editarCategoria(categoria); }}>Editar</Button>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </Table>
+
+     
+      <Modal show={showModal} onHide={cancelarExclusao} centered>
+        <Modal.Header closeButton>
+          <Modal.Title style={{ color: "black" }}>Confirmar Exclusão</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{ color: "black" }}>
+          Tem certeza de que deseja excluir esta categoria?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={cancelarExclusao}>
+            Cancelar
+          </Button>
+          <Button variant="danger" onClick={confirmarExclusao}>
+            Excluir
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 }

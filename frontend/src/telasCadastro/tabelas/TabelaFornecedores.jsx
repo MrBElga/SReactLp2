@@ -1,22 +1,42 @@
-import { Container, Table, Button } from "react-bootstrap";
-import "./tabela.css";
+import React, { useState } from "react";
+import { Container, Table, Button, Modal } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { remover } from "../../redux/fornecedorReducer";
+import "./tabela.css";
 
 export default function TabelaFornecedores(props) {
-  const {status,mensagem,listaFornecedores} = useSelector(state=>state.fornecedor);
+  const { status, mensagem, listaFornecedores } = useSelector((state) => state.fornecedor);
   const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
+  const [fornecedorToDelete, setFornecedorToDelete] = useState(null);
+  const customModalStyle = {
+    color: "black", 
+  };
+
   function excluirFornecedor(fornecedor) {
-    if (window.confirm("Deseja realmente excluir esse cliente?")) {
-      dispatch(remover(fornecedor));
+    setFornecedorToDelete(fornecedor);
+    setShowModal(true);
+  }
+
+  function confirmarExclusao() {
+    if (fornecedorToDelete) {
+      dispatch(remover(fornecedorToDelete));
+      setShowModal(false);
+      setFornecedorToDelete(null);
     }
   }
-  function editarFornecedor(fornecedor){
 
-    props.setFornecedorPAraEdicao(fornecedor);
+  function cancelarExclusao() {
+    setShowModal(false);
+    setFornecedorToDelete(null);
+  }
+
+  function editarFornecedor(fornecedor) {
+    props.setFornecedorParaEdicao(fornecedor);
     props.setModoEdicao(true);
     props.exibirFormulario(true);
   }
+
   return (
     <Container>
       <Button
@@ -61,14 +81,31 @@ export default function TabelaFornecedores(props) {
                   >
                     Excluir
                   </Button>
-                
-                <Button className="btn-editar"  onClick={()=>{ editarFornecedor(fornecedor);}}>Editar</Button>
+                  <Button className="btn-editar" onClick={() => { editarFornecedor(fornecedor); }}>Editar</Button>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </Table>
+
+ 
+      <Modal show={showModal} onHide={cancelarExclusao} centered>
+        <Modal.Header closeButton>
+          <Modal.Title  style={customModalStyle}>Confirmar Exclusão</Modal.Title>
+        </Modal.Header>
+        <Modal.Body  style={customModalStyle}>
+          Tem certeza de que deseja excluir este fornecedor?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={cancelarExclusao}>
+            Cancelar
+          </Button>
+          <Button variant="danger" onClick={confirmarExclusao}>
+            Excluir
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 }
