@@ -9,6 +9,8 @@ import {
   FloatingLabel,
   Alert,
 } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { adicionar, atualizar } from "../../redux/clienteReducer";
 
 export default function FormCadCliente(props) {
   const estadoInicialCliente = props.clienteParaEdicao;
@@ -29,8 +31,8 @@ export default function FormCadCliente(props) {
   const [cpfError, setCpfError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [showAlertErro, setShowAlertErro] = useState(false);
-
-
+  const { status, mensagem, listaClientes } = useSelector((state)=>state.cliente);
+  const dispatch = useDispatch();
 
   function manipularMudancas(e) {
     const componente = e.currentTarget;
@@ -41,11 +43,11 @@ export default function FormCadCliente(props) {
   }
 
   function verificarExistenciaCPF(cpf) {
-    return props.listaClientes.some((itemCliente) => itemCliente.cpf === cpf);
+    return listaClientes.some((itemCliente) => itemCliente.cpf === cpf);
   }
 
   function verificarExistenciaEmail(email) {
-    return props.listaClientes.some((itemCliente) => itemCliente.email === email);
+    return listaClientes.some((itemCliente) => itemCliente.email === email);
   }
 
   function manipularSubmit(e) {
@@ -55,12 +57,7 @@ export default function FormCadCliente(props) {
       setEmailError("");
 
       if (props.modoEdicao) {
-        props.setListaClientes([
-          ...props.listaClientes.filter(
-            (itemCliente) => itemCliente.cpf !== cliente.cpf
-          ),
-          cliente,
-        ]);
+        dispatch(atualizar(cliente))
         props.setModoEdicao(false);
         props.setClienteParaEdicao(clienteVazio);
         setCliente(clienteVazio);
@@ -75,7 +72,8 @@ export default function FormCadCliente(props) {
           setShowAlertErro(true);
           setValidated(false);
         } else {
-          props.setListaClientes([...props.listaClientes, cliente]);
+          //props.setListaClientes([...props.listaClientes, cliente]);
+          dispatch(adicionar(cliente))
           setCliente(clienteVazio);
           setValidated(false);
           setShowAlertErro(false);

@@ -8,12 +8,17 @@ import {
   Col,
   FloatingLabel,
 } from "react-bootstrap";
+import { useSelector, useDispatch} from 'react-redux';
+import { adicionar, atualizar} from '../../redux/produtoReducer';
 
 export default function FormCadProduto(props) {
   const estadoInicialProduto = props.produtoParaEdicao;
   
   const [produto, setProduto] = useState(estadoInicialProduto);
   const [validated, setValidated] = useState(false);
+
+  const {status,mensagem,listaProdutos} = useSelector((state)=>state.cliente);
+  const dispatch = useDispatch();
 
   function manipularMudancas(e) {
     const componente = e.currentTarget;
@@ -27,16 +32,11 @@ export default function FormCadProduto(props) {
     const form = e.currentTarget;
     if(form.checkValidity()){
       if (!props.modoEdicao) {
-        props.setProdutosCadastrados([...props.produtosCadastrados, produto]);
+        dispatch(adicionar(produto));
         props.setExibirAlert(true);
         props.exibirFormulario(false);
       } else {
-        props.setProdutosCadastrados([
-          ...props.produtosCadastrados.filter(
-            (itemProduto) => itemProduto.nomeProduto !== produto.nomeProduto
-          ),
-          produto,
-        ]);
+        dispatch(atualizar(produto));
         props.setModoEdicao(false);
         props.setProdutoParaEdicao(estadoInicialProduto);
         props.setExibirAlert(true);

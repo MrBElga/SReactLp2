@@ -9,6 +9,8 @@ import {
   Button,
   Alert,
 } from "react-bootstrap";
+import { useSelector, useDispatch} from 'react-redux';
+import { adicionar, atualizar} from '../../redux/fornecedorReducer';
 
 export default function FormCadFornecedor(props) {
   const estadoInicialFornecedor = props.fornecedorParaEdicao;
@@ -16,6 +18,9 @@ export default function FormCadFornecedor(props) {
   const [validated, setValidated] = useState(false);
   const [cnpjDuplicado, setCnpjDuplicado] = useState(false);
   const [emailDuplicado, setEmailDuplicado] = useState(false);
+
+  const {status,mensagem,listaFornecedores} = useSelector((state)=>state.fornecedor);
+  const dispatch = useDispatch();
 
   function manipularMudancas(e) {
     const componente = e.currentTarget;
@@ -29,10 +34,10 @@ export default function FormCadFornecedor(props) {
     const form = e.currentTarget;
 
     if (form.checkValidity()) {
-      const cnpjExistente = props.listaFornecedores.some(
+      const cnpjExistente = listaFornecedores.some(
         (itemFornecedor) => itemFornecedor.cnpj === fornecedor.cnpj
       );
-      const emailExistente = props.listaFornecedores.some(
+      const emailExistente = listaFornecedores.some(
         (itemFornecedor) => itemFornecedor.email === fornecedor.email
       );
 
@@ -42,22 +47,15 @@ export default function FormCadFornecedor(props) {
         } else if (emailExistente) {
           setEmailDuplicado(true);
         } else {
-          props.setListaFornecedores([...props.listaFornecedores, fornecedor]);
+          dispatch(adicionar(fornecedor));
           setFornecedor(estadoInicialFornecedor);
           setValidated(false);
           props.setExibirAlert(true);
           props.exibirFormulario(false);
         }
       } else {
-        props.setListaFornecedores([
-          ...props.listaFornecedores.filter(
-            (itemFornecedor) => itemFornecedor.cnpj !== fornecedor.cnpj
-          ),
-          fornecedor,
-        ]);
+        dispatch(atualizar(fornecedor));
         props.setModoEdicao(false);
-       
-        
         setFornecedor(estadoInicialFornecedor);
         setValidated(false);
         props.setExibirAlert(true);

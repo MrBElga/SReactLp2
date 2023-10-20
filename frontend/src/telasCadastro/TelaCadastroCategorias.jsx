@@ -36,8 +36,6 @@ export default function TelaCadastroCategoria(props) {
           {exibirFormulario ? (
             <FormCadCategoria
               exibirFormulario={setExibirFormulario}
-              listaCategoria={listaCategoria}
-              setListaCategoria={setListaCategoria}
               categoriaParaEdicao={categoriaParaEdicao}
               setCategoriaParaEdicao={setCategoriaParaEdicao}
               modoEdicao={modoEdicao}
@@ -48,8 +46,6 @@ export default function TelaCadastroCategoria(props) {
           ) : (
             <TabelaCategorias
               exibirFormulario={setExibirFormulario}
-              listaCategoria={listaCategoria}
-              setListaCategoria={setListaCategoria}
               categoriaParaEdicao={categoriaParaEdicao}
               setCategoriaParaEdicao={setCategoriaParaEdicao}
               modoEdicao={modoEdicao}

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import ESTADO from "../recursos/estado";
+import ESTADO from "../recurso/estado";
 
 const produtoSlice = createSlice({
     name: 'produto',
@@ -9,18 +9,18 @@ const produtoSlice = createSlice({
         listaProdutos: []
     },
     reducers: {
-        adicionarProduto: (state, action) => {
+        adicionar: (state, action) => {
             state.listaProdutos.push(action.payload);
         },
-        removerProduto: (state, action) => {
+        remover: (state, action) => {
             state.listaProdutos = state.listaProdutos.filter(produto => produto.id !== action.payload.id);
         },
-        atualizarProduto: (state, action) => {
+        atualizar: (state, action) => {
             const listaTemporariaProdutos = state.listaProdutos.filter(produto => produto.id !== action.payload.id);
-            state.listaProdutos = [...listaTemporariaProdutos, action.payload.produto];
+            state.listaProdutos = [...listaTemporariaProdutos, action.payload];
         }
     }
 });
 
-export const { adicionarProduto, removerProduto, atualizarProduto } = produtoSlice.actions;
+export const { adicionar, remover, atualizar } = produtoSlice.actions;
 export default produtoSlice.reducer;

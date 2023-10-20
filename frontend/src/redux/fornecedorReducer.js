@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import ESTADO from "../recursos/estado";
+import ESTADO from "../recurso/estado";
 
 const fornecedorSlice = createSlice({
     name: 'fornecedor',
@@ -9,18 +9,18 @@ const fornecedorSlice = createSlice({
         listaFornecedores: []
     },
     reducers: {
-        adicionarFornecedor: (state, action) => {
+        adicionar: (state, action) => {
             state.listaFornecedores.push(action.payload);
         },
-        removerFornecedor: (state, action) => {
-            state.listaFornecedores = state.listaFornecedores.filter(fornecedor => fornecedor.id !== action.payload.id);
+        remover: (state, action) => {
+            state.listaFornecedores = state.listaFornecedores.filter(fornecedor => fornecedor.cnpj !== action.payload.cnpj);
         },
-        atualizarFornecedor: (state, action) => {
-            const listaTemporariaFornecedores = state.listaFornecedores.filter(fornecedor => fornecedor.id !== action.payload.id);
-            state.listaFornecedores = [...listaTemporariaFornecedores, action.payload.fornecedor];
+        atualizar: (state, action) => {
+            const listaTemporariaFornecedores = state.listaFornecedores.filter(fornecedor => fornecedor.cnpj !== action.payload.cnpj);
+            state.listaFornecedores = [...listaTemporariaFornecedores, action.payload];
         }
     }
 });
 
-export const { adicionarFornecedor, removerFornecedor, atualizarFornecedor } = fornecedorSlice.actions;
+export const { adicionar, remover, atualizar} = fornecedorSlice.actions;
 export default fornecedorSlice.reducer;

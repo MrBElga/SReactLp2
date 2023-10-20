@@ -8,7 +8,6 @@ import "./tela.css";
 export default function TelaCadastroFornecedor(props) {
   const [exibirFormulario, setExibirFormulario] = useState(false);
   const [exibirAlert, setExibirAlert] = useState(false);
-  const [listaFornecedores, setListaFornecedores] = useState([]);
   const [fornecedorParaEdicao, setFornecedorPAraEdicao] = useState({
     nome:"",
     cnpj: "",
@@ -44,8 +43,6 @@ export default function TelaCadastroFornecedor(props) {
           {exibirFormulario ? (
             <FormCadFornecedor
               exibirFormulario={setExibirFormulario}
-              listaFornecedores={listaFornecedores}
-              setListaFornecedores={setListaFornecedores}
               fornecedorParaEdicao={fornecedorParaEdicao}
               setFornecedorPAraEdicao={setFornecedorPAraEdicao}
               modoEdicao={modoEdicao}
@@ -56,8 +53,6 @@ export default function TelaCadastroFornecedor(props) {
           ) : (
             <TabelaFornecedor
               exibirFormulario={setExibirFormulario}
-              listaFornecedores={listaFornecedores}
-              setListaFornecedores={setListaFornecedores}
               fornecedorParaEdicao={fornecedorParaEdicao}
               setFornecedorPAraEdicao={setFornecedorPAraEdicao}
               modoEdicao={modoEdicao}

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import ESTADO from "../recursos/estado";
+import ESTADO from "../recurso/estado";
 
 const categoriaSlice = createSlice({
     name: 'categoria',
@@ -9,18 +9,18 @@ const categoriaSlice = createSlice({
         listaCategorias: []
     },
     reducers: {
-        adicionarCategoria: (state, action) => {
+        adicionar: (state, action) => {
             state.listaCategorias.push(action.payload);
         },
-        removerCategoria: (state, action) => {
+        remover: (state, action) => {
             state.listaCategorias = state.listaCategorias.filter(categoria => categoria.id !== action.payload.id);
         },
-        atualizarCategoria: (state, action) => {
+        atualizar: (state, action) => {
             const listaTemporariaCategorias = state.listaCategorias.filter(categoria => categoria.id !== action.payload.id);
-            state.listaCategorias = [...listaTemporariaCategorias, action.payload.categoria];
+            state.listaCategorias = [...listaTemporariaCategorias, action.payload];
         }
     }
 });
 
-export const { adicionarCategoria, removerCategoria, atualizarCategoria } = categoriaSlice.actions;
+export const { adicionar, remover, atualizar } = categoriaSlice.actions;
 export default categoriaSlice.reducer;

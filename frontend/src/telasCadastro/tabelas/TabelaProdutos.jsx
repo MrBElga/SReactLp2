@@ -1,16 +1,19 @@
 import { Container, Table, Button } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { remover } from "../../redux/produtoReducer";
 import "./tabela.css";
 
 export default function TabelaProdutos(props) {
+  const {status,mensagem,listaProdutos} = useSelector(state=>state.produto);
+  const dispatch = useDispatch();
+
   function excluirProduto(produto) {
     if (window.confirm("Deseja realmente excluir este produto?")) {
-      props.setProdutosCadastrados(
-        props.produtosCadastrados.filter(((itemProduto) => itemProduto.nomeProduto !== produto.nomeProduto))
-      );
+      dispatch(remover(produto));
     }
   }
-  function editarProduto(produto){
 
+  function editarProduto(produto){
     props.setProdutoParaEdicao(produto);
     props.setModoEdicao(true)
     props.exibirFormulario(true);
@@ -42,7 +45,7 @@ export default function TabelaProdutos(props) {
           </tr>
         </thead>
         <tbody>
-          {props.produtosCadastrados.map((produto) => {
+          {listaProdutos.map((produto) => {
             return (
               <tr key={produto.nomeProduto}>
                 <td>{produto.nomeProduto}</td>

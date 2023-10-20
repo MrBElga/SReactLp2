@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import ESTADO from "../recursos/estado";
+import ESTADO from "../recurso/estado";
 
 const clienteSlice = createSlice({
     name:'cliente',
@@ -18,7 +18,7 @@ const clienteSlice = createSlice({
         },
         atualizar:(state,action)=>{
             const listaTemporariaClientes = state.listaClientes.filter(cliente => cliente.cpf !== action.payload.cpf);
-            state.listaClientes = [...listaTemporariaClientes, action.payload.cliente];
+            state.listaClientes = [...listaTemporariaClientes, action.payload];
         }
 
     }

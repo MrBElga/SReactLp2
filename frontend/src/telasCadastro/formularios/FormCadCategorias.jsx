@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { Container, Form, Row, Col, FloatingLabel, Button, Alert } from "react-bootstrap";
 import "./form.css";
+import { useSelector, useDispatch } from "react-redux";
+import { adicionar, atualizar } from "../../redux/categoriaReducer";
 
 export default function FormCadCategoria(props) {
   const categoriaIn = props.categoriaParaEdicao;
 
   const [categoria, setCategoria] = useState(categoriaIn);
   const [validated, setValidated] = useState(false);
-  const [categoriaDuplicada, setCategoriaDuplicada] = useState(false); // Estado para controlar a categoria duplicada
+  const [categoriaDuplicada, setCategoriaDuplicada] = useState(false);
+  const { status, mendagem, listaCategoria } = useSelector((state) => state.categoria);
+  const dispatch = useDispatch();
 
   function manipularMudancas(e) {
     const componente = e.currentTarget;
@@ -21,39 +25,17 @@ export default function FormCadCategoria(props) {
     const form = e.currentTarget;
 
     if (form.checkValidity()) {
-      if (!props.modoEdicao) {
-        if (props.listaCategoria.some(itemCategoria => itemCategoria.nomeCategoria === categoria.nomeCategoria)) {
-     
-          setCategoriaDuplicada(true);
+        if (!props.modoEdicao) {
+          dispatch(adicionar(categoria));
         } else {
-          props.setListaCategoria([...props.listaCategoria, categoria]);
-          props.setExibirAlert(true);
-          props.exibirFormulario(false);
+          dispatch(atualizar(categoria));
+          props.setModoEdicao(false);
         }
-      } else {
-        props.setListaCategoria([
-          ...props.listaCategoria.filter(
-            (itemCategoria) =>
-              itemCategoria.nomeCategoria !== categoria.nomeCategoria
-          ),
-          categoria,
-        ]);
-        props.setModoEdicao(false);
-     
-        props.setCategoriaParaEdicao({
-          nomeCategoria: "",
-          descricao: ""
-        });
-        props.setExibirAlert(true);
-        props.exibirFormulario(false);
-      }
-  
       setCategoria(categoriaIn);
       setValidated(false);
     } else {
       setValidated(true);
     }
-    
     e.stopPropagation();
     e.preventDefault();
   }

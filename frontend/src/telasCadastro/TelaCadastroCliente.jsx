@@ -8,7 +8,6 @@ import "./tela.css";
 export default function TelaCadastroCliente(props) {
   const [exibirFormulario, setExibirFormulario] = useState(false);
   const [exibirAlert, setExibirAlert] = useState(false);
-  const [listaClientes, setListaClientes] = useState([]);
   const [clienteParaEdicao, setClienteParaEdicao] = useState({
     cpf: '',
     nome: '',
@@ -42,8 +41,6 @@ export default function TelaCadastroCliente(props) {
           {exibirFormulario ? (
             <FormCadCliente
               exibirFormulario={setExibirFormulario}
-              listaClientes={listaClientes}
-              setListaClientes={setListaClientes}
               clienteParaEdicao={clienteParaEdicao}
               setClienteParaEdicao={setClienteParaEdicao}
               modoEdicao={modoEdicao}
@@ -54,8 +51,6 @@ export default function TelaCadastroCliente(props) {
           ) : (
             <TabelaClientes
               exibirFormulario={setExibirFormulario} 
-              listaClientes={listaClientes}
-              setListaClientes={setListaClientes}
               clienteParaEdicao={clienteParaEdicao}
               setClienteParaEdicao={setClienteParaEdicao}
               modoEdicao={modoEdicao}

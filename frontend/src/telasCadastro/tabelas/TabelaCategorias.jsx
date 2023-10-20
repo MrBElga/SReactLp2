@@ -1,18 +1,19 @@
 import { Container, Table, Button } from "react-bootstrap";
 import "./tabela.css";
+import { useSelector, useDispatch } from "react-redux";
+import { remover } from "../../redux/categoriaReducer";
+
 
 export default function TabelaCategorias(props) {
+  const { status, mensagem, listaCategorias } = useSelector((state) => state.categoria);
+  const dispatch = useDispatch();
+
   function excluirCategoria(categoria) {
     if (window.confirm("Deseja realmente excluir esse Fornecedor?")) {
-      props.setListaCategoria(
-        props.listaCategoria.filter(
-          (itemLista) => itemLista.nomeCategoria !== categoria.nomeCategoria
-        )
-      );
+      dispatch(remover(categoria));
     }
   }
   function editarCategoria(categoria){
-
     props.setCategoriaParaEdicao(categoria);
     props.setModoEdicao(true)
     props.exibirFormulario(true);
@@ -37,7 +38,7 @@ export default function TabelaCategorias(props) {
           </tr>
         </thead>
         <tbody>
-          {props.listaCategoria.map((categoria) => {
+          {listaCategorias.map((categoria) => {
             return (
               <tr key={categoria.nomeCategoria}>
                 <td>{categoria.nomeCategoria}</td>
