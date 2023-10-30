@@ -25,7 +25,6 @@ class Categoria {
 
     set codigo(Cod) {
         if (Cod > 0) 
-        if (Cod > 0) 
             this.#codigo = Cod;
     }
 
@@ -72,7 +71,7 @@ class Categoria {
 
     async consultarID(id,conexao) {
         const categoriaDAO = new CategoriaDAO();
-        return await categoriaDAO.consultarId(id.conexao);
+        return await categoriaDAO.consultarId(id,conexao);
     }
 }
 

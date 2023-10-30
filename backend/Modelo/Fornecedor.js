@@ -51,7 +51,8 @@ class Fornecedor {
     }
 
     set codigo(codigo) {
-        this.#codigo = codigo;
+        if (codigo > 0)
+            this.#codigo = codigo;
     }
 
     get cnpj() {

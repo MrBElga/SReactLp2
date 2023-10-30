@@ -33,6 +33,7 @@ class Produto {
     }
 
     set codigo(codigo) {
+        if (codigo > 0)
         this.#codigo = codigo;
     }
 
