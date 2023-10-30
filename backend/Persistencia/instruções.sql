@@ -52,6 +52,6 @@ CREATE TABLE produtos (
     prod_descricao TEXT,
     prod_preco DECIMAL(10, 2),
     prod_estoque INT,
-    prod_fornecedor_id INT,
-    FOREIGN KEY (fornecedor_id) REFERENCES fornecedores (forn_codigo)
+    forn_fornecedor_id INT,
+    FOREIGN KEY (forn_fornecedor_id) REFERENCES fornecedores (forn_codigo)
 );
