@@ -10,7 +10,7 @@ import mysql from 'mysql2/promise';
         host: 'localhost',
         port: 3306,
         user: 'root',
-        database: 'loj  a',
+        database: 'loja',
         password: '',
         waitForConnections: true,
         connectionLimit: 10,

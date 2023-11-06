@@ -3,8 +3,8 @@ export default class FornecedorDAO {
 
     async gravar(fornecedor,conexao) {
       
-        const sql = "INSERT INTO fornecedores (cnpj, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        const valores = [fornecedor.cnpj, fornecedor.nome, fornecedor.telefone, fornecedor.celular, fornecedor.endereco, fornecedor.numero, fornecedor.bairro, fornecedor.cidade, fornecedor.uf, fornecedor.cep, fornecedor.email];
+        const sql = "INSERT INTO fornecedores (forn_cnpj, forn_nome, forn_telefone, forn_celular, forn_endereco, forn_numero, forn_bairro, forn_cidade, forn_uf, forn_cep, forn_email,usu_prior) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        const valores = [fornecedor.cnpj, fornecedor.nome, fornecedor.telefone, fornecedor.celular, fornecedor.endereco, fornecedor.numero, fornecedor.bairro, fornecedor.cidade, fornecedor.uf, fornecedor.cep, fornecedor.email,fornecedor.prior];
        
         try {
             const [result] = await conexao.execute(sql, valores);
@@ -16,8 +16,8 @@ export default class FornecedorDAO {
 
     async atualizar(fornecedor,conexao) {
       
-        const sql = "UPDATE fornecedores SET cnpj = ?, nome = ?, telefone = ?, celular = ?, endereco = ?, numero = ?, bairro = ?, cidade = ?, uf = ?, cep = ?, email = ? WHERE codigo = ?";
-        const valores = [fornecedor.cnpj, fornecedor.nome, fornecedor.telefone, fornecedor.celular, fornecedor.endereco, fornecedor.numero, fornecedor.bairro, fornecedor.cidade, fornecedor.uf, fornecedor.cep, fornecedor.email, fornecedor.codigo];
+        const sql = "UPDATE fornecedores SET forn_cnpj = ?, forn_nome = ?, forn_telefone = ?, forn_celular = ?, forn_endereco = ?, forn_numero = ?, forn_bairro = ?, forn_cidade = ?, forn_uf = ?, forn_cep = ?, forn_email = ?, usu_prior = ? WHERE codigo = ?";
+        const valores = [fornecedor.cnpj, fornecedor.nome, fornecedor.telefone, fornecedor.celular, fornecedor.endereco, fornecedor.numero, fornecedor.bairro, fornecedor.cidade, fornecedor.uf, fornecedor.cep, fornecedor.email, fornecedor.codigo, fornecedor.prior];
         console.log(valores)
         try {
             await conexao.execute(sql, valores);

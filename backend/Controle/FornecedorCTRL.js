@@ -9,10 +9,10 @@ export default class FornecedorCTRL {
 
         if (requisicao.method === "POST") {
             if (requisicao.is("application/json")) {
-                const { cnpj, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep,email } = requisicao.body;
+                const { cnpj, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email, prior } = requisicao.body;
 
-                if ( cnpj && nome && telefone && celular && email && endereco && numero && bairro && cidade && uf && cep) {
-                    const fornecedor = new Fornecedor(cnpj, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email);
+                if ( cnpj && nome && telefone && celular && email && endereco && numero && bairro && cidade && uf && cep && prior) {
+                    const fornecedor = new Fornecedor(cnpj, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email, prior);
                    
                     fornecedor.gravar(conexao)
                         .then(() => {
@@ -54,10 +54,10 @@ export default class FornecedorCTRL {
         if (requisicao.method === "PUT") {
             if (requisicao.is("application/json")) {
                 const { id } = requisicao.params;
-                const { cnpj, nome, telefone, celular, email, endereco, numero, bairro, cidade, uf, cep } = requisicao.body;
+                const { cnpj, nome, telefone, celular, email, endereco, numero, bairro, cidade, uf, cep,prior } = requisicao.body;
 
-                if (cnpj && celular && nome && telefone && email && endereco && numero && bairro && cidade && uf && cep) {
-                    const fornecedor = new Fornecedor(cnpj, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep,email );
+                if (cnpj && celular && nome && telefone && email && endereco && numero && bairro && cidade && uf && cep && prior) {
+                    const fornecedor = new Fornecedor(cnpj, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email, prior );
                     fornecedor.codigo = id;
                     fornecedor.atualizar(conexao)
                         .then(() => {

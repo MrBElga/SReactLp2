@@ -3,7 +3,7 @@ CREATE DATABASE loja;
 
 USE loja;
 
-CREATE TABLE admin (
+CREATE TABLE adm (
     admin_codigo INT AUTO_INCREMENT PRIMARY KEY,
     admin_nome VARCHAR(255) NOT NULL,
     admin_senha VARCHAR(255) NOT NULL,
@@ -58,11 +58,11 @@ CREATE TABLE  categorias (
 
 
 -- para a tabela admin
-INSERT INTO admin (admin_nome, admin_senha, usu_prior) 
+INSERT INTO adm (admin_nome, admin_senha, usu_prior) 
 VALUES ('João', '123456', 1);
-INSERT INTO admin (admin_nome, admin_senha, usu_prior) 
+INSERT INTO adm (admin_nome, admin_senha, usu_prior) 
 VALUES ('Maria', 'abcdef', 1);
-INSERT INTO admin (admin_nome, admin_senha, usu_prior) 
+INSERT INTO adm (admin_nome, admin_senha, usu_prior) 
 VALUES ('Pedro', '7890', 1);
 
 -- Para a tabela `fornecedores`:
