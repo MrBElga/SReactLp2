@@ -11,7 +11,7 @@ import mysql from 'mysql2/promise';
         port: 3306,
         user: 'root',
         database: 'loja',
-        password: '123456789',
+        password: '',
         waitForConnections: true,
         connectionLimit: 10,
         maxIdle: 10, 

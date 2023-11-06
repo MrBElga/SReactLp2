@@ -10,11 +10,11 @@ export default class ClienteCTRL {
         if (requisicao.method === "POST") {
             if (requisicao.is("application/json")) {
                 
-                const { cpf, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email } = requisicao.body;
-                console.log(cpf, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email)
+                const { cpf, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email,prior } = requisicao.body;
+                console.log(cpf, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email,prior)
 
-                if (cpf && nome && telefone && celular && endereco && numero && bairro && cidade && uf && cep && email) {
-                    const cliente = new Cliente(cpf, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email);
+                if (cpf && nome && telefone && celular && endereco && numero && bairro && cidade && uf && cep && email && prior) {
+                    const cliente = new Cliente(cpf, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email,prior);
                     cliente.gravar(conexao)
                         .then(() => {
                             resposta.json({
@@ -66,7 +66,8 @@ export default class ClienteCTRL {
                     dados.cidade,
                     dados.uf,
                     dados.cep,
-                    dados.email
+                    dados.email,
+                    dados.prior
                 );
                 cliente.codigo = requisicao.params.id;
                 try {

@@ -13,8 +13,9 @@ class Fornecedor {
     #uf;
     #cep;
     #email;
+    #prior;
 
-    constructor(cnpj, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email, codigo = 0) {
+    constructor(cnpj, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email, codigo = 0 , prior) {
         this.#codigo = codigo;
         this.#cnpj = cnpj;
         this.#nome = nome;
@@ -27,6 +28,7 @@ class Fornecedor {
         this.#uf = uf;
         this.#cep = cep;
         this.#email = email;
+        this.#prior = prior;
     }
 
     toJSON() {
@@ -42,7 +44,8 @@ class Fornecedor {
             cidade: this.#cidade,
             uf: this.#uf,
             cep: this.#cep,
-            email: this.#email
+            email: this.#email,
+            prior: this.#prior
         };
     }
 
@@ -141,6 +144,14 @@ class Fornecedor {
 
     set email(email) {
         this.#email = email;
+    }
+
+    get prior(){
+        return this.#prior;
+    }
+
+    set prior(prior){
+        this.#prior = prior;
     }
 
     toString() {

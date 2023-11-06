@@ -2,8 +2,8 @@ export default class ClientesDAO {
     constructor() {}
 
     async gravar(cliente, conexao) {
-        const sql = "INSERT INTO clientes (cpf, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        const valores = [cliente.cpf, cliente.nome, cliente.telefone, cliente.celular, cliente.endereco, cliente.numero, cliente.bairro, cliente.cidade, cliente.uf, cliente.cep, cliente.email];
+        const sql = "INSERT INTO clientes (cli_cpf, cli_nome, cli_telefone, cli_celular, cli_endereco, cli_numero, cli_bairro, cli_cidade, cli_uf, cli_ep, cli_email, usu_prior) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        const valores = [cliente.cpf, cliente.nome, cliente.telefone, cliente.celular, cliente.endereco, cliente.numero, cliente.bairro, cliente.cidade, cliente.uf, cliente.cep, cliente.email, cliente.prior];
 
         try {
             const [result] = await conexao.execute(sql, valores);
@@ -14,8 +14,8 @@ export default class ClientesDAO {
     }
 
     async atualizar(cliente, conexao) {
-        const sql = "UPDATE clientes SET cpf = ?, nome = ?, telefone = ?, celular = ?, endereco = ?, numero = ?, bairro = ?, cidade = ?, uf = ?, cep = ?, email = ? WHERE codigo = ?";
-        const valores = [cliente.cpf, cliente.nome, cliente.telefone, cliente.celular, cliente.endereco, cliente.numero, cliente.bairro, cliente.cidade, cliente.uf, cliente.cep, cliente.email, cliente.codigo];
+        const sql = "UPDATE clientes SET cli_cpf = ?, cli_nome = ?, cli_telefone = ?, cli_celular = ?, cli_endereco = ?, cli_numero = ?, cli_bairro = ?, cli_cidade = ?, cli_uf = ?, cli_cep = ?, cli_email = ?, usu_prior = ? WHERE codigo = ?";
+        const valores = [cliente.cpf, cliente.nome, cliente.telefone, cliente.celular, cliente.endereco, cliente.numero, cliente.bairro, cliente.cidade, cliente.uf, cliente.cep, cliente.email, cliente.codigo,cliente.prior];
 
         try {
             await conexao.execute(sql, valores);
@@ -36,7 +36,7 @@ export default class ClientesDAO {
     }
 
     async consultarID(id, conexao) {
-        const sql = "SELECT * FROM clientes WHERE codigo = ?";
+        const sql = "SELECT * FROM clientes WHERE cli_codigo = ?";
 
         try {
             const [rows] = await conexao.query(sql, [id]);
@@ -47,7 +47,7 @@ export default class ClientesDAO {
     }
 
     async excluir(cliente, conexao) {
-        const sql = "DELETE FROM clientes WHERE codigo = ?";
+        const sql = "DELETE FROM clientes WHERE cli_codigo = ?";
 
         try {
             await conexao.execute(sql, [cliente.codigo]);

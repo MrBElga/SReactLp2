@@ -13,8 +13,9 @@ class Clientes {
     #uf;
     #cep;
     #email;
+    #prior;
 
-    constructor(cpf, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email, codigo = 0) {
+    constructor(cpf, nome, telefone, celular, endereco, numero, bairro, cidade, uf, cep, email,prior, codigo = 0) {
         this.#codigo = codigo;
         this.#cpf = cpf;
         this.#nome = nome;
@@ -27,6 +28,7 @@ class Clientes {
         this.#uf = uf;
         this.#cep = cep;
         this.#email = email;
+        this.#prior = prior;
     }
 
     toJSON() {
@@ -42,7 +44,8 @@ class Clientes {
             cidade: this.#cidade,
             uf: this.#uf,
             cep: this.#cep,
-            email: this.#email
+            email: this.#email,
+            prior: this.#prior
         };
     }
 
@@ -142,9 +145,16 @@ class Clientes {
     set email(email) {
         this.#email = email;
     }
+    get prior() {
+        return this.#prior;
+    }
+
+    set prior(prior) {
+        this.#prior = prior;
+    }
 
     toString() {
-        return `Cliente - Código: ${this.#codigo}, Nome: ${this.#nome}, CPF: ${this.#cpf}, Telefone: ${this.#telefone}, Celular: ${this.#celular}, Endereço: ${this.#endereco}, Número: ${this.#numero}, Bairro: ${this.#bairro}, Cidade: ${this.#cidade}, UF: ${this.#uf}, CEP: ${this.#cep}, Email: ${this.#email}`;
+        return `Cliente - Código: ${this.#codigo}, Nome: ${this.#nome}, CPF: ${this.#cpf}, Telefone: ${this.#telefone}, Celular: ${this.#celular}, Endereço: ${this.#endereco}, Número: ${this.#numero}, Bairro: ${this.#bairro}, Cidade: ${this.#cidade}, UF: ${this.#uf}, CEP: ${this.#cep}, Email: ${this.#email}, prior: ${this.#prior}`;
     }
 
     async gravar(conexao) {
