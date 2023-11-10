@@ -22,7 +22,7 @@ export default class FornecedorCTRL {
           email,
           prior,
         } = requisicao.body;
-
+        prior = 2;
         if (
           cnpj &&
           nome &&
