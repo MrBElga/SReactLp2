@@ -1,4 +1,5 @@
 import Produto from '../Modelo/Produtos.js'
+import Categoria from '../modelo/Categoria.js';
 export default class ProdutoDAO {
   constructor() {}
 

@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS loja;
+
 CREATE DATABASE loja;
 
 USE loja;
@@ -11,7 +13,7 @@ CREATE TABLE adm (
 
 CREATE TABLE fornecedores (
     forn_codigo INT AUTO_INCREMENT PRIMARY KEY,
-    forn_cnpj VARCHAR(14) NOT NULL,
+    forn_cnpj VARCHAR(15) NOT NULL,
     forn_telefone VARCHAR(14) NOT NULL,
     forn_celular VARCHAR(15) NOT NULL,
     forn_endereco VARCHAR(255) NOT NULL,
@@ -39,15 +41,7 @@ CREATE TABLE  clientes (
     usu_prior INT NOT NULL
 );
 
-CREATE TABLE produtos (
-    prod_codigo INT AUTO_INCREMENT PRIMARY KEY,
-    prod_nome VARCHAR(255) NOT NULL,
-    prod_descricao TEXT,
-    prod_preco DECIMAL(10, 2),
-    prod_estoque INT,
-    forn_fornecedor_id INT NOT NULL,
-    FOREIGN KEY (forn_fornecedor_id) REFERENCES fornecedores (forn_codigo)
-);
+
 
 CREATE TABLE  categorias (
     cat_codigo INT AUTO_INCREMENT PRIMARY KEY,
@@ -55,47 +49,132 @@ CREATE TABLE  categorias (
     cat_descricao TEXT
 );
 
+CREATE TABLE produtos (
+    prod_codigo INT AUTO_INCREMENT PRIMARY KEY,
+    prod_nome VARCHAR(255) NOT NULL,
+    prod_descricao TEXT,
+    prod_preco DECIMAL(10, 2),
+    prod_estoque INT,
+    cat_codigo INT NOT NULL,
+    FOREIGN KEY (cat_codigo) REFERENCES categorias (cat_codigo)
+);
 
--- para a tabela admin
-INSERT INTO adm (adm_nome, adm_senha, usu_prior) 
-VALUES ('João', '123456', 1);
-INSERT INTO adm (adm_nome, adm_senha, usu_prior) 
-VALUES ('Maria', 'abcdef', 1);
-INSERT INTO adm (adm_nome, adm_senha, usu_prior) 
-VALUES ('Pedro', '7890', 1);
+INSERT INTO adm (adm_nome, adm_senha, usu_prior) VALUES
+('Admin 1', 'pass123', 1),
+('Admin 2', 'securePass', 1),
+('Admin 3', 'adminPass', 1),
+('User 1', 'userPass', 1),
+('User 2', 'userSecure', 1),
+('User 3', 'password1', 1),
+('Staff 1', 'staffPass', 1),
+('Staff 2', 'employeePass', 1),
+('Manager 1', 'managerPass', 1),
+('Supervisor 1', 'superPass', 1);
 
--- Para a tabela `fornecedores`:
+INSERT INTO fornecedores (forn_cnpj, forn_telefone, forn_celular, forn_endereco, forn_numero, forn_bairro, forn_cidade, forn_uf, forn_cep, forn_email, usu_prior) VALUES
+('12345678901234', '1111111111', '999999999999', 'Supplier Street 1', '123', 'Downtown', 'São Paulo', 'SP', '12345-678', 'supplier1@email.com', 2),
+('98765432109876', '2222222222', '888888888888', 'Supplies Avenue 5', '555', 'Botanical Garden', 'Rio de Janeiro', 'RJ', '98765-432', 'supplier2@email.com', 2),
+('11112222333344', '3333333333', '777777777777', 'Delivery Road 9', '789', 'Industrial Village', 'Campinas', 'SP', '54321-678', 'supplier3@email.com', 2),
+('44445555666677', '4444444444', '666666666666', 'Merchandise Avenue 12', '666', 'Copacabana', 'Rio de Janeiro', 'RJ', '45678-901', 'supplier4@email.com', 2),
+('88887777666655', '5555555555', '555555555555', 'Imports Street 3', '321', 'Barra da Tijuca', 'Rio de Janeiro', 'RJ', '56789-012', 'supplier5@email.com', 2),
+('99998888777766', '6666666666', '444444444444', 'Product Avenue 7', '777', 'Itaim Bibi', 'São Paulo', 'SP', '34567-890', 'supplier6@email.com', 2),
+('33332222111100', '7777777777', '333333333333', 'Material Road 2', '222', 'Downtown', 'São Paulo', 'SP', '23456-789', 'supplier7@email.com', 2),
+('00001111222233', '8888888888', '222222222222', 'Merchandise Avenue 4', '444', 'Botafogo', 'Rio de Janeiro', 'RJ', '76543-210', 'supplier8@email.com', 2),
+('55556667778889', '9999999999', '111111111111', 'Supplies Street 6', '999', 'Ipanema', 'Rio de Janeiro', 'RJ', '89012-345', 'supplier9@email.com', 2),
+('22223333444455', '1010101010', '101010101010', 'Shopping Avenue 8', '1010', 'Vila Olímpia', 'São Paulo', 'SP', '67890-123', 'supplier10@email.com', 2);
 
-INSERT INTO fornecedores (forn_cnpj, forn_telefone, forn_celular, forn_endereco, forn_numero, forn_bairro, forn_cidade, forn_uf, forn_cep, forn_email, usu_prior) 
-VALUES ('12345678901234', '12345678', '987654321', 'Rua A', '123', 'Centro', 'São Paulo', 'SP', '12345-678', 'fornecedor1@gmail.com', 3);
-INSERT INTO fornecedores (forn_cnpj, forn_telefone, forn_celular, forn_endereco, forn_numero, forn_bairro, forn_cidade, forn_uf, forn_cep, forn_email, usu_prior) 
-VALUES ('98765432109876', '87654321', '123456789', 'Rua B', '456', 'Centro', 'São Paulo', 'SP', '98765-432', 'fornecedor2@gmail.com', 3);
-INSERT INTO fornecedores (forn_cnpj, forn_telefone, forn_celular, forn_endereco, forn_numero, forn_bairro, forn_cidade, forn_uf, forn_cep, forn_email, usu_prior) 
-VALUES ('54321678901234', '45678901', '987654321', 'Rua C', '789', 'Centro', 'São Paulo', 'SP', '54321-098', 'fornecedor3@gmail.com', 3);
 
--- Para a tabela `clientes`:
+INSERT INTO clientes (cli_cpf, cli_telefone, cli_celular, cli_endereco, cli_numero, cli_bairro, cli_cidade, cli_uf, cli_cep, cli_email, usu_prior) VALUES
+('12345678901', '1111111111', '999999999999', 'Customer Street 1', '123', 'Downtown', 'São Paulo', 'SP', '12345-678', 'customer1@email.com', 3),
+('98765432109', '2222222222', '888888888888', 'Shopping Avenue 5', '555', 'Botanical Garden', 'Rio de Janeiro', 'RJ', '98765-432', 'customer2@email.com', 3),
+('11112222333', '3333333333', '777777777777', 'Delivery Road 9', '789', 'Industrial Village', 'Campinas', 'SP', '54321-678', 'customer3@email.com', 3),
+('44445555666', '4444444444', '666666666666', 'Merchandise Avenue 12', '666', 'Copacabana', 'Rio de Janeiro', 'RJ', '45678-901', 'customer4@email.com', 3),
+('88887777666', '5555555555', '555555555555', 'Consumer Street 3', '321', 'Barra da Tijuca', 'Rio de Janeiro', 'RJ', '56789-012', 'customer5@email.com', 3),
+('99998888777', '6666666666', '444444444444', 'User Avenue 7', '777', 'Itaim Bibi', 'São Paulo', 'SP', '34567-890', 'customer6@email.com', 3),
+('33332222111', '7777777777', '333333333333', 'Lovers Road 2', '222', 'Downtown', 'São Paulo', 'SP', '23456-789', 'customer7@email.com', 3),
+('00001112223', '8888888888', '222222222222', 'Shopping Avenue 4', '444', 'Botafogo', 'Rio de Janeiro', 'RJ', '76543-210', 'customer8@email.com', 3),
+('55556667778', '9999999999', '111111111111', 'Customer Street 6', '999', 'Ipanema', 'Rio de Janeiro', 'RJ', '89012-345', 'customer9@email.com', 3),
+('22223334455', '1010101010', '101010101010', 'Consumer Avenue 8', '1010', 'Vila Olímpia', 'São Paulo', 'SP', '67890-123', 'customer10@email.com', 3);
 
-INSERT INTO clientes (cli_cpf, cli_telefone, cli_celular, cli_endereco, cli_numero, cli_bairro, cli_cidade, cli_uf, cli_cep, cli_email, usu_prior)
- VALUES ('12345678901', '12345678', '987654321', 'Rua D', '123', 'Centro', 'São Paulo', 'SP', '12345-678', 'cliente1@gmail.com', 2);
-INSERT INTO clientes (cli_cpf, cli_telefone, cli_celular, cli_endereco, cli_numero, cli_bairro, cli_cidade, cli_uf, cli_cep, cli_email, usu_prior) 
-VALUES ('98765432109', '12345678', '987654321', 'Rua E', '456', 'Centro', 'São Paulo', 'SP', '98765-432', 'cliente2@gmail.com', 2);
-INSERT INTO clientes (cli_cpf, cli_telefone, cli_celular, cli_endereco, cli_numero, cli_bairro, cli_cidade, cli_uf, cli_cep, cli_email, usu_prior)
- VALUES ('54321678901', '12345678', '987654321', 'Rua F', '789', 'Centro', 'São Paulo', 'SP', '54321-098', 'cliente3@gmail.com', 2);
+INSERT INTO categorias (cat_nome, cat_descricao) VALUES
+('Espadas', 'Diversos tipos de espadas usadas no universo de Sword Art Online.'),
+('Armas de Arremesso', 'Adagas, lanças e arcos utilizados para ataques à distância.'),
+('Armaduras Leves', 'Armaduras mais leves e ágeis para melhor mobilidade.'),
+('Armaduras Pesadas', 'Armaduras robustas para maior proteção em batalha.'),
+('Poções de Cura', 'Poções para restaurar pontos de vida.'),
+('Poções de Energia', 'Poções para restaurar energia e habilidades.'),
+('Itens de Suporte', 'Itens diversos para auxiliar em combate e exploração.'),
+('Acessórios Mágicos', 'Amuletos e artefatos que concedem poderes mágicos.'),
+('Relíquias Encantadas', 'Itens raros com habilidades especiais.'),
+('Artefatos Sagrados', 'Itens lendários com poderes únicos e significado especial no jogo.');
 
--- Para a tabela `categorias`:
+INSERT INTO produtos (prod_nome, prod_descricao, prod_preco, prod_estoque, cat_codigo) VALUES
+('Espada "Dark Repulser"', 'Réplica da espada secundária de Kirito.', 249.99, 15, 1),
+('Espada "Lambent Light"', 'Réplica da espada de Asuna.', 349.99, 10, 1),
+('Espada "Elucidator"', 'Réplica da famosa espada de Kirito.', 299.99, 20, 1),
+('Espada "Night Sky Sword"', 'Réplica da espada de Heathcliff.', 279.99, 12, 1),
+('Espada "Libertador"', 'Espadas duplas similares às usadas por Yuuki.', 399.99, 8, 1);
 
-INSERT INTO categorias (cat_nome, cat_descricao)
-VALUES ('Eletrônicos', 'Categoria de produtos eletrônicos');
-INSERT INTO categorias (cat_nome, cat_descricao) 
-VALUES ('Roupas', 'Categoria de produtos de vestuário');
-INSERT INTO categorias (cat_nome, cat_descricao) 
-VALUES ('Alimentos', 'Categoria de produtos alimentícios');
+INSERT INTO produtos (prod_nome, prod_descricao, prod_preco, prod_estoque, cat_codigo) VALUES
+('Adaga "Anneal Blade"', 'Uma adaga leve e ágil para ataques rápidos.', 399.99, 20, 2),
+('Lança "Guilty Thorn"', 'Uma lança rápida com alcance estendido.', 599.99, 12, 2),
+('Florete "Queen''s Knight"', 'Um florete elegante e preciso.', 299.99, 25, 2),
+('Kunai "Shadow Strike"', 'Um arremesso rápido e silencioso.', 199.99, 30, 2),
+('Arco "Photon Bow"', 'Um arco de alta precisão e velocidade.', 699.99, 10, 2);
 
--- Para a tabela `produtos`:
+INSERT INTO produtos (prod_nome, prod_descricao, prod_preco, prod_estoque, cat_codigo) VALUES
+('Manto de Asuna', 'Uma armadura leve com alta resistência.', 499.99, 10, 3),
+('Casaco de Kirito', 'Uma jaqueta leve com proteção reforçada.', 399.99, 15, 3),
+('Colete de Lizbeth', 'Um colete leve e resistente.', 299.99, 20, 3),
+('Vestimenta de Silica', 'Vestes leves com propriedades mágicas.', 449.99, 12, 3),
+('Traje de Sinon', 'Traje leve e aerodinâmico.', 349.99, 18, 3);
 
-INSERT INTO produtos (prod_nome, prod_descricao, prod_preco, prod_estoque, forn_fornecedor_id) 
-VALUES ('Notebook', 'Notebook com processador Intel i5, 8GB de RAM e 256GB de SSD', 3499.99, 10, 1);
-INSERT INTO produtos (prod_nome, prod_descricao, prod_preco, prod_estoque, forn_fornecedor_id) 
-VALUES ('Camiseta', 'Camiseta de algodão na cor branca', 29.99, 50, 2);
-INSERT INTO produtos (prod_nome, prod_descricao, prod_preco, prod_estoque, forn_fornecedor_id) 
-VALUES ('Arroz', 'Pacote de arroz branco tipo 1 com 5kg', 19.99, 100, 3);
+INSERT INTO produtos (prod_nome, prod_descricao, prod_preco, prod_estoque, cat_codigo) VALUES
+('Armadura de Chefe de Guilda', 'Uma armadura pesada com defesa máxima.', 899.99, 8, 4),
+('Armadura de Kirito', 'Uma armadura pesada com grande resistência.', 799.99, 10, 4),
+('Armadura de Asuna', 'Uma armadura pesada com agilidade surpreendente.', 849.99, 9, 4),
+('Armadura de Yui', 'Uma armadura pesada com propriedades mágicas.', 999.99, 6, 4),
+('Armadura de Alice', 'Uma armadura pesada lendária.', 1299.99, 5, 4);
+
+INSERT INTO produtos (prod_nome, prod_descricao, prod_preco, prod_estoque, cat_codigo) VALUES
+('Poção de Vida Menor', 'Restaura uma pequena quantidade de pontos de vida.', 9.99, 50, 5),
+('Poção de Cura Média', 'Cura moderada de pontos de vida.', 19.99, 40, 5),
+('Poção de Cura Avançada', 'Cura substancial de pontos de vida.', 29.99, 30, 5),
+('Elixir de Regeneração', 'Regenera lentamente os pontos de vida por um período.', 39.99, 20, 5),
+('Poção da Cura Instantânea', 'Cura imediata e completa dos pontos de vida.', 49.99, 15, 5);
+
+INSERT INTO produtos (prod_nome, prod_descricao, prod_preco, prod_estoque, cat_codigo) VALUES
+('Poção de Energia Básica', 'Restaura uma pequena quantidade de energia.', 9.99, 50, 6),
+('Poção de Energia Média', 'Restaura uma quantidade moderada de energia.', 19.99, 40, 6),
+('Poção de Energia Avançada', 'Restaura uma quantidade substancial de energia.', 29.99, 30, 6),
+('Elixir Revigorante', 'Aumenta gradativamente os pontos de energia por um período.', 39.99, 20, 6),
+('Poção de Energia Total', 'Restaura toda a energia instantaneamente.', 49.99, 15, 6);
+
+INSERT INTO produtos (prod_nome, prod_descricao, prod_preco, prod_estoque, cat_codigo) VALUES
+('Mapa de Teletransporte', 'Item que permite o teletransporte para locais conhecidos.', 99.99, 5, 7),
+('Pergaminho de Recuperação', 'Restaura pontos de vida e energia após uso.', 49.99, 10, 7),
+('Corda de Escalada', 'Auxilia na escalada de terrenos íngremes.', 29.99, 15, 7),
+('Kit de Primeiros Socorros', 'Recuperação rápida de pontos de vida em emergências.', 39.99, 8, 7),
+('Pergaminho de Identificação', 'Revela informações sobre itens ou locais ocultos.', 19.99, 20, 7);
+
+INSERT INTO produtos (prod_nome, prod_descricao, prod_preco, prod_estoque, cat_codigo) VALUES
+('Colar da Cura', 'Amuleto que aumenta a eficácia das poções de cura.', 129.99, 5, 8),
+('Anel da Resistência', 'Concede resistência a ataques mágicos.', 149.99, 8, 8),
+('Bracelete da Agilidade', 'Aumenta a velocidade de movimento do jogador.', 99.99, 12, 8),
+('Talisman do Poder', 'Aumenta a força e o poder de ataque.', 119.99, 6, 8),
+('Amuleto do Conhecimento', 'Aumenta a experiência ganha em batalhas.', 79.99, 10, 8);
+
+INSERT INTO produtos (prod_nome, prod_descricao, prod_preco, prod_estoque, cat_codigo) VALUES
+('Cristal da Clarividência', 'Revela informações ocultas no mapa.', 199.99, 3, 9),
+('Pedaço da Espada Divina', 'Fragmento de uma lendária espada.', 299.99, 4, 9),
+('Orbe da Proteção', 'Concede proteção adicional temporária.', 249.99, 5, 9),
+('Relíquia do Arcano', 'Item místico com poderes mágicos.', 399.99, 2, 9),
+('Chave dos Antigos', 'Abre portais para locais secretos.', 149.99, 6, 9);
+
+INSERT INTO produtos (prod_nome, prod_descricao, prod_preco, prod_estoque, cat_codigo) VALUES
+('Lâmina do Herói', 'Espada lendária com poderes divinos.', 999.99, 1, 10),
+('Escudo do Protetor', 'Escudo que bloqueia qualquer ataque.', 1199.99, 1, 10),
+('Coroa da Ascensão', 'Coroa que aumenta todas as habilidades do jogador.', 1499.99, 1, 10),
+('Cetro do Infinito', 'Concede poderes para controlar o tempo.', 1999.99, 1, 10),
+('Artefato do Destino', 'Item que determina o desfecho de batalhas cruciais.', 2499.99, 1, 10);
+
