@@ -105,7 +105,7 @@ class Produto {
 
   async consultarID(id, conexao) {
     const produtoDAO = new ProdutoDAO();
-    return await produtoDAO.consultarID(id), conexao;
+    return await produtoDAO.consultarID(id, conexao);
   }
 }
 

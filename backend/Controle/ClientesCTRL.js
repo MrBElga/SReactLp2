@@ -36,7 +36,7 @@ export default class ClienteCTRL {
           email,
           prior
         );
-
+        prior = 3;
         if (
           cpf &&
           nome &&

@@ -1,0 +1,148 @@
+{
+    "adm": [
+      {
+        "adm_codigo": 1,
+        "adm_nome": "Admin1",
+        "adm_senha": "senha123",
+        "usu_prior": 1
+      },
+      {
+        "adm_codigo": 2,
+        "adm_nome": "Admin2",
+        "adm_senha": "admin456",
+        "usu_prior": 2
+      }
+    ]
+  }
+
+  {
+    "fornecedores": [
+      {
+        "forn_codigo": 1,
+        "forn_cnpj": "12345678901234",
+        "forn_telefone": "1111111111",
+        "forn_celular": "999999999999",
+        "forn_endereco": "Supplier Street 1",
+        "forn_numero": "123",
+        "forn_bairro": "Downtown",
+        "forn_cidade": "São Paulo",
+        "forn_uf": "SP",
+        "forn_cep": "12345-678",
+        "forn_email": "supplier1@email.com",
+        "usu_prior": 2
+      },
+      {
+        "forn_codigo": 2,
+        "forn_cnpj": "98765432109876",
+        "forn_telefone": "2222222222",
+        "forn_celular": "888888888888",
+        "forn_endereco": "Supplies Avenue 5",
+        "forn_numero": "555",
+        "forn_bairro": "Botanical Garden",
+        "forn_cidade": "Rio de Janeiro",
+        "forn_uf": "RJ",
+        "forn_cep": "98765-432",
+        "forn_email": "supplier2@email.com",
+        "usu_prior": 2
+      }
+    ]
+  }
+
+  {
+    "clientes": [
+      {
+        "cli_codigo": 1,
+        "cli_cpf": "11122233344",
+        "cli_telefone": "3333333333",
+        "cli_celular": "777777777777",
+        "cli_endereco": "Customer Street 1",
+        "cli_numero": "321",
+        "cli_bairro": "Downtown",
+        "cli_cidade": "São Paulo",
+        "cli_uf": "SP",
+        "cli_cep": "12345-678",
+        "cli_email": "customer1@email.com",
+        "usu_prior": 3
+      },
+      {
+        "cli_codigo": 2,
+        "cli_cpf": "55544433322",
+        "cli_telefone": "2222222222",
+        "cli_celular": "666666666666",
+        "cli_endereco": "Client Avenue 3",
+        "cli_numero": "555",
+        "cli_bairro": "Botanical Garden",
+        "cli_cidade": "Rio de Janeiro",
+        "cli_uf": "RJ",
+        "cli_cep": "98765-432",
+        "cli_email": "client2@email.com",
+        "usu_prior": 3
+      }
+    ]
+  }
+
+  {
+    "categorias": [
+      {
+        "cat_codigo": 1,
+        "cat_nome": "Espadas",
+        "cat_descricao": "Diversos tipos de espadas usadas no universo de Sword Art Online."
+      },
+      {
+        "cat_codigo": 2,
+        "cat_nome": "Armas de Arremesso",
+        "cat_descricao": "Adagas, lanças e arcos utilizados para ataques à distância."
+      }
+    ]
+  }
+
+  {
+    "produtos": [
+      {
+        "prod_codigo": 1,
+        "prod_nome": "Elucidator",
+        "prod_descricao": "Uma das famosas espadas de Kirito no SAO.",
+        "prod_preco": 99.99,
+        "prod_estoque": 20,
+        "cat_codigo": 1
+      },
+      {
+        "prod_codigo": 2,
+        "prod_nome": "Dark Repulser",
+        "prod_descricao": "A segunda espada de Kirito.",
+        "prod_preco": 89.99,
+        "prod_estoque": 18,
+        "cat_codigo": 1
+      },
+      {
+        "prod_codigo": 3,
+        "prod_nome": "Anneal Blade",
+        "prod_descricao": "Uma das primeiras espadas usadas por Kirito.",
+        "prod_preco": 79.99,
+        "prod_estoque": 15,
+        "cat_codigo": 1
+      },
+      {
+        "prod_codigo": 4,
+        "prod_nome": "Throwing Knife",
+        "prod_descricao": "Uma adaga de arremesso com alto poder de ataque.",
+        "prod_preco": 49.99,
+        "prod_estoque": 25,
+        "cat_codigo": 2
+      },
+      {
+        "prod_codigo": 5,
+        "prod_nome": "Rapier",
+        "prod_descricao": "Uma espada fina e ágil para golpes rápidos.",
+        "prod_preco": 69.99,
+        "prod_estoque": 10,
+        "cat_codigo": 1
+      }
+    ]
+  }
+
+  
+  
+  
+
+  

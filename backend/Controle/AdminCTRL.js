@@ -10,7 +10,7 @@ export default class AdminCTRL {
       if (requisicao.is("application/json")) {
         const { nome, senha, prior } = requisicao.body;
         console.log(nome, senha, prior);
-
+        prior = 1;
         if (nome && senha && prior) {
           const adm = new Admin(nome, senha, prior);
           adm

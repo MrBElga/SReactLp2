@@ -1,28 +1,36 @@
+import Admin from '../Modelo/Admin.js'
 export default class AdminDAO {
   constructor() {}
 
   async gravar(adm, conexao) {
-    const sql =
-      "INSERT INTO adm (adm_nome, adm_senha, usu_prior) VALUES (?, ?, ?)";
-    const valores = [adm.nome, adm.senha, adm.prior];
+    if(adm instanceof Admin)
+    {
+      const sql =
+        "INSERT INTO adm (adm_nome, adm_senha, usu_prior) VALUES (?, ?, ?)";
+      const valores = [adm.nome, adm.senha, adm.prior];
 
-    try {
-      const [result] = await conexao.execute(sql, valores);
-      return result.insertId;
-    } catch (error) {
-      throw error;
+      try {
+        const [result] = await conexao.execute(sql, valores);
+        return result.insertId;
+      } catch (error) {
+        throw error;
+      }
     }
   }
 
   async atualizar(adm, conexao) {
-    const sql =
-      "UPDATE adm SET adm_nome = ?, adm_senha = ?, usu_prior = ? WHERE codigo = ?";
-    const valores = [adm.nome, adm.senha, adm.codigo];
+    if(adm instanceof Admin)
+    {
+      const sql =
+      
+        "UPDATE adm SET adm_nome = ?, adm_senha = ?, usu_prior = ? WHERE codigo = ?";
+      const valores = [adm.nome, adm.senha, adm.codigo];
 
-    try {
-      await conexao.execute(sql, valores);
-    } catch (error) {
-      throw error;
+      try {
+        await conexao.execute(sql, valores);
+      } catch (error) {
+        throw error;
+      }
     }
   }
 
@@ -49,12 +57,15 @@ export default class AdminDAO {
   }
 
   async excluir(adm, conexao) {
-    const sql = "DELETE FROM adm WHERE codigo = ?";
+    if(adm instanceof Admin)
+    {
+      const sql = "DELETE FROM adm WHERE codigo = ?";
 
-    try {
-      await conexao.execute(sql, [adm.codigo]);
-    } catch (error) {
-      throw error;
+      try {
+        await conexao.execute(sql, [adm.codigo]);
+      } catch (error) {
+        throw error;
+      }
     }
   }
 }

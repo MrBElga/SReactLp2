@@ -186,12 +186,12 @@ export default class ProdutoCTRL {
     resposta.type("application/json");
 
     if (requisicao.method === "GET") {
-      const { cod } = requisicao.params;
-
-      if (cod) {
-        const produto = new Produto(cod);
-        produto
-          .consultarID(conexao)
+      const { id } = requisicao.params;
+      console.log(id)
+      if (id) {
+        const produto = new Produto(id);
+      
+          produto.consultarID(id,conexao)
           .then((produto) => {
             resposta.json(produto);
           })

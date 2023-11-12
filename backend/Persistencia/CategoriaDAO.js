@@ -1,39 +1,46 @@
+import Categoria from '../Modelo/Categoria.js'
 export default class CategoriaDAO {
   constructor() {}
 
   async gravar(categoria, conexao) {
-    const sql = "INSERT INTO categorias (nome, descricao) VALUES (?, ?)";
-    const valores = [categoria.nome, categoria.descricao];
+    if(categoria instanceof Categoria)
+    {
+      const sql = "INSERT INTO categorias (nome, descricao) VALUES (?, ?)";
+      const valores = [categoria.nome, categoria.descricao];
 
-    try {
-      const [result] = await conexao.execute(sql, valores);
-      return result.insertId;
-    } catch (error) {
-      throw error;
+      try {
+        const [result] = await conexao.execute(sql, valores);
+        return result.insertId;
+      } catch (error) {
+        throw error;
+      }
     }
   }
 
   async atualizar(categoria, conexao) {
-    const sql =
-      "UPDATE categorias SET nome = ?, descricao = ? WHERE codigo = ?";
-    const valores = [categoria.nome, categoria.descricao, categoria.codigo];
+    if(categoria instanceof Categoria)
+    {
+      const sql =
+        "UPDATE categorias SET nome = ?, descricao = ? WHERE codigo = ?";
+      const valores = [categoria.nome, categoria.descricao, categoria.codigo];
 
-    try {
-      await conexao.execute(sql, valores);
-    } catch (error) {
-      throw error;
-    }
+      try {
+        await conexao.execute(sql, valores);
+      } catch (error) {
+        throw error;
+      }
+    }  
   }
 
   async consultar(conexao) {
-    const sql = "SELECT * FROM categorias";
+      const sql = "SELECT * FROM categorias";
 
-    try {
-      const [rows] = await conexao.query(sql);
-      return rows;
-    } catch (error) {
-      throw error;
-    }
+      try {
+        const [rows] = await conexao.query(sql);
+        return rows;
+      } catch (error) {
+        throw error;
+      }  
   }
 
   async consultarID(id, conexao) {
@@ -48,12 +55,15 @@ export default class CategoriaDAO {
   }
 
   async excluir(categoria, conexao) {
-    const sql = "DELETE FROM categorias WHERE codigo = ?";
+    if(categoria instanceof Categoria)
+    {
+      const sql = "DELETE FROM categorias WHERE codigo = ?";
 
-    try {
-      await conexao.execute(sql, [categoria.codigo]);
-    } catch (error) {
-      throw error;
+      try {
+        await conexao.execute(sql, [categoria.codigo]);
+      } catch (error) {
+        throw error;
+      }
     }
   }
 }
