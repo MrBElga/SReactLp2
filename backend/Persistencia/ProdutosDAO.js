@@ -7,7 +7,7 @@ export default class ProdutoDAO {
     if(produto instanceof Produto)
     {  
       const sql =
-        "INSERT INTO produtos (nome, descricao, preco, estoque, fornecedor_id,cat_codigo) VALUES (?, ?, ?, ?, ?, ?)";
+        "INSERT INTO produtos (prod_nome, prod_descricao, prod_preco, prod_estoque, cat_codigo) VALUES (?, ?, ?, ?, ?)";
       const valores = [
         produto.nome,
         produto.descricao,
@@ -28,7 +28,7 @@ export default class ProdutoDAO {
   async atualizar(produto, conexao) {
     if(produto instanceof Produto)
     {  
-      const sql = `UPDATE produto SET prod_descricao = ?, prod_precoCusto = ?, prod_precoVenda = ?, prod_dataValidade = ?, prod_qtdEstoque = ?, cat_codigo = ? WHERE prod_codigo = ?`;
+      const sql = `UPDATE produto SET prod_nome = ?, prod_descricao = ?, prod_preco = ?,  prod_estoque = ?, cat_codigo = ? WHERE prod_codigo = ?`;
 
       const valores = [
         produto.nome,
@@ -110,8 +110,9 @@ export default class ProdutoDAO {
 
 
   async consultarID(id, conexao) {
-  
-      const sql = "SELECT * FROM produtos WHERE codigo = ?";
+
+    console.log(id);
+      const sql = 'SELECT * FROM produtos WHERE prod_codigo = ?';
 
       try {
         const [rows] = await conexao.query(sql, [id]);
@@ -125,7 +126,7 @@ export default class ProdutoDAO {
   async excluir(produto, conexao) {
     if(produto instanceof Produto)
     {  
-      const sql = "DELETE FROM produtos WHERE codigo = ?";
+      const sql = 'DELETE FROM produtos WHERE prod_codigo = ?';
 
       try {
         await conexao.execute(sql, [produto.codigo]);
