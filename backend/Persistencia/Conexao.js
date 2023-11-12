@@ -10,7 +10,7 @@ function conectar() {
     port: 3306,
     user: "root",
     database: "loja",
-    password: "",
+    password: "123456789",
     waitForConnections: true,
     connectionLimit: 10,
     maxIdle: 10,
