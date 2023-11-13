@@ -1,3 +1,5 @@
+
+import Categoria from "../Modelo/Categoria.js";
 import Produto from "../Modelo/Produtos.js";
 import conectar from "../Persistencia/Conexao.js";
 
@@ -206,7 +208,40 @@ export default class ProdutoCTRL {
       resposta.json({
         status: false,
         mensagem: "Para consultar um produto por ID utilize o método GET!",
-      });
+      }); 
     }
+  }
+
+  async consultarA(requisicao, resposta) {
+    const conexao = await conectar();
+    resposta.type("application/json");
+
+   
+      let { id } = requisicao.params;
+      if(!id)
+      {
+        id = "";
+      }
+        if (requisicao.method === "GET") {
+         
+          const produto = new Produto(id);
+      
+          produto.consultarA(id,conexao)
+          .then((produto) => {
+            resposta.json(produto);
+          })
+          .catch((erro) => {
+            resposta.json({
+              status: false,
+              mensagem: "Erro ao consultar produto por ID: " + erro.message,
+            });
+          });
+    
+        } else {
+          resposta.json({
+            status: false,
+            mensagem: "Para consultar um produto por ID utilize o método GET!",
+          });
+        }
   }
 }
