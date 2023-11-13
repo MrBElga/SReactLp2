@@ -174,8 +174,7 @@ export default class CategoriaCTRL {
 
       if (id) {
         const categoria = new Categoria();
-        categoria
-          .consultarID(id, conexao)
+        categoria.consultarID(id, conexao)
           .then((categoriaConsultada) => {
             resposta.json(categoriaConsultada);
           })

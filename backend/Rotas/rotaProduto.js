@@ -11,3 +11,4 @@ router.get("/produtos", produtosController.consultar);
 router.get("/produtos/:id", produtosController.consultarID);
 
 export default router;
+    

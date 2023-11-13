@@ -10,7 +10,6 @@ export default class ProdutoCTRL {
       if (requisicao.is("application/json")) {
         const { nome, descricao, preco, estoque, fornecedorId } =
           requisicao.body;
-
         if (nome && descricao && preco && estoque && fornecedorId) {
           const produto = new Produto(
             nome,
@@ -61,20 +60,17 @@ export default class ProdutoCTRL {
     if (requisicao.method === "PUT") {
       if (requisicao.is("application/json")) {
         const { id } = requisicao.params;
-        const { nome, descricao, preco, estoque, fornecedor_id } =
-          requisicao.body;
-
-        if (id && nome && descricao && preco && estoque && fornecedor_id) {
+        const { nome, descricao, preco, estoque, fornecedorId } = requisicao.body;
+        if (id && nome && descricao && preco && estoque && fornecedorId) {
           const produto = new Produto(
             nome,
             descricao,
             preco,
             estoque,
-            fornecedor_id
+            fornecedorId
           );
           produto.codigo = id;
-          produto
-            .atualizar(conexao)
+          produto.atualizar(conexao)
             .then(() => {
               resposta.json({
                 status: true,
@@ -116,7 +112,7 @@ export default class ProdutoCTRL {
     if (requisicao.method === "DELETE") {
       if (requisicao.is("application/json")) {
         const idProduto = requisicao.params.id;
-
+        console.log(idProduto)
         if (idProduto) {
           const produto = new Produto();
           produto.codigo = idProduto;
@@ -187,7 +183,6 @@ export default class ProdutoCTRL {
 
     if (requisicao.method === "GET") {
       const { id } = requisicao.params;
-      console.log(id)
       if (id) {
         const produto = new Produto(id);
       
@@ -204,13 +199,13 @@ export default class ProdutoCTRL {
       } else {
         resposta.json({
           status: false,
-          mensagem: "Especifique na URL o ID do cliente que deseja consultar!",
+          mensagem: "Especifique na URL o ID do produto que deseja consultar!",
         });
       }
     } else {
       resposta.json({
         status: false,
-        mensagem: "Para consultar um cliente por ID utilize o método GET!",
+        mensagem: "Para consultar um produto por ID utilize o método GET!",
       });
     }
   }

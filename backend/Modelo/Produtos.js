@@ -90,7 +90,7 @@ class Produto {
 
   async atualizar(conexao) {
     const produtoDAO = new ProdutoDAO();
-    await produtoDAO.atualizar(this, conexao);
+    await produtoDAO.atualizar(this,conexao);
   }
 
   async excluir(conexao) {

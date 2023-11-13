@@ -5,7 +5,7 @@ export default class CategoriaDAO {
   async gravar(categoria, conexao) {
     if(categoria instanceof Categoria)
     {
-      const sql = "INSERT INTO categorias (nome, descricao) VALUES (?, ?)";
+      const sql = "INSERT INTO categorias (cat_nome, cat_descricao) VALUES (?, ?)";
       const valores = [categoria.nome, categoria.descricao];
 
       try {
@@ -21,7 +21,7 @@ export default class CategoriaDAO {
     if(categoria instanceof Categoria)
     {
       const sql =
-        "UPDATE categorias SET nome = ?, descricao = ? WHERE codigo = ?";
+        "UPDATE categorias SET cat_nome = ?, cat_descricao = ? WHERE cat_codigo = ?";
       const valores = [categoria.nome, categoria.descricao, categoria.codigo];
 
       try {
@@ -43,8 +43,8 @@ export default class CategoriaDAO {
       }  
   }
 
-  async consultarID(id, conexao) {
-    const sql = "SELECT * FROM categorias WHERE codigo = ?";
+  async consultarId (id, conexao) {
+    const sql = "SELECT * FROM categorias WHERE cat_codigo = ?";
 
     try {
       const [rows] = await conexao.query(sql, [id]);
@@ -57,7 +57,7 @@ export default class CategoriaDAO {
   async excluir(categoria, conexao) {
     if(categoria instanceof Categoria)
     {
-      const sql = "DELETE FROM categorias WHERE codigo = ?";
+      const sql = "DELETE FROM categorias WHERE cat_codigo = ?";
 
       try {
         await conexao.execute(sql, [categoria.codigo]);

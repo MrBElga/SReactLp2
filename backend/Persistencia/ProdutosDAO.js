@@ -1,5 +1,5 @@
 import Produto from '../Modelo/Produtos.js'
-import Categoria from '../modelo/Categoria.js';
+import Categoria from '../Modelo/Categoria.js';
 export default class ProdutoDAO {
   constructor() {}
 
@@ -28,7 +28,7 @@ export default class ProdutoDAO {
   async atualizar(produto, conexao) {
     if(produto instanceof Produto)
     {  
-      const sql = `UPDATE produto SET prod_nome = ?, prod_descricao = ?, prod_preco = ?,  prod_estoque = ?, cat_codigo = ? WHERE prod_codigo = ?`;
+      const sql = `UPDATE produtos SET prod_nome = ?, prod_descricao = ?, prod_preco = ?,  prod_estoque = ?, cat_codigo = ? WHERE prod_codigo = ?`;
 
       const valores = [
         produto.nome,
