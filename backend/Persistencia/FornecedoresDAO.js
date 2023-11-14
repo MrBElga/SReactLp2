@@ -18,7 +18,7 @@ export default class FornecedorDAO {
         fornecedor.uf,
         fornecedor.cep,
         fornecedor.email,
-        fornecedor.prior,
+        fornecedor.prior
       ];
 
       try {
@@ -31,10 +31,9 @@ export default class FornecedorDAO {
   }
 
   async atualizar(fornecedor, conexao) {
-    if(fornecedor instanceof Fornecedor )
-    {
+    if (fornecedor instanceof Fornecedor) {
       const sql =
-        "UPDATE fornecedores SET forn_cnpj = ?, forn_nome = ?, forn_telefone = ?, forn_celular = ?, forn_endereco = ?, forn_numero = ?, forn_bairro = ?, forn_cidade = ?, forn_uf = ?, forn_cep = ?, forn_email = ?, usu_prior = ? WHERE codigo = ?";
+        "UPDATE fornecedores SET forn_cnpj = ?, forn_nome = ?, forn_telefone = ?, forn_celular = ?, forn_endereco = ?, forn_numero = ?, forn_bairro = ?, forn_cidade = ?, forn_uf = ?, forn_cep = ?, forn_email = ?, usu_prior = ? WHERE forn_codigo = ?";
       const valores = [
         fornecedor.cnpj,
         fornecedor.nome,
@@ -47,10 +46,10 @@ export default class FornecedorDAO {
         fornecedor.uf,
         fornecedor.cep,
         fornecedor.email,
-        fornecedor.codigo,
         fornecedor.prior,
+        fornecedor.codigo,
       ];
-      console.log(valores);
+  
       try {
         await conexao.execute(sql, valores);
       } catch (error) {
@@ -58,7 +57,7 @@ export default class FornecedorDAO {
       }
     }
   }
-
+  
   async consultar(conexao) {
     const sql = "SELECT * FROM fornecedores";
 
@@ -71,7 +70,7 @@ export default class FornecedorDAO {
   }
 
   async consultarID(id, conexao) {
-    const sql = "SELECT * FROM fornecedores WHERE codigo = ?";
+    const sql = "SELECT * FROM fornecedores WHERE forn_codigo = ?";
 
     try {
       const [rows] = await conexao.query(sql, [id]);
