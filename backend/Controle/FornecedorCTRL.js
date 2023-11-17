@@ -3,6 +3,7 @@ import conectar from "../Persistencia/Conexao.js";
 
 export default class FornecedorCTRL {
   async gravar(requisicao, resposta) {
+  
     const conexao = await conectar();
     resposta.setHeader("Content-Type", "application/json");
 
@@ -19,10 +20,9 @@ export default class FornecedorCTRL {
           cidade,
           uf,
           cep,
-          email,
-          prior,
+          email    
         } = requisicao.body;
-        prior = 2;
+        const prior = 2;
         if (
           cnpj &&
           nome &&
@@ -106,9 +106,8 @@ export default class FornecedorCTRL {
           cidade,
           uf,
           cep,
-          prior,
         } = requisicao.body;
-
+        const prior = 2;
         if (
           cnpj &&
           celular &&
@@ -255,7 +254,7 @@ export default class FornecedorCTRL {
         const fornecedor = new Fornecedor();
         fornecedor.codigo = id;
         fornecedor
-          .consultarID(conexao)
+          .consultarID(id,conexao)
           .then((fornecedorConsultado) => {
             resposta.json(fornecedorConsultado);
           })
@@ -263,20 +262,20 @@ export default class FornecedorCTRL {
             resposta.json({
               status: false,
               mensagem:
-                "Erro ao consultar fornecedor por CNPJ: " + erro.message,
+                "Erro ao consultar fornecedor por id: " + erro.message,
             });
           });
       } else {
         resposta.json({
           status: false,
           mensagem:
-            "Especifique na URL o CNPJ do fornecedor que deseja consultar!",
+            "Especifique na URL o id do fornecedor que deseja consultar!",
         });
       }
     } else {
       resposta.json({
         status: false,
-        mensagem: "Para consultar um fornecedor por CNPJ utilize o método GET!",
+        mensagem: "Para consultar um fornecedor por id utilize o método GET!",
       });
     }
   }

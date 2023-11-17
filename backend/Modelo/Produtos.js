@@ -8,7 +8,7 @@ class Produto {
   #estoque;
   #fornecedorId;
 
-  constructor(nome, descricao, preco, estoque, fornecedorId, codigo = 0) {
+  constructor(nome, descricao, preco, estoque, fornecedorId={}, codigo = 0) {
     this.#codigo = codigo;
     this.#nome = nome;
     this.#descricao = descricao;
@@ -90,7 +90,7 @@ class Produto {
 
   async atualizar(conexao) {
     const produtoDAO = new ProdutoDAO();
-    await produtoDAO.atualizar(this, conexao);
+    await produtoDAO.atualizar(this,conexao);
   }
 
   async excluir(conexao) {
@@ -106,6 +106,11 @@ class Produto {
   async consultarID(id, conexao) {
     const produtoDAO = new ProdutoDAO();
     return await produtoDAO.consultarID(id, conexao);
+  }
+
+  async consultarA(termo,conexao) {
+    const produtoDAO = new ProdutoDAO();
+    return await produtoDAO.consultarA(termo,conexao);
   }
 }
 

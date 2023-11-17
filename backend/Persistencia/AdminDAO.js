@@ -19,13 +19,10 @@ export default class AdminDAO {
   }
 
   async atualizar(adm, conexao) {
-    if(adm instanceof Admin)
-    {
-      const sql =
-      
-        "UPDATE adm SET adm_nome = ?, adm_senha = ?, usu_prior = ? WHERE codigo = ?";
-      const valores = [adm.nome, adm.senha, adm.codigo];
-
+    if (adm instanceof Admin) {
+      const sql = "UPDATE adm SET adm_nome = ?, adm_senha = ?, usu_prior = ? WHERE adm_codigo = ?"; 
+      const valores = [adm.nome, adm.senha, adm.prior, adm.codigo];
+  
       try {
         await conexao.execute(sql, valores);
       } catch (error) {
@@ -45,8 +42,8 @@ export default class AdminDAO {
     }
   }
 
-  async consultarID(id, conexao) {
-    const sql = "SELECT * FROM adm WHERE codigo = ?";
+  async consultarId(id, conexao) {
+    const sql = "SELECT * FROM adm WHERE adm_codigo = ?";
 
     try {
       const [rows] = await conexao.query(sql, [id]);
@@ -59,7 +56,7 @@ export default class AdminDAO {
   async excluir(adm, conexao) {
     if(adm instanceof Admin)
     {
-      const sql = "DELETE FROM adm WHERE codigo = ?";
+      const sql = "DELETE FROM adm WHERE adm_codigo = ?";
 
       try {
         await conexao.execute(sql, [adm.codigo]);

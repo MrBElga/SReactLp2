@@ -6,7 +6,7 @@ export default class ClientesDAO {
     if(cliente instanceof Cliente)
     {
       const sql =
-        "INSERT INTO clientes (cli_cpf, cli_nome, cli_telefone, cli_celular, cli_endereco, cli_numero, cli_bairro, cli_cidade, cli_uf, cli_ep, cli_email, usu_prior) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        "INSERT INTO clientes (cli_cpf, cli_nome, cli_telefone, cli_celular, cli_endereco, cli_numero, cli_bairro, cli_cidade, cli_uf, cli_cep, cli_email, usu_prior) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       const valores = [
         cliente.cpf,
         cliente.nome,
@@ -32,10 +32,11 @@ export default class ClientesDAO {
   }
 
   async atualizar(cliente, conexao) {
+    
     if(cliente instanceof Cliente)
     {
-      const sql =
-        "UPDATE clientes SET cli_cpf = ?, cli_nome = ?, cli_telefone = ?, cli_celular = ?, cli_endereco = ?, cli_numero = ?, cli_bairro = ?, cli_cidade = ?, cli_uf = ?, cli_cep = ?, cli_email = ?, usu_prior = ? WHERE codigo = ?";
+      const sql = 
+        "UPDATE clientes SET cli_cpf = ?, cli_nome = ?, cli_telefone = ?, cli_celular = ?, cli_endereco = ?, cli_numero = ?, cli_bairro = ?, cli_cidade = ?, cli_uf = ?, cli_cep = ?, cli_email = ?, usu_prior = ? WHERE cli_codigo = ?";
       const valores = [
         cliente.cpf,
         cliente.nome,
@@ -48,8 +49,8 @@ export default class ClientesDAO {
         cliente.uf,
         cliente.cep,
         cliente.email,
-        cliente.codigo,
         cliente.prior,
+        cliente.codigo
       ];
 
       try {
@@ -71,7 +72,7 @@ export default class ClientesDAO {
     }
   }
 
-  async consultarID(id, conexao) {
+  async consultarId(id, conexao) {
     const sql = "SELECT * FROM clientes WHERE cli_codigo = ?";
 
     try {

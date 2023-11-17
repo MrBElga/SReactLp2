@@ -188,7 +188,7 @@ class Clientes {
   async atualizar(conexao) {
     const clientesDAO = new ClientesDAO();
     await clientesDAO.atualizar(this, conexao);
-    console.log(this);
+
   }
 
   async excluir(conexao) {
@@ -201,7 +201,7 @@ class Clientes {
     return await clientesDAO.consultar(conexao);
   }
 
-  async consultarID(id, conexao) {
+  async consultarId(id, conexao) {
     const clientesDAO = new ClientesDAO();
     return await clientesDAO.consultarId(id, conexao);
   }

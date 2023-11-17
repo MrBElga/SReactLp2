@@ -2,6 +2,7 @@ import Cliente from "../Modelo/Clientes.js";
 import conectar from "../Persistencia/Conexao.js";
 
 export default class ClienteCTRL {
+
   async gravar(requisicao, resposta) {
     const conexao = await conectar();
     resposta.setHeader("Content-Type", "application/json");
@@ -19,8 +20,7 @@ export default class ClienteCTRL {
           cidade,
           uf,
           cep,
-          email,
-          prior,
+          email
         } = requisicao.body;
         console.log(
           cpf,
@@ -33,10 +33,9 @@ export default class ClienteCTRL {
           cidade,
           uf,
           cep,
-          email,
-          prior
+          email
         );
-        prior = 3;
+        const prior = 3;
         if (
           cpf &&
           nome &&
@@ -103,7 +102,7 @@ export default class ClienteCTRL {
   async atualizar(requisicao, resposta) {
     const conexao = await conectar();
     resposta.setHeader("Content-Type", "application/json");
-
+  
     if (requisicao.method === "PUT") {
       if (requisicao.is("application/json")) {
         const dados = requisicao.body;
@@ -119,9 +118,10 @@ export default class ClienteCTRL {
           dados.uf,
           dados.cep,
           dados.email,
-          dados.prior
+          3  // Prioridade fixa como 3, conforme seu padrão
         );
         cliente.codigo = requisicao.params.id;
+  
         try {
           await cliente.atualizar(conexao);
           resposta.json({
@@ -147,6 +147,7 @@ export default class ClienteCTRL {
       });
     }
   }
+  
 
   async excluir(requisicao, resposta) {
     const conexao = await conectar();
@@ -154,11 +155,11 @@ export default class ClienteCTRL {
 
     if (requisicao.method === "DELETE") {
       if (requisicao.is("application/json")) {
-        const idCliente = requisicao.params.id;
+        const id = requisicao.params.id;
 
-        if (idCliente) {
+        if (id) {
           const cliente = new Cliente();
-          cliente.codigo = idCliente;
+          cliente.codigo = id;
           cliente
             .excluir(conexao)
             .then(() => {
@@ -223,31 +224,31 @@ export default class ClienteCTRL {
     resposta.type("application/json");
 
     if (requisicao.method === "GET") {
-      const { cpf } = requisicao.params;
+      const { id } = requisicao.params;
 
-      if (cpf) {
-        const cliente = new Cliente(cpf);
+      if (id) {
+        const cliente = new Cliente(id);
         cliente
-          .consultarID(conexao)
+          .consultarId(id,conexao)
           .then((clienteConsultado) => {
             resposta.json(clienteConsultado);
           })
           .catch((erro) => {
             resposta.json({
               status: false,
-              mensagem: "Erro ao consultar cliente por CPF: " + erro.message,
+              mensagem: "Erro ao consultar cliente por id: " + erro.message,
             });
           });
       } else {
         resposta.json({
           status: false,
-          mensagem: "Especifique na URL o CPF do cliente que deseja consultar!",
+          mensagem: "Especifique na URL o id do cliente que deseja consultar!",
         });
       }
     } else {
       resposta.json({
         status: false,
-        mensagem: "Para consultar um cliente por CPF utilize o método GET!",
+        mensagem: "Para consultar um cliente por id utilize o método GET!",
       });
     }
   }

@@ -14,6 +14,7 @@ CREATE TABLE adm (
 CREATE TABLE fornecedores (
     forn_codigo INT AUTO_INCREMENT PRIMARY KEY,
     forn_cnpj VARCHAR(15) NOT NULL,
+    forn_nome VARCHAR(45) NOT NULL,
     forn_telefone VARCHAR(14) NOT NULL,
     forn_celular VARCHAR(15) NOT NULL,
     forn_endereco VARCHAR(255) NOT NULL,
@@ -29,6 +30,7 @@ CREATE TABLE fornecedores (
 CREATE TABLE  clientes (
     cli_codigo INT AUTO_INCREMENT PRIMARY KEY,
     cli_cpf VARCHAR(14) NOT NULL,
+    cli_nome VARCHAR(45) NOT NULL,
     cli_telefone VARCHAR(14) NOT NULL,
     cli_celular VARCHAR(15) NOT NULL,
     cli_endereco VARCHAR(255) NOT NULL,
@@ -71,17 +73,31 @@ INSERT INTO adm (adm_nome, adm_senha, usu_prior) VALUES
 ('Manager 1', 'managerPass', 1),
 ('Supervisor 1', 'superPass', 1);
 
-INSERT INTO fornecedores (forn_cnpj, forn_telefone, forn_celular, forn_endereco, forn_numero, forn_bairro, forn_cidade, forn_uf, forn_cep, forn_email, usu_prior) VALUES
-('12345678901234', '1111111111', '999999999999', 'Supplier Street 1', '123', 'Downtown', 'São Paulo', 'SP', '12345-678', 'supplier1@email.com', 2),
-('98765432109876', '2222222222', '888888888888', 'Supplies Avenue 5', '555', 'Botanical Garden', 'Rio de Janeiro', 'RJ', '98765-432', 'supplier2@email.com', 2),
-('11112222333344', '3333333333', '777777777777', 'Delivery Road 9', '789', 'Industrial Village', 'Campinas', 'SP', '54321-678', 'supplier3@email.com', 2),
-('44445555666677', '4444444444', '666666666666', 'Merchandise Avenue 12', '666', 'Copacabana', 'Rio de Janeiro', 'RJ', '45678-901', 'supplier4@email.com', 2),
-('88887777666655', '5555555555', '555555555555', 'Imports Street 3', '321', 'Barra da Tijuca', 'Rio de Janeiro', 'RJ', '56789-012', 'supplier5@email.com', 2),
-('99998888777766', '6666666666', '444444444444', 'Product Avenue 7', '777', 'Itaim Bibi', 'São Paulo', 'SP', '34567-890', 'supplier6@email.com', 2),
-('33332222111100', '7777777777', '333333333333', 'Material Road 2', '222', 'Downtown', 'São Paulo', 'SP', '23456-789', 'supplier7@email.com', 2),
-('00001111222233', '8888888888', '222222222222', 'Merchandise Avenue 4', '444', 'Botafogo', 'Rio de Janeiro', 'RJ', '76543-210', 'supplier8@email.com', 2),
-('55556667778889', '9999999999', '111111111111', 'Supplies Street 6', '999', 'Ipanema', 'Rio de Janeiro', 'RJ', '89012-345', 'supplier9@email.com', 2),
-('22223333444455', '1010101010', '101010101010', 'Shopping Avenue 8', '1010', 'Vila Olímpia', 'São Paulo', 'SP', '67890-123', 'supplier10@email.com', 2);
+INSERT INTO fornecedores (forn_cnpj, forn_nome, forn_telefone, forn_celular, forn_endereco, forn_numero, forn_bairro, forn_cidade, forn_uf, forn_cep, forn_email, usu_prior) VALUES
+('11111111111111', 'Argo Supplies', '1111111111', '999999999999', 'Market Street 1', '123', 'Merchant District', 'Floor 1', 'SAO', '12345-678', 'argo@supplies.com', 2),
+('22222222222222', 'Silica Materials', '2222222222', '888888888888', 'Crystal Avenue 5', '555', 'Beast Village', 'Floor 47', 'SAO', '98765-432', 'silica@materials.com', 2),
+('33333333333333', 'Lisbeth Forges', '3333333333', '777777777777', 'Craftsman Road 9', '789', 'Blacksmith Area', 'Floor 55', 'SAO', '54321-678', 'lisbeth@forges.com', 2),
+('44444444444444', 'Agil Weapons', '4444444444', '666666666666', 'Armory Avenue 12', '666', 'Weapon Shop Area', 'Floor 37', 'SAO', '45678-901', 'agil@weapons.com', 2),
+('55555555555555', 'Klein Supplies', '5555555555', '555555555555', 'Lobby Street 3', '321', 'Starting City', 'Floor 1', 'SAO', '56789-012', 'klein@supplies.com', 2),
+('66666666666666', 'Yuuki Trading', '6666666666', '444444444444', 'Market Lane 7', '777', 'Medieval Realm', 'Floor 27', 'SAO', '34567-890', 'yuuki@trading.com', 2),
+('77777777777777', 'Leafa Imports', '7777777777', '333333333333', 'Trading Street 2', '222', 'ALO', 'Swilvane', 'SAO', '23456-789', 'leafa@imports.com', 2),
+('88888888888888', 'Sinon Tech', '8888888888', '222222222222', 'Technology Road 4', '444', 'GGO', 'SBC Glocken', 'SAO', '76543-210', 'sinon@tech.com', 2),
+('99999999999999', 'Asuna Enterprises', '9999999999', '111111111111', 'Enterprise Street 6', '999', 'Yggdrasil', 'Floor 22', 'SAO', '89012-345', 'asuna@enterprises.com', 2),
+('10101010101010', 'Kirito Trading', '1010101010', '101010101010', 'Trading Avenue 8', '1010', 'Starting City', 'Floor 1', 'SAO', '67890-123', 'kirito@trading.com', 2);
+
+
+INSERT INTO clientes (cli_cpf, cli_nome, cli_telefone, cli_celular, cli_endereco, cli_numero, cli_bairro, cli_cidade, cli_uf, cli_cep, cli_email, usu_prior) VALUES
+('11111111111', 'Kirito', '1111111111', '999999999999', 'Sword Street 1', '123', 'Aincrad', 'Floor 1', 'SAO', '12345-678', 'kirito@sao.com', 3),
+('22222222222', 'Asuna', '2222222222', '888888888888', 'Love Avenue 5', '555', 'Yggdrasil', 'Floor 22', 'SAO', '98765-432', 'asuna@sao.com', 3),
+('33333333333', 'Sinon', '3333333333', '777777777777', 'Sniper Road 9', '789', 'GGO', 'SBC Glocken', 'SAO', '54321-678', 'sinon@sao.com', 3),
+('44444444444', 'Leafa', '4444444444', '666666666666', 'Fairy Avenue 12', '666', 'ALO', 'Swilvane', 'SAO', '45678-901', 'leafa@sao.com', 3),
+('55555555555', 'Yuuki', '5555555555', '555555555555', 'Impulse Street 3', '321', 'Medieval Realm', 'Floor 27', 'SAO', '56789-012', 'yuuki@sao.com', 3),
+('66666666666', 'Agil', '6666666666', '444444444444', 'Merchant Lane 7', '777', 'Starting City', 'Floor 1', 'SAO', '34567-890', 'agil@sao.com', 3),
+('77777777777', 'Silica', '7777777777', '333333333333', 'Pet Street 2', '222', 'Beast Village', 'Floor 47', 'SAO', '23456-789', 'silica@sao.com', 3),
+('88888888888', 'Lisbeth', '8888888888', '222222222222', 'Smith Road 4', '444', 'Blacksmith Area', 'Floor 55', 'SAO', '76543-210', 'lisbeth@sao.com', 3),
+('99999999999', 'Klein', '9999999999', '111111111111', 'Guild Street 6', '999', 'Starting City', 'Floor 1', 'SAO', '89012-345', 'klein@sao.com', 3),
+('10101010101', 'Yui', '1010101010', '101010101010', 'System Avenue 8', '1010', 'Floating Castle', 'Floor 75', 'SAO', '67890-123', 'yui@sao.com', 3);
+
 
 
 INSERT INTO clientes (cli_cpf, cli_telefone, cli_celular, cli_endereco, cli_numero, cli_bairro, cli_cidade, cli_uf, cli_cep, cli_email, usu_prior) VALUES

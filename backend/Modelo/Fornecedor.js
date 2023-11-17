@@ -27,8 +27,8 @@ class Fornecedor {
     uf,
     cep,
     email,
+    prior,
     codigo = 0,
-    prior
   ) {
     this.#codigo = codigo;
     this.#cnpj = cnpj;
