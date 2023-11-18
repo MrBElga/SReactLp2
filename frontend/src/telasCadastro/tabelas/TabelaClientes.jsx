@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Table, Button, Modal } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { remover } from "../../redux/clienteReducer";
+import { buscarClientes, excluirCliente } from "../../redux/clienteReducer";
 import "./tabela.css";
 
 export default function TabelaClientes(props) {
@@ -10,6 +10,10 @@ export default function TabelaClientes(props) {
   const [showModal, setShowModal] = useState(false);
   const [clienteToDelete, setClienteToDelete] = useState(null);
 
+  useEffect(() => {
+    dispatch(buscarClientes());
+  }, [dispatch]);
+
   function excluirCliente(cliente) {
     setClienteToDelete(cliente);
     setShowModal(true);
@@ -17,7 +21,7 @@ export default function TabelaClientes(props) {
 
   function confirmarExclusao() {
     if (clienteToDelete) {
-      dispatch(remover(clienteToDelete));
+      dispatch(excluirCliente(clienteToDelete.cpf));
       setShowModal(false);
       setClienteToDelete(null);
     }
@@ -86,7 +90,6 @@ export default function TabelaClientes(props) {
         </tbody>
       </Table>
 
-   
       <Modal show={showModal} onHide={cancelarExclusao} centered>
         <Modal.Header closeButton>
           <Modal.Title style={{ color: "black" }}>Confirmar Exclusão</Modal.Title>

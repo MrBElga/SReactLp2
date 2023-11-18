@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Table, Button, Modal } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { remover } from "../../redux/fornecedorReducer";
+import { buscarFornecedores, excluirFornecedor } from "../../redux/fornecedorReducer";
 import "./tabela.css";
 
 export default function TabelaFornecedores(props) {
@@ -10,8 +10,12 @@ export default function TabelaFornecedores(props) {
   const [showModal, setShowModal] = useState(false);
   const [fornecedorToDelete, setFornecedorToDelete] = useState(null);
   const customModalStyle = {
-    color: "black", 
+    color: "black",
   };
+
+  useEffect(() => {
+    dispatch(buscarFornecedores());
+  }, [dispatch]);
 
   function excluirFornecedor(fornecedor) {
     setFornecedorToDelete(fornecedor);
@@ -20,7 +24,7 @@ export default function TabelaFornecedores(props) {
 
   function confirmarExclusao() {
     if (fornecedorToDelete) {
-      dispatch(remover(fornecedorToDelete));
+      dispatch(excluirFornecedor(fornecedorToDelete.cnpj));
       setShowModal(false);
       setFornecedorToDelete(null);
     }
@@ -89,12 +93,11 @@ export default function TabelaFornecedores(props) {
         </tbody>
       </Table>
 
- 
       <Modal show={showModal} onHide={cancelarExclusao} centered>
         <Modal.Header closeButton>
-          <Modal.Title  style={customModalStyle}>Confirmar Exclusão</Modal.Title>
+          <Modal.Title style={customModalStyle}>Confirmar Exclusão</Modal.Title>
         </Modal.Header>
-        <Modal.Body  style={customModalStyle}>
+        <Modal.Body style={customModalStyle}>
           Tem certeza de que deseja excluir este fornecedor?
         </Modal.Body>
         <Modal.Footer>

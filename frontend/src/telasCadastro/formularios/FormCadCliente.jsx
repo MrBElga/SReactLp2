@@ -10,11 +10,11 @@ import {
   Alert,
 } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { adicionar, atualizar } from "../../redux/clienteReducer";
+import { incluirCliente, atualizarCliente } from "../../redux/clienteReducer";
 
 export default function FormCadCliente(props) {
   const estadoInicialCliente = props.clienteParaEdicao;
-
+  
   const clienteVazio = {
     cpf: "",
     nome: "",
@@ -58,7 +58,7 @@ export default function FormCadCliente(props) {
       setEmailError("");
 
       if (props.modoEdicao) {
-        dispatch(atualizar(cliente))
+        dispatch(atualizarCliente(cliente))
         props.setModoEdicao(false);
         props.setClienteParaEdicao(clienteVazio);
         setCliente(clienteVazio);
@@ -76,7 +76,7 @@ export default function FormCadCliente(props) {
           setValidated(false);
         } else {
           //props.setListaClientes([...props.listaClientes, cliente]);
-          dispatch(adicionar(cliente))
+          dispatch(incluirCliente(cliente))
           setCliente(clienteVazio);
           setValidated(false);
           setShowAlertErro(false);

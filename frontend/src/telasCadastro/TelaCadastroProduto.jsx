@@ -10,15 +10,11 @@ export default function TelaCadastroProduto(props) {
   const [exibirAlert, setExibirAlert] = useState(false);
   const [produtosCadastrados, setProdutosCadastrados] = useState([]);
   const [produtoParaEdicao, setProdutoParaEdicao] = useState({
-    nomeProduto: "",
+    nome: "",
     descricao: "",
     preco: "",
-    quantidade: "",
-    tipoProduto: "",
-    numeroIdentificacao: "",
-    custoUnitario: "",
-    precoVenda: "",
-    nomeFornecedor: "",
+    estoque:"",
+    fornecedorId: ""
   });
   const [modoEdicao, setModoEdicao] = useState(false);
   const exibirAlertTemporariamente = () => {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Form, Row, Col, FloatingLabel, Button, Alert } from "react-bootstrap";
 import "./form.css";
 import { useSelector, useDispatch } from "react-redux";
-import { adicionar, atualizar } from "../../redux/categoriaReducer";
+import { incluirCategoria, atualizarCategoria } from "../../redux/categoriaReducer";
 
 export default function FormCadCategoria(props) {
   const categoriaIn = props.categoriaParaEdicao;
@@ -33,12 +33,12 @@ export default function FormCadCategoria(props) {
      
           setCategoriaDuplicada(true);
         } else {
-          dispatch(adicionar(categoria));
+          dispatch(incluirCategoria(categoria));
           props.setExibirAlert(true);
           props.exibirFormulario(false);
         }
       } else {
-        dispatch(atualizar(categoria));
+        dispatch(atualizarCategoria(categoria));
         props.setModoEdicao(false);
      
         props.setCategoriaParaEdicao({
