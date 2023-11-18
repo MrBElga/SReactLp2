@@ -24,6 +24,7 @@ function App() {
     senha: "",
     level: "",
     progesso:"",
+
     prior: 1,
     logado: false
   });
@@ -58,8 +59,6 @@ function App() {
         </ContextoUsuario.Provider>
       </Provider>
     );
-  
-  
 }
 
 export default App;

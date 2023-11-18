@@ -16,3 +16,4 @@ export default function TelaCadastroCategoria(props) {
     </>
   );
 } 
+
