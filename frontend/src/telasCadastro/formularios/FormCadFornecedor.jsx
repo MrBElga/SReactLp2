@@ -10,7 +10,7 @@ import {
   Alert,
 } from "react-bootstrap";
 import { useSelector, useDispatch} from 'react-redux';
-import { adicionar, atualizar} from '../../redux/fornecedorReducer';
+import { incluirFornecedor, atualizarFornecedor} from '../../redux/fornecedorReducer';
 
 export default function FormCadFornecedor(props) {
   const estadoInicialFornecedor = props.fornecedorParaEdicao;
@@ -60,14 +60,14 @@ export default function FormCadFornecedor(props) {
         } else if (emailExistente) {
           setEmailDuplicado(true);
         } else {
-          dispatch(adicionar(fornecedor));
+          dispatch(incluirFornecedor(fornecedor));
           setFornecedor(FornecedorVazio);
           setValidated(false);
           props.setExibirAlert(true);
           props.exibirFormulario(false);
         }
       } else {
-        dispatch(atualizar(fornecedor));
+        dispatch(atualizarFornecedor(fornecedor));
         props.setModoEdicao(false);
         setFornecedor(FornecedorVazio);
         setValidated(false);

@@ -9,21 +9,18 @@ import {
   FloatingLabel,
 } from "react-bootstrap";
 import { useSelector, useDispatch} from 'react-redux';
-import { adicionar, atualizar} from '../../redux/produtoReducer';
+import { incluirProduto, atualizarProduto} from '../../redux/produtoReducer';
 
 export default function FormCadProduto(props) {
   const estadoInicialProduto = props.produtoParaEdicao;
   const ProdutoVazio = {
-    nomeProduto: "",
+    nome: "",
     descricao: "",
     preco: "",
-    quantidade: "",
-    tipoProduto: "",
-    numeroIdentificacao: "",
-    custoUnitario: "",
-    precoVenda: "",
-    nomeFornecedor: "",
+    estoque:"",
+    fornecedorId: "",
   }
+
   const [produto, setProduto] = useState(estadoInicialProduto);
   const [validated, setValidated] = useState(false);
   const {status,mensagem,listaProdutos} = useSelector((state)=>state.cliente);
@@ -42,11 +39,11 @@ export default function FormCadProduto(props) {
     const form = e.currentTarget;
     if(form.checkValidity()){
       if (!props.modoEdicao) {
-        dispatch(adicionar(produto));
+        dispatch(incluirProduto(produto));
         props.setExibirAlert(true);
         props.exibirFormulario(false);
       } else {
-        dispatch(atualizar(produto));
+        dispatch(atualizarProduto(produto));
         props.setModoEdicao(false);
         props.setProdutoParaEdicao(ProdutoVazio);
         props.setExibirAlert(true);
@@ -74,7 +71,7 @@ export default function FormCadProduto(props) {
                   type="text"
                   placeholder="Informe o nome do produto"
                   name="nomeProduto"
-                  value={produto.nomeProduto}
+                  value={produto.nome}
                   onChange={manipularMudancas}
                   required
                 />
@@ -127,87 +124,13 @@ export default function FormCadProduto(props) {
                   type="number"
                   placeholder="Informe a quantidade em estoque"
                   name="quantidade"
-                  value={produto.quantidade}
+                  value={produto.estoque}
                   onChange={manipularMudancas}
                   required
                 />
               </FloatingLabel>
               <Form.Control.Feedback type="invalid">
                 Informe a quantidade em estoque!
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={6}>
-            <Form.Group>
-              <FloatingLabel label="Tipo de Produto:" className="mb-3">
-                <Form.Control
-                  type="text"
-                  placeholder="Informe o tipo de produto"
-                  name="tipoProduto"
-                  value={produto.tipoProduto}
-                  onChange={manipularMudancas}
-                  required
-                />
-              </FloatingLabel>
-              <Form.Control.Feedback type="invalid">
-                Informe o tipo de produto!
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group>
-              <FloatingLabel label="Número de Identificação:" className="mb-3">
-                <Form.Control
-                  type="text"
-                  placeholder="Informe o número de identificação"
-                  name="numeroIdentificacao"
-                  value={produto.numeroIdentificacao}
-                  onChange={manipularMudancas}
-                  required
-                />
-              </FloatingLabel>
-              <Form.Control.Feedback type="invalid">
-                Informe o número de identificação!
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={6}>
-            <Form.Group>
-              <FloatingLabel label="Custo Unitário:" className="mb-3">
-                <Form.Control
-                  type="number"
-                  step="0.01"
-                  placeholder="Informe o custo unitário"
-                  name="custoUnitario"
-                  value={produto.custoUnitario}
-                  onChange={manipularMudancas}
-                  required
-                />
-              </FloatingLabel>
-              <Form.Control.Feedback type="invalid">
-                Informe o custo unitário!
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group>
-              <FloatingLabel label="Preço de Venda:" className="mb-3">
-                <Form.Control
-                  type="number"
-                  step="0.01"
-                  placeholder="Informe o preço de venda"
-                  name="precoVenda"
-                  value={produto.precoVenda}
-                  onChange={manipularMudancas}
-                  required
-                />
-              </FloatingLabel>
-              <Form.Control.Feedback type="invalid">
-                Informe o preço de venda!
               </Form.Control.Feedback>
             </Form.Group>
           </Col>
@@ -220,7 +143,7 @@ export default function FormCadProduto(props) {
                   type="text"
                   placeholder="Informe o nome do fornecedor"
                   name="nomeFornecedor"
-                  value={produto.nomeFornecedor}
+                  value={produto.fornecedorId}
                   onChange={manipularMudancas}
                   required
                 />

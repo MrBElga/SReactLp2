@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Table, Button, Modal } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { remover } from "../../redux/categoriaReducer";
+import { buscarCategorias, excluirCategoria } from "../../redux/categoriaReducer";
 import "./tabela.css";
 
 export default function TabelaCategorias(props) {
@@ -10,6 +10,10 @@ export default function TabelaCategorias(props) {
   const [showModal, setShowModal] = useState(false);
   const [categoriaToDelete, setCategoriaToDelete] = useState(null);
 
+  useEffect(() => {
+    dispatch(buscarCategorias());
+  }, [dispatch]);
+
   function excluirCategoria(categoria) {
     setCategoriaToDelete(categoria);
     setShowModal(true);
@@ -17,7 +21,7 @@ export default function TabelaCategorias(props) {
 
   function confirmarExclusao() {
     if (categoriaToDelete) {
-      dispatch(remover(categoriaToDelete));
+      dispatch(excluirCategoria(categoriaToDelete.nomeCategoria));
       setShowModal(false);
       setCategoriaToDelete(null);
     }

@@ -15,4 +15,5 @@ export default function TelaCadastroCategoria(props) {
     </Pagina>
     </>
   );
-}
+} 
+

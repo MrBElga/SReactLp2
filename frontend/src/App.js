@@ -24,39 +24,41 @@ function App() {
     senha: "",
     level: "",
     progesso:"",
-    nivel: "",
+
+    prior: 1,
     logado: false
   });
 
-  return (
-    <Provider store={store}>
-      <ContextoUsuario.Provider value={[usuario, setUsuario]}>
-        <BrowserRouter>
-          <Routes>
-            {!usuario.logado ? (
-              <>
-                <Route path="/login" element={<TelaLogin />} />
-                <Route path="*" element={<Navigate to="/login" />} />
-              </>
-            ) : (
-              <>
-                <Route path="/login" element={<Navigate to="/home" />} />
-                <Route path="/conta" element={<Conta />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/forum" element={<Forum />} />
-                <Route path="/cliente" element={<TelaCadastroCliente />} />
-                <Route path="/fornecedor" element={<TelaCadastroFornecedor />} />
-                <Route path="/produto" element={<TelaCadastroProduto />} />
-                <Route path="/categoria" element={<TelaCadastroCategoria />} />
-              
-                <Route path="*" element={<Tela404 />} />
-              </>
-            )}
-          </Routes>
-        </BrowserRouter>
-      </ContextoUsuario.Provider>
-    </Provider>
-  );
+ 
+    return (
+      <Provider store={store}>
+        <ContextoUsuario.Provider value={[usuario, setUsuario]}>
+          <BrowserRouter>
+            <Routes>
+              {!usuario.logado ? (
+                <>
+                  <Route path="/login" element={<TelaLogin />} />
+                  <Route path="*" element={<Navigate to="/login" />} />
+                </>
+              ) : (
+                <>
+                  <Route path="/login" element={<Navigate to="/home" />} />
+                  <Route path="/conta" element={<Conta />} />
+                  <Route path="/home" element={<Home />} />
+                  <Route path="/forum" element={<Forum />} />
+                  <Route path="/cliente" element={<TelaCadastroCliente />} />
+                  <Route path="/fornecedor" element={<TelaCadastroFornecedor />} />
+                  <Route path="/produto" element={<TelaCadastroProduto />} />
+                  <Route path="/categoria" element={<TelaCadastroCategoria />} />
+                
+                  <Route path="*" element={<Tela404 />} />
+                </>
+              )}
+            </Routes>
+          </BrowserRouter>
+        </ContextoUsuario.Provider>
+      </Provider>
+    );
 }
 
 export default App;
