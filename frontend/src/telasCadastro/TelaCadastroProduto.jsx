@@ -13,8 +13,12 @@ export default function TelaCadastroProduto(props) {
     nome: "",
     descricao: "",
     preco: "",
-    estoque:"",
-    fornecedorId: ""
+    estoque: "",
+    categoria: {
+      cat_codigo: 0,
+      cat_descricao: "",
+      cat_nome: "",
+    },
   });
   const [modoEdicao, setModoEdicao] = useState(false);
   const exibirAlertTemporariamente = () => {

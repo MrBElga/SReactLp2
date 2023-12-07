@@ -10,21 +10,24 @@ export default class ProdutoCTRL {
 
     if (requisicao.method === "POST") {
       if (requisicao.is("application/json")) {
-        const { nome, descricao, preco, estoque, fornecedorId } =
+        const { nome, descricao, preco, estoque, categoria } =
           requisicao.body;
-        if (nome && descricao && preco && estoque && fornecedorId) {
+          console.log(nome, descricao, preco, estoque, categoria);
+        if (nome && descricao && preco && estoque && categoria.cat_codigo) {
           const produto = new Produto(
             nome,
             descricao,
             preco,
             estoque,
-            fornecedorId
+            categoria.cat_codigo
           );
+          console.log(categoria.cat_codigo);
           produto
             .gravar(conexao)
             .then(() => {
               resposta.json({
                 status: true,
+                codigoGerado: produto.codigo,
                 mensagem: "Produto gravado com sucesso!",
               });
             })
@@ -62,20 +65,21 @@ export default class ProdutoCTRL {
     if (requisicao.method === "PUT") {
       if (requisicao.is("application/json")) {
         const { id } = requisicao.params;
-        const { nome, descricao, preco, estoque, fornecedorId } = requisicao.body;
-        if (id && nome && descricao && preco && estoque && fornecedorId) {
+        const { nome, descricao, preco, estoque, categoria } = requisicao.body;
+        if (id && nome && descricao && preco && estoque && categoria) {
           const produto = new Produto(
             nome,
             descricao,
             preco,
             estoque,
-            fornecedorId
+            categoria
           );
           produto.codigo = id;
           produto.atualizar(conexao)
             .then(() => {
               resposta.json({
                 status: true,
+                produto,
                 mensagem: "Produto atualizado com sucesso!",
               });
             })
@@ -114,13 +118,14 @@ export default class ProdutoCTRL {
     if (requisicao.method === "DELETE") {
       if (requisicao.is("application/json")) {
         const idProduto = requisicao.params.id;
-        console.log(idProduto)
+        console.log("ID: "+idProduto)
         if (idProduto) {
-          const produto = new Produto();
-          produto.codigo = idProduto;
-          produto
-            .excluir(conexao)
-            .then(() => {
+          const produto = new Produto(idProduto);
+
+          produto.codigo=idProduto;
+          console.log(produto)
+          
+          produto.excluir(conexao).then(() => {
               resposta.json({
                 status: true,
                 mensagem: "produto excluído com sucesso!",
@@ -156,13 +161,19 @@ export default class ProdutoCTRL {
   async consultar(requisicao, resposta) {
     const conexao = await conectar();
     resposta.type("application/json");
-
+ 
     if (requisicao.method === "GET") {
       const produtos = new Produto();
       produtos
         .consultar(conexao)
-        .then((produtos) => {
-          resposta.json(produtos);
+        .then((listaProdutos) => {
+          console.log(listaprodutos)
+          resposta.json(
+            {
+                status: true,
+                listaProdutos
+            });
+            console.log(resposta)
         })
         .catch((erro) => {
           resposta.json({
@@ -189,8 +200,14 @@ export default class ProdutoCTRL {
         const produto = new Produto(id);
       
           produto.consultarID(id,conexao)
-          .then((produto) => {
-            resposta.json(produto);
+          .then((listaProdutos) => {
+            console.log(listaprodutos)
+          resposta.json(
+            {
+                status: true,
+                listaProdutos
+            });
+            console.log(resposta)
           })
           .catch((erro) => {
             resposta.json({
@@ -221,15 +238,20 @@ export default class ProdutoCTRL {
       if(!id)
       {
         id = "";
-      }
+      }console.log(id)
         if (requisicao.method === "GET") {
          
           const produto = new Produto(id);
       
           produto.consultarA(id,conexao)
-          .then((produto) => {
-            resposta.json(produto);
-          })
+          .then((listaProdutos) => {
+            resposta.json(
+            {
+                status: true,
+                listaProdutos
+            });
+           
+            })
           .catch((erro) => {
             resposta.json({
               status: false,

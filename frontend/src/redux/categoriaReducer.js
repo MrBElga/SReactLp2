@@ -1,58 +1,105 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import ESTADO from "../recurso/estado";
 
-const urlBase = "http://localhost:4000/categoria";
+const urlBase = "http://localhost:4000/categorias";
 
 // Thunks
-export const buscarCategorias = createAsyncThunk('buscarCategorias', async () => {
-  try {
-    const resposta = await fetch(urlBase, { method: "GET" });
-    const dados = await resposta.json();
-    return dados;
+export const buscarCategorias = createAsyncThunk('categoria/buscarCategorias', async () => {
+  try { 
+      const resposta = await fetch(urlBase, { method: 'GET' });
+      const dados = await resposta.json();
+      console.log(dados)
+      if (dados.status) {
+          return {
+              status: true,
+              listaCategorias: dados.listaCategorias,
+              mensagem: ''
+          }
+      }
+      else {
+          return {
+              status: false,
+              listaCategorias: [],
+              mensagem: 'Ocorreu um erro ao recuperar as categorias da base de dados.'
+          }
+      }
   } catch (erro) {
-    return {
-      status: false,
-      mensagem: "Erro ao recuperar categorias:" + erro.message,
-      listaCategorias: []
-    };
+      return {
+          status: false,
+          listaCategorias: [],
+          mensagem: 'Ocorreu um erro ao recuperar as categorias da base de dados:' + erro.message
+      }
   }
 });
 
-export const incluirCategoria = createAsyncThunk('incluirCategoria', async (categoria) => {
-  try {
-    const resposta = await fetch(urlBase, {
-      method: "POST",
+export const incluirCategoria = createAsyncThunk('gravar', async (categoria) => {
+ 
+  const resposta = await fetch(urlBase, {
+      method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
       },
       body: JSON.stringify(categoria)
-    });
-    const dados = await resposta.json();
-    return dados;
-  } catch (erro) {
-    return {
-      status: false,
-      mensagem: "Não foi possível cadastrar a categoria: " + erro.message
-    };
+  }).catch(erro => {
+      return {
+          status: false,
+          mensagem: 'Ocorreu um erro ao adicionar a categoria:' + erro.message
+      }
+  });
+
+  if (resposta.ok) {
+      const dados = await resposta.json();
+ 
+      return {
+          status: dados.status,
+          mensagem: dados.mensagem,
+          categoria
+      }
+  }
+  else {
+      return {
+          status: false,
+          mensagem: 'Ocorreu um erro ao adicionar a categoria.',
+          categoria
+      }
   }
 });
 
-export const excluirCategoria = createAsyncThunk('excluirCategoria', async (nomeCategoria) => {
-  try {
-    const resposta = await fetch(`${urlBase}/${nomeCategoria}`, { method: "DELETE" });
-    const dados = await resposta.json();
-    return dados;
-  } catch (erro) {
-    return {
-      status: false,
-      mensagem: "Não foi possível excluir a categoria: " + erro.message
-    };
+export const excluirCategoria = createAsyncThunk('excluirCategoria', async (categoria) =>  {
+  console.log(categoria.cat_codigo)
+  const resposta = await fetch(`${urlBase}/${categoria.cat_codigo}`, {
+      method: 'DELETE',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(categoria)
+  }).catch(erro => {
+      return {
+          status: false,
+          mensagem: 'Ocorreu um erro ao remover a categoria:' + erro.message,
+          categoria
+      }
+  });
+  if (resposta.ok) {
+      const dados = await resposta.json();
+      return {
+          status: dados.status,
+          mensagem: dados.mensagem,
+          categoria
+      }
+  }
+  else {
+      return {
+          status: false,
+          mensagem: 'Ocorreu um erro ao remover a categoria.',
+          categoria
+      }
   }
 });
 
 export const atualizarCategoria = createAsyncThunk('atualizarCategoria', async (categoria) => {
   try {
-    const resposta = await fetch(`${urlBase}/${categoria.nomeCategoria}`, {
+    const resposta = await fetch(`${urlBase}/${categoria.cat_codigo}`, {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json'
@@ -60,6 +107,7 @@ export const atualizarCategoria = createAsyncThunk('atualizarCategoria', async (
       body: JSON.stringify(categoria)
     });
     const dados = await resposta.json();
+  
     return dados;
   } catch (erro) {
     return {
@@ -121,7 +169,7 @@ const categoriaSlice = createSlice({
         if (action.payload.status) {
           state.status = ESTADO.OCIOSO;
           state.mensagem = action.payload.mensagem;
-          state.listaCategorias = state.listaCategorias.filter(categoria => categoria.nomeCategoria !== action.payload.nomeCategoria);
+          state.listaCategorias = state.listaCategorias.filter(categoria => categoria.cat_codigo !== action.payload.cat_codigo);
         } else {
           state.status = ESTADO.ERRO;
           state.mensagem = action.payload.mensagem;
@@ -135,13 +183,18 @@ const categoriaSlice = createSlice({
         if (action.payload.status) {
           state.status = ESTADO.OCIOSO;
           state.mensagem = action.payload.mensagem;
-          const listaTemporariaCategorias = state.listaCategorias.filter(categoria => categoria.nomeCategoria !== action.payload.nomeCategoria);
-          state.listaCategorias = [...listaTemporariaCategorias, action.payload.categoria];
+          
+          console.log(action.payload.listaCategorias)
+          const listaTemporariaCategorias = state.listaCategorias.filter(categoria => categoria.cat_nome !== action.payload.listaCategorias.cat_nome);
+          
+  
+          state.listaCategorias = [...listaTemporariaCategorias, action.payload.listaCategorias];
         } else {
           state.status = ESTADO.ERRO;
           state.mensagem = action.payload.mensagem;
         }
       })
+
   }
 });
 

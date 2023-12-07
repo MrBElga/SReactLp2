@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./form.css"
+import React, { useState, useEffect, Spinner } from "react";
+import "./form.css";
 import {
   Button,
   Container,
@@ -8,8 +8,11 @@ import {
   Col,
   FloatingLabel,
 } from "react-bootstrap";
-import { useSelector, useDispatch} from 'react-redux';
-import { incluirProduto, atualizarProduto} from '../../redux/produtoReducer';
+import { useSelector, useDispatch } from "react-redux";
+import { incluirProduto, atualizarProduto } from "../../redux/produtoReducer";
+import { buscarCategorias } from "../../redux/categoriaReducer";
+import ESTADO from "../../recurso/estado.js";
+import { toast } from "react-toastify";
 
 export default function FormCadProduto(props) {
   const estadoInicialProduto = props.produtoParaEdicao;
@@ -17,15 +20,43 @@ export default function FormCadProduto(props) {
     nome: "",
     descricao: "",
     preco: "",
-    estoque:"",
-    fornecedorId: "",
-  }
+    estoque: "",
+    categoria: {
+      cat_codigo: 0,
+      cat_descricao: "",
+      cat_nome: "",
+    },
+  };
 
   const [produto, setProduto] = useState(estadoInicialProduto);
   const [validated, setValidated] = useState(false);
-  const {status,mensagem,listaProdutos} = useSelector((state)=>state.cliente);
+
+  const {
+    estado: estadoCat,
+    mensagem: mensagemCat,
+    listaCategorias,
+  } = useSelector((state) => state.categoria);
+
+  const { status, mensagem, listaProdutos } = useSelector(
+    (state) => state.produto
+  );
+
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(buscarCategorias());
+  }, [dispatch]);
+
+  function selecionaCategoria(e) {
+    const componente = e.currentTarget;
+    setProduto({
+      ...produto,
+      fornecedorId: {
+        codigo: componente.value,
+        descricao: componente.options[componente.selectedIndex].text,
+      },
+    });
+  }
 
   function manipularMudancas(e) {
     const componente = e.currentTarget;
@@ -34,10 +65,19 @@ export default function FormCadProduto(props) {
       [componente.name]: componente.value,
     });
   }
-
-  function manipularSubmit(e){
+  function selecionaCategoria(e) {
+    const componente = e.currentTarget;
+    setProduto({
+      ...produto,
+      categoria: {
+        cat_codigo: componente.value,
+        cat_nome: componente.options[componente.selectedIndex].text,
+      },
+    });
+  }
+  function manipularSubmit(e) {
     const form = e.currentTarget;
-    if(form.checkValidity()){
+    if (form.checkValidity()) {
       if (!props.modoEdicao) {
         dispatch(incluirProduto(produto));
         props.setExibirAlert(true);
@@ -51,9 +91,7 @@ export default function FormCadProduto(props) {
       }
       setProduto(ProdutoVazio);
       setValidated(false);
-   
-    }
-    else{
+    } else {
       setValidated(true);
     }
     e.stopPropagation();
@@ -70,7 +108,7 @@ export default function FormCadProduto(props) {
                 <Form.Control
                   type="text"
                   placeholder="Informe o nome do produto"
-                  name="nomeProduto"
+                  name="nome"
                   value={produto.nome}
                   onChange={manipularMudancas}
                   required
@@ -101,7 +139,7 @@ export default function FormCadProduto(props) {
         <Row>
           <Col md={6}>
             <Form.Group>
-              <FloatingLabel label="Preço:" className="mb-3">
+              <FloatingLabel label="Preco:" className="mb-3">
                 <Form.Control
                   type="number"
                   step="0.01"
@@ -123,7 +161,7 @@ export default function FormCadProduto(props) {
                 <Form.Control
                   type="number"
                   placeholder="Informe a quantidade em estoque"
-                  name="quantidade"
+                  name="estoque"
                   value={produto.estoque}
                   onChange={manipularMudancas}
                   required
@@ -136,22 +174,40 @@ export default function FormCadProduto(props) {
           </Col>
         </Row>
         <Row>
-          <Col>
-            <Form.Group>
-              <FloatingLabel label="Nome do Fornecedor:" className="mb-3">
-                <Form.Control
-                  type="text"
-                  placeholder="Informe o nome do fornecedor"
-                  name="nomeFornecedor"
-                  value={produto.fornecedorId}
-                  onChange={manipularMudancas}
-                  required
-                />
-              </FloatingLabel>
-              <Form.Control.Feedback type="invalid">
-                Informe o nome do fornecedor!
-              </Form.Control.Feedback>
-            </Form.Group>
+          <Col md={4}>
+            <FloatingLabel controlId="floatingSelect" label="Categoria:">
+              <Form.Select
+                aria-label="Categoria dos produtos"
+                id="categoria"
+                name="categoria"
+                onChange={selecionaCategoria}
+                value={produto.categoria.cat_codigo}
+                style={{ backgroundColor: "#020202", color: "#f0f0f0" }}
+                required
+              >
+                <option value='0' defaultValue>
+                  Selecione uma categoria
+                </option>
+                {listaCategorias?.map((listaCategorias) => (
+                  <option
+                    key={listaCategorias.cat_codigo}
+                    value={listaCategorias.cat_codigo} 
+                  >
+                    {listaCategorias.cat_nome}
+                  </option>
+                ))}
+              </Form.Select>
+              {estadoCat === ESTADO.PENDENTE ? (
+                <Spinner animation="border" role="status">
+                  <span className="visually-hidden">
+                    Carregando listaCategorias...
+                  </span>
+                </Spinner>
+              ) : null}
+              {estadoCat === ESTADO.ERRO ? (
+                <p>Erro ao carregar as categorias: {mensagemCat}</p>
+              ) : null}
+            </FloatingLabel>
           </Col>
         </Row>
         <Row>
@@ -159,7 +215,7 @@ export default function FormCadProduto(props) {
             <Button type="submit" variant={"primary"}>
               {props.modoEdicao ? "Alterar" : "Cadastrar"}
             </Button>
-      
+
             <Button
               type="button"
               variant={"secondary"}

@@ -5,8 +5,10 @@ export default class CategoriaDAO {
   async gravar(categoria, conexao) {
     if(categoria instanceof Categoria)
     {
+
+      console.log(categoria.nomeCategoria, categoria.descricao)
       const sql = "INSERT INTO categorias (cat_nome, cat_descricao) VALUES (?, ?)";
-      const valores = [categoria.nome, categoria.descricao];
+      const valores = [categoria.nomeCategoria, categoria.descricao];
 
       try {
         const [result] = await conexao.execute(sql, valores);
@@ -22,7 +24,7 @@ export default class CategoriaDAO {
     {
       const sql =
         "UPDATE categorias SET cat_nome = ?, cat_descricao = ? WHERE cat_codigo = ?";
-      const valores = [categoria.nome, categoria.descricao, categoria.codigo];
+      const valores = [categoria.nomeCategoria, categoria.descricao, categoria.codigo];
 
       try {
         await conexao.execute(sql, valores);
