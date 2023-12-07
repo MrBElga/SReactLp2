@@ -1,31 +1,50 @@
-import { Container, Table, Button, Modal } from "react-bootstrap";
-import { useState } from "react";
+import { Container, Table, Spinner, Button, Modal } from "react-bootstrap";
+import { toast } from "react-toastify";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { buscarProdutos, excluirProduto } from "../../redux/produtoReducer"; // Importe excluirProduto ao invés de remover
+import ESTADO from "../../recurso/estado.js";
+import { buscarProdutos, excluirProduto } from "../../redux/produtoReducer";
 import "./tabela.css";
 
 export default function TabelaProdutos(props) {
-  const { status, mensagem, listaProdutos } = useSelector(state => state.produto);
+  const { estado, mensagem, listaProdutos } = useSelector(
+    (state) => state.produto
+  );
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [produtoToDelete, setProdutoToDelete] = useState(null);
+
+  useEffect(() => {
+    dispatch(buscarProdutos());
+  }, [dispatch,produtoToDelete]);
+
+  function apagarMensagens() {
+    setTimeout(() => {
+      toast.dismiss();
+    }, 2000);
+    return null;
+  }
 
   const customModalStyle = {
     color: "black",
   };
 
-  function excluirProduto(produto) {
+  function Remover(produto) {
     setProdutoToDelete(produto);
     setShowModal(true);
   }
 
+
   function confirmarExclusao() {
     if (produtoToDelete) {
-      dispatch(excluirProduto(produtoToDelete)); 
-      setShowModal(false);
-      setProdutoToDelete(null);
+      dispatch(excluirProduto(produtoToDelete)).then(() => {
+        dispatch(buscarProdutos());  
+        setShowModal(false);
+        setProdutoToDelete(null);
+      });
     }
   }
+  
 
   function cancelarExclusao() {
     setShowModal(false);
@@ -37,9 +56,31 @@ export default function TabelaProdutos(props) {
     props.setModoEdicao(true);
     props.exibirFormulario(true);
   }
- 
+
   return (
     <Container>
+      {estado === ESTADO.ERRO
+        ? toast.error(
+            ({ closeToast }) => (
+              <div>
+                <p>{mensagem}</p>
+              </div>
+            ),
+            { toastId: estado }
+          )
+        : null}
+      {estado === ESTADO.PENDENTE
+        ? toast(
+            ({ closeToast }) => (
+              <div>
+                <Spinner animation="border" role="status"></Spinner>
+                <p>Processando a requisição...</p>
+              </div>
+            ),
+            { toastId: estado }
+          )
+        : null}
+      {estado === ESTADO.OCIOSO ? apagarMensagens() : null}
       <Button
         type="button"
         onClick={() => {
@@ -55,11 +96,13 @@ export default function TabelaProdutos(props) {
             <th>Nome do Produto</th>
             <th>Descrição</th>
             <th>Preço</th>
-            <th>Fornecedor</th>
+            <th>Unidades</th>
+            <th>Categoria</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
+        
           {listaProdutos.map((produto) => {
             return (
               <tr key={produto.nome}>
@@ -67,18 +110,25 @@ export default function TabelaProdutos(props) {
                 <td>{produto.descricao}</td>
                 <td>R$ {produto.preco}</td>
                 <td>{produto.estoque} unidades</td>
-                <td>{produto.fornecedorId}</td>
+                <td>{produto.categoria.nomeCategoria}</td>
 
                 <td>
                   <Button
                     className="btn-excluir"
                     onClick={() => {
-                      excluirProduto(produto);
+                      Remover(produto);
                     }}
                   >
                     Excluir
                   </Button>
-                  <Button className="btn-editar" onClick={() => { editarProduto(produto) }}>Editar</Button>
+                  <Button
+                    className="btn-editar"
+                    onClick={() => {
+                      editarProduto(produto);
+                    }}
+                  >
+                    Editar
+                  </Button>
                 </td>
               </tr>
             );

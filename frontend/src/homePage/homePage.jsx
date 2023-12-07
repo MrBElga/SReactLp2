@@ -41,11 +41,10 @@ const HomePage = () => {
                 height="315"
                 src="https://www.youtube.com/embed/1oOBjyOKu2o?si=3oq8hoqTBIwq66aR"
                 title="YouTube video player"
-                frameborder="0"
+                
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-                muted
-                autoplay
+                allowFullScreen
+                autoPlay
               ></iframe>
             </Col>
             <Col md={6}>

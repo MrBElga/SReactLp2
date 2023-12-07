@@ -4,21 +4,24 @@ export default class ProdutoDAO {
   constructor() {}
 
   async gravar(produto, conexao) {
+
     if (produto instanceof Produto) {
       const sql =
         "INSERT INTO produtos (prod_nome, prod_descricao, prod_preco, prod_estoque, cat_codigo) VALUES (?, ?, ?, ?, ?)";
       const valores = [
         produto.nome,
         produto.descricao,
-        produto.preco,
-        produto.estoque,
-        produto.fornecedorId,
+        parseFloat(produto.preco),
+        parseInt(produto.estoque),
+        parseInt(produto.categoria),
       ];
-      console.log(valores);
+
+      console.log(valores)
       try {
         const [result] = await conexao.execute(sql, valores);
         return result.insertId;
       } catch (error) {
+        console.log(error)
         throw error;
       }
     }
@@ -26,14 +29,17 @@ export default class ProdutoDAO {
 
   async atualizar(produto, conexao) {
     if (produto instanceof Produto) {
-      const sql = `UPDATE produtos SET prod_nome = ?, prod_descricao = ?, prod_preco = ?,  prod_estoque = ?, cat_codigo = ? WHERE prod_codigo = ?`;
+      
+      const sql = `UPDATE produtos
+      SET prod_nome = ?, prod_descricao = ?, prod_preco = ?, prod_estoque = ?, cat_codigo = ?
+      WHERE prod_codigo = ?;`;
 
       const valores = [
         produto.nome,
         produto.descricao,
-        produto.preco,
-        produto.estoque,
-        produto.fornecedorId,
+        parseFloat(produto.preco),
+        parseInt(produto.estoque),
+        parseInt(produto.categoria.cat_codigo),
         produto.codigo,
       ];
 
@@ -114,6 +120,7 @@ export default class ProdutoDAO {
   }
 
   async excluir(produto, conexao) {
+    console.log(produto)
     if (produto instanceof Produto) {
       const sql = "DELETE FROM produtos WHERE prod_codigo = ?";
 

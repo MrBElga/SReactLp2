@@ -4,45 +4,41 @@ import conectar from "../Persistencia/Conexao.js";
 export default class CategoriaCTRL {
   async gravar(requisicao, resposta) {
     const conexao = await conectar();
-    resposta.setHeader("Content-Type", "application/json");
+    resposta.type("application/json");
+    if (requisicao.method === "POST" && requisicao.is("application/json")) {
+      const dados = requisicao.body;
 
-    if (requisicao.method === "POST") {
-      if (requisicao.is("application/json")) {
-        const { nome, descricao } = requisicao.body;
-
-        if (nome && descricao) {
-          const categoria = new Categoria(nome, descricao);
-          categoria
-            .gravar(conexao)
-            .then(() => {
-              resposta.json({
-                status: true,
-                mensagem: "Categoria gravada com sucesso!",
-              });
-            })
-            .catch((erro) => {
-              resposta.json({
-                status: false,
-                mensagem: "Erro ao gravar a categoria: " + erro.message,
-              });
+      if (dados.cat_nome && dados.cat_descricao) {
+   
+        const categoria = new Categoria(dados.cat_nome,dados.cat_descricao,0);
+        //resolver a promise
+   
+        categoria
+          .gravar(conexao)
+          .then(() => {
+            resposta.status(200).json({
+              status: true,
+              codigoGerado: categoria.codigo,
+              mensagem: "Categoria incluída com sucesso!",
             });
-        } else {
-          resposta.json({
-            status: false,
-            mensagem:
-              "Verifique a documentação da API e informe todos os dados necessários de uma categoria!",
+          })
+          .catch((erro) => {
+            resposta.status(500).json({
+              status: false,
+              mensagem: "Erro ao registrar a categoria:" + erro.message,
+            });
           });
-        }
       } else {
-        resposta.json({
+        resposta.status(400).json({
           status: false,
-          mensagem: "A requisição deve possuir um payload application/json",
+          mensagem: "Por favor, informe a descrição da categoria!",
         });
       }
     } else {
-      resposta.json({
+      resposta.status(400).json({
         status: false,
-        mensagem: "Para registrar uma categoria utilize o método POST!",
+        mensagem:
+          "Por favor, utilize o método POST para cadastrar uma categoria!",
       });
     }
   }
@@ -50,22 +46,22 @@ export default class CategoriaCTRL {
   async atualizar(requisicao, resposta) {
     const conexao = await conectar();
     resposta.setHeader("Content-Type", "application/json");
-
+    
     if (requisicao.method === "PUT") {
       if (requisicao.is("application/json")) {
         const { id } = requisicao.params;
-        const { nome, descricao } = requisicao.body;
-
-        if (id && nome && descricao) {
-          const categoria = new Categoria(nome, descricao);
+        const { cat_nome, cat_descricao } = requisicao.body;
+        console.log(cat_nome, cat_descricao)
+        if (id && cat_nome && cat_descricao) {
+          const categoria = new Categoria(cat_nome, cat_descricao);
           categoria.codigo = id;
           categoria
             .atualizar(conexao)
             .then(() => {
               resposta.json({
                 status: true,
-                mensagem: "Categoria atualizada com sucesso!",
-              });
+                listaCategorias,
+              })
             })
             .catch((erro) => {
               resposta.json({
@@ -110,8 +106,8 @@ export default class CategoriaCTRL {
             .then(() => {
               resposta.json({
                 status: true,
-                mensagem: "Categoria excluída com sucesso!",
-              });
+                listaCategorias,
+              })
             })
             .catch((erro) => {
               resposta.json({
@@ -148,9 +144,12 @@ export default class CategoriaCTRL {
       const categoria = new Categoria();
       categoria
         .consultar(conexao)
-        .then((categorias) => {
-          resposta.json(categorias);
-        })
+        .then((listaCategorias) =>
+          resposta.json({
+            status: true,
+            listaCategorias,
+          })
+        )
         .catch((erro) => {
           resposta.json({
             status: false,
@@ -174,7 +173,8 @@ export default class CategoriaCTRL {
 
       if (id) {
         const categoria = new Categoria();
-        categoria.consultarID(id, conexao)
+        categoria
+          .consultarID(id, conexao)
           .then((categoriaConsultada) => {
             resposta.json(categoriaConsultada);
           })

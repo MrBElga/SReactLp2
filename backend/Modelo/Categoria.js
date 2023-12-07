@@ -2,19 +2,19 @@ import CategoriaDAO from "../Persistencia/CategoriaDAO.js";
 
 class Categoria {
   #codigo;
-  #nome;
+  #nomeCategoria;
   #descricao;
 
-  constructor(nome, descricao, codigo = 0) {
+  constructor(nomeCategoria='', descricao='', codigo = 0) {
     this.#codigo = codigo;
-    this.#nome = nome;
+    this.#nomeCategoria = nomeCategoria;
     this.#descricao = descricao;
   }
 
   toJSON() {
     return {
       codigo: this.#codigo,
-      nome: this.#nome,
+      nomeCategoria: this.#nomeCategoria,
       descricao: this.#descricao,
     };
   }
@@ -23,39 +23,49 @@ class Categoria {
     return this.#codigo;
   }
 
-  set codigo(Cod) {
-    if (Cod > 0) this.#codigo = Cod;
+  set codigo(codigo) {
+    if (codigo > 0) this.#codigo = codigo;
   }
 
-  get nome() {
-    return this.#nome;
+  get nomeCategoria() {
+    return this.#nomeCategoria;
   }
 
-  set nome(nome) {
-    this.#nome = nome;
+  set nomeCategoria(nomeCategoria) {
+    this.#nomeCategoria = nomeCategoria;
   }
 
   get descricao() {
     return this.#descricao;
   }
 
-  set descricao(desc) {
-    this.#descricao = desc;
+  set descricao(descricao) {
+    this.#descricao = descricao;
   }
 
   toString() {
-    return this.#nome + " " + this.#descricao + " " + this.#codigo;
+    return this.#nomeCategoria + " " + this.#descricao + " " + this.#codigo;
   }
 
   async gravar(conexao) {
-    const categoriaDAO = new CategoriaDAO();
-    const id = await categoriaDAO.gravar(this, conexao);
-    this.#codigo = id;
+    try {
+      const categoriaDAO = new CategoriaDAO();
+      const id = await categoriaDAO.gravar(this, conexao);
+      this.#codigo = id;
+    } catch (error) {
+      console.log(error)
+    }
+    
   }
 
   async atualizar(conexao) {
-    const categoriaDAO = new CategoriaDAO();
-    await categoriaDAO.atualizar(this, conexao);
+    try {
+      const categoriaDAO = new CategoriaDAO();
+      await categoriaDAO.atualizar(this, conexao);
+    } catch (error) {
+      console.log(error)
+    }
+   
   }
 
   async excluir(conexao) {

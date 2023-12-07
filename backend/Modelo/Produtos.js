@@ -6,15 +6,15 @@ class Produto {
   #descricao;
   #preco;
   #estoque;
-  #fornecedorId;
+  #categoria;
 
-  constructor(nome, descricao, preco, estoque, fornecedorId={}, codigo = 0) {
+  constructor(nome, descricao, preco, estoque, categoria, codigo = 0) {
     this.#codigo = codigo;
     this.#nome = nome;
     this.#descricao = descricao;
     this.#preco = preco;
     this.#estoque = estoque;
-    this.#fornecedorId = fornecedorId;
+    this.#categoria = categoria;
   }
 
   toJSON() {
@@ -24,7 +24,7 @@ class Produto {
       descricao: this.#descricao,
       preco: this.#preco,
       estoque: this.#estoque,
-      fornecedorId: this.#fornecedorId,
+      categoria: this.#categoria,
     };
   }
 
@@ -68,12 +68,12 @@ class Produto {
     this.#estoque = estoque;
   }
 
-  get fornecedorId() {
-    return this.#fornecedorId;
+  get categoria() {
+    return this.#categoria;
   }
 
-  set fornecedorId(fornecedorId) {
-    this.#fornecedorId = fornecedorId;
+  set categoria(categoria) {
+    this.#categoria = categoria;
   }
 
   toString() {
@@ -83,9 +83,14 @@ class Produto {
   }
 
   async gravar(conexao) {
-    const produtoDAO = new ProdutoDAO();
+    try {
+      const produtoDAO = new ProdutoDAO();
     const id = await produtoDAO.gravar(this, conexao);
     this.#codigo = id;
+    } catch (error) {
+      console.log(error)
+    }
+    
   }
 
   async atualizar(conexao) {
