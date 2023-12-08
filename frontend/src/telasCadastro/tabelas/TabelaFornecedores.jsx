@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Table, Button, Modal } from "react-bootstrap";
+import { Container, Table, Button, Modal,Spinner } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { buscarFornecedores, excluirFornecedor } from "../../redux/fornecedorReducer";
 import "./tabela.css";

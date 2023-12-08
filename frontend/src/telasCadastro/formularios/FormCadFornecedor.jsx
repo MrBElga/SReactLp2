@@ -7,7 +7,7 @@ import {
   Col,
   FloatingLabel,
   Button,
-  Alert,
+  Alert,Spinner
 } from "react-bootstrap";
 import { useSelector, useDispatch } from 'react-redux';
 import { incluirFornecedor, atualizarFornecedor } from '../../redux/fornecedorReducer';

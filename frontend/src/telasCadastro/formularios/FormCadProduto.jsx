@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Spinner } from "react";
+import React, { useState, useEffect } from "react";
 import "./form.css";
 import {
   Button,
@@ -6,7 +6,7 @@ import {
   Form,
   Row,
   Col,
-  FloatingLabel,
+  FloatingLabel,Spinner
 } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { incluirProduto, atualizarProduto } from "../../redux/produtoReducer";

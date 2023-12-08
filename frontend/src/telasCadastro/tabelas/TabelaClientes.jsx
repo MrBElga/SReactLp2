@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Table, Button, Modal } from "react-bootstrap";
+import { Container, Table, Button, Modal ,Spinner} from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { buscarClientes, excluirCliente } from "../../redux/clienteReducer";
 import { ToastContainer, toast } from "react-toastify";
