@@ -1,5 +1,3 @@
-
-import Categoria from "../Modelo/Categoria.js";
 import Produto from "../Modelo/Produtos.js";
 import conectar from "../Persistencia/Conexao.js";
 

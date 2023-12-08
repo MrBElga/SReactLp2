@@ -1,13 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import ESTADO from "../recurso/estado";
 
-const urlBase = "http://localhost:4000/cliente";
+const urlBase = "http://localhost:4000/clientes";
 
-// Thunks
+
 export const buscarClientes = createAsyncThunk('buscarClientes', async () => {
   try {
     const resposta = await fetch(urlBase, { method: "GET" });
     const dados = await resposta.json();
+    //console.log(dados)
     return dados;
   } catch (erro) {
     return {
@@ -19,6 +20,7 @@ export const buscarClientes = createAsyncThunk('buscarClientes', async () => {
 });
 
 export const incluirCliente = createAsyncThunk('incluirCliente', async (cliente) => {
+  console.log(cliente)
   try {
     const resposta = await fetch(urlBase, {
       method: "POST",
@@ -28,6 +30,7 @@ export const incluirCliente = createAsyncThunk('incluirCliente', async (cliente)
       body: JSON.stringify(cliente)
     });
     const dados = await resposta.json();
+    console.log(dados)
     return dados;
   } catch (erro) {
     return {
@@ -37,11 +40,31 @@ export const incluirCliente = createAsyncThunk('incluirCliente', async (cliente)
   }
 });
 
-export const excluirCliente = createAsyncThunk('excluirCliente', async (cpf) => {
+export const excluirCliente = createAsyncThunk('excluirCliente', async (cliente) => {
+  console.log(cliente)
   try {
-    const resposta = await fetch(`${urlBase}/${cpf}`, { method: "DELETE" });
+    const resposta = await fetch(`${urlBase}/${cliente.cli_codigo}`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(cliente)
+    });
+
     const dados = await resposta.json();
-    return dados;
+    console.log(dados)
+    if (dados.status) {
+      return {
+        status: dados.status,
+        cliente,
+        mensagem: dados.mensagem
+      };
+    } else {
+      return {
+        status: dados.status,
+        mensagem: dados.mensagem
+      };
+    }
   } catch (erro) {
     return {
       status: false,
@@ -51,8 +74,9 @@ export const excluirCliente = createAsyncThunk('excluirCliente', async (cpf) => 
 });
 
 export const atualizarCliente = createAsyncThunk('atualizarCliente', async (cliente) => {
+  console.log(cliente)
   try {
-    const resposta = await fetch(`${urlBase}/${cliente.cpf}`, {
+    const resposta = await fetch(`${urlBase}/${cliente.cli_codigo}`, {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json'
@@ -60,6 +84,7 @@ export const atualizarCliente = createAsyncThunk('atualizarCliente', async (clie
       body: JSON.stringify(cliente)
     });
     const dados = await resposta.json();
+    console.log(dados)
     return dados;
   } catch (erro) {
     return {
@@ -121,12 +146,18 @@ const clienteSlice = createSlice({
         if (action.payload.status) {
           state.status = ESTADO.OCIOSO;
           state.mensagem = action.payload.mensagem;
-          state.listaClientes = state.listaClientes.filter(cliente => cliente.cpf !== action.payload.cpf);
+      
+          if (action.payload.cliente) {
+         
+            state.listaClientes = state.listaClientes.filter(cliente => cliente.cli_cpf !== action.payload.cliente.cli_cpf);
+          }
         } else {
           state.status = ESTADO.ERRO;
           state.mensagem = action.payload.mensagem;
         }
       })
+      
+      
       .addCase(atualizarCliente.pending, (state) => {
         state.status = ESTADO.PENDENTE;
         state.mensagem = 'Processando a requisição...';
@@ -135,13 +166,15 @@ const clienteSlice = createSlice({
         if (action.payload.status) {
           state.status = ESTADO.OCIOSO;
           state.mensagem = action.payload.mensagem;
-          const listaTemporariaClientes = state.listaClientes.filter(cliente => cliente.cpf !== action.payload.cpf);
+      
+          const listaTemporariaClientes = state.listaClientes.filter(cliente => cliente.cli_cpf !== action.payload.cliente.cli_cpf);
           state.listaClientes = [...listaTemporariaClientes, action.payload.cliente];
         } else {
           state.status = ESTADO.ERRO;
           state.mensagem = action.payload.mensagem;
         }
       })
+      
   }
 });
 

@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from "react";
-import { Container,Alert } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Alert } from "react-bootstrap";
 import FormCadFornecedor from "./formularios/FormCadFornecedor";
 import TabelaFornecedor from "./tabelas/TabelaFornecedores";
 import Pagina from "../templates/Pagina";
@@ -8,8 +8,8 @@ import "./tela.css";
 export default function TelaCadastroFornecedor(props) {
   const [exibirFormulario, setExibirFormulario] = useState(false);
   const [exibirAlert, setExibirAlert] = useState(false);
-  const [fornecedorParaEdicao, setFornecedorPAraEdicao] = useState({
-    nome:"",
+  const [fornecedorParaEdicao, setFornecedorParaEdicao] = useState({
+    nome: "",
     cnpj: "",
     email: "",
     telefone: "",
@@ -19,7 +19,7 @@ export default function TelaCadastroFornecedor(props) {
     bairro: "",
     cidade: "",
     uf: "SP",
-    cep: ""
+    cep: "",
   });
   const [modoEdicao, setModoEdicao] = useState(false);
 
@@ -44,7 +44,7 @@ export default function TelaCadastroFornecedor(props) {
             <FormCadFornecedor
               exibirFormulario={setExibirFormulario}
               fornecedorParaEdicao={fornecedorParaEdicao}
-              setFornecedorPAraEdicao={setFornecedorPAraEdicao}
+              setFornecedorParaEdicao={setFornecedorParaEdicao}
               modoEdicao={modoEdicao}
               setModoEdicao={setModoEdicao}
               exibirAlert={exibirAlert}
@@ -54,17 +54,15 @@ export default function TelaCadastroFornecedor(props) {
             <TabelaFornecedor
               exibirFormulario={setExibirFormulario}
               fornecedorParaEdicao={fornecedorParaEdicao}
-              setFornecedorPAraEdicao={setFornecedorPAraEdicao}
+              setFornecedorParaEdicao={setFornecedorParaEdicao}
               modoEdicao={modoEdicao}
               setModoEdicao={setModoEdicao}
             />
           )}
         </Container>
-        {
-          exibirAlert&&( <Alert variant="success">
-                          Fornecedor cadastrada com sucesso!!
-                        </Alert>)
-        }
+        {exibirAlert && (
+          <Alert variant="success">Fornecedor cadastrado com sucesso!!</Alert>
+        )}
       </Pagina>
     </>
   );

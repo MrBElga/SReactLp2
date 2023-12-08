@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./form.css";
 import {
   Container,
@@ -9,13 +9,13 @@ import {
   Button,
   Alert,
 } from "react-bootstrap";
-import { useSelector, useDispatch} from 'react-redux';
-import { incluirFornecedor, atualizarFornecedor} from '../../redux/fornecedorReducer';
+import { useSelector, useDispatch } from 'react-redux';
+import { incluirFornecedor, atualizarFornecedor } from '../../redux/fornecedorReducer';
 
-export default function FormCadFornecedor(props) {
+const FormCadFornecedor = (props) => {
   const estadoInicialFornecedor = props.fornecedorParaEdicao;
-  const FornecedorVazio ={
-    nome:"",
+  const FornecedorVazio = {
+    nome: "",
     cnpj: "",
     email: "",
     telefone: "",
@@ -26,24 +26,37 @@ export default function FormCadFornecedor(props) {
     cidade: "",
     uf: "SP",
     cep: ""
-  }
+  };
+
   const [fornecedor, setFornecedor] = useState(estadoInicialFornecedor);
   const [validated, setValidated] = useState(false);
   const [cnpjDuplicado, setCnpjDuplicado] = useState(false);
   const [emailDuplicado, setEmailDuplicado] = useState(false);
 
-  const {status,mensagem,listaFornecedores} = useSelector((state)=>state.fornecedor);
+  const { status, mensagem, listaFornecedores } = useSelector((state) => state.fornecedor);
   const dispatch = useDispatch();
 
-  function manipularMudancas(e) {
+  useEffect(() => {
+    setFornecedor(estadoInicialFornecedor);
+  }, [estadoInicialFornecedor]);
+
+  const manipularMudancas = (e) => {
     const componente = e.currentTarget;
     setFornecedor({
       ...fornecedor,
       [componente.name]: componente.value,
     });
-  }
+  };
+  const limparDados = () => {
+    setFornecedor(FornecedorVazio);
+    props.setModoEdicao(false);
+    props.setFornecedorParaEdicao(FornecedorVazio)
+    setValidated(false);
+    props.exibirFormulario(false);
+  
+  };
 
-  function manipularSubmit(e) {
+  const manipularSubmit = (e) => {
     const form = e.currentTarget;
 
     if (form.checkValidity()) {
@@ -68,19 +81,19 @@ export default function FormCadFornecedor(props) {
         }
       } else {
         dispatch(atualizarFornecedor(fornecedor));
+        props.setFornecedorParaEdicao(FornecedorVazio)
         props.setModoEdicao(false);
         setFornecedor(FornecedorVazio);
         setValidated(false);
         props.setExibirAlert(true);
         props.exibirFormulario(false);
-     
       }
     } else {
       setValidated(true);
     }
     e.stopPropagation();
     e.preventDefault();
-  }
+  };
 
   return (
     <Container>
@@ -113,6 +126,7 @@ export default function FormCadFornecedor(props) {
                   id="cnpj"
                   name="cnpj"
                   value={fornecedor.cnpj}
+                  readOnly={props.modoEdicao}
                   onChange={manipularMudancas}
                   required
                 />
@@ -324,9 +338,7 @@ export default function FormCadFornecedor(props) {
             <Button
               type="button"
               variant="secondary"
-              onClick={() => {
-                props.exibirFormulario(false);
-              }}
+              onClick={limparDados}
             >
               Voltar
             </Button>
@@ -346,3 +358,5 @@ export default function FormCadFornecedor(props) {
     </Container>
   );
 }
+
+export default FormCadFornecedor;

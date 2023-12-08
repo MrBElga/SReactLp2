@@ -184,9 +184,9 @@ class Fornecedor {
     await fornecedorDAO.atualizar(this, conexao);
   }
 
-  async excluir(conexao) {
+  async excluir(id,conexao) {
     const fornecedorDAO = new FornecedorDAO();
-    await fornecedorDAO.excluir(this, conexao);
+    await fornecedorDAO.excluir(id, conexao);
   }
 
   async consultar(conexao) {
