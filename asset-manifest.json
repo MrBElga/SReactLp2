@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/SReactLp2/static/css/main.da18f8a4.css",
+    "main.js": "/SReactLp2/static/js/main.99709700.js",
+    "static/media/700049.jpg": "/SReactLp2/static/media/700049.684fd5322412bfa7998f.jpg",
+    "static/media/AsunaEsp.png": "/SReactLp2/static/media/AsunaEsp.7ffe530077aab5b3ef99.png",
+    "static/media/KiritoEsp.png": "/SReactLp2/static/media/KiritoEsp.3f187a76a044c2af2ec1.png",
+    "static/media/Logo3.png": "/SReactLp2/static/media/Logo3.85efee5014ab74f228ca.png",
+    "static/media/Config.svg": "/SReactLp2/static/media/Config.7362b99a1d20a2b0ae96516b9e4fd5fd.svg",
+    "static/media/Config_on.svg": "/SReactLp2/static/media/Config_on.3e25604bae982c60030b8dee44299b82.svg",
+    "static/media/Party & Profile.svg": "/SReactLp2/static/media/Party & Profile.389baa6c4310619385d8e7d1c068a049.svg",
+    "static/media/Party & Profile_on.svg": "/SReactLp2/static/media/Party & Profile_on.8f94d1ea9425a0e93cc064b49aa99ad0.svg",
+    "static/media/Items.svg": "/SReactLp2/static/media/Items.7510084d8537d711be3bc5bb09f88f85.svg",
+    "static/media/Items_on.svg": "/SReactLp2/static/media/Items_on.08e376385357171aab6b6ea575e5e343.svg",
+    "index.html": "/SReactLp2/index.html",
+    "static/media/Logout.svg": "/SReactLp2/static/media/Logout.b2677ed37ad2427b15df89168946e493.svg",
+    "static/media/Logout_on.svg": "/SReactLp2/static/media/Logout_on.c4262fc7643dcbfbb8d03830fb846e38.svg",
+    "static/media/Equipment.svg": "/SReactLp2/static/media/Equipment.82102f146c02c9cc62612e8580a06d8b.svg",
+    "static/media/Equipment_on.svg": "/SReactLp2/static/media/Equipment_on.03ef7e6fa6d17fc0ee4a9efb4be0f93d.svg",
+    "static/media/Message.svg": "/SReactLp2/static/media/Message.ad073092a0e4d3fba3b4e8a22163473f.svg",
+    "static/media/Message_on.svg": "/SReactLp2/static/media/Message_on.8b0a96ac098711d7a5e870cadda516e6.svg",
+    "static/media/Invite.svg": "/SReactLp2/static/media/Invite.357c5b19bcee4430a72a32cf4a64bc94.svg",
+    "static/media/Invite_on.svg": "/SReactLp2/static/media/Invite_on.83aea790a201d125feb095413cdcb7eb.svg",
+    "static/media/Man.svg": "/SReactLp2/static/media/Man.5973bf0bcb940ef90293b95630f816c0.svg",
+    "static/media/Man_on.svg": "/SReactLp2/static/media/Man_on.1606038c36012e4ea6788a14e434e417.svg",
+    "main.da18f8a4.css.map": "/SReactLp2/static/css/main.da18f8a4.css.map",
+    "main.99709700.js.map": "/SReactLp2/static/js/main.99709700.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.da18f8a4.css",
+    "static/js/main.99709700.js"
+  ]
+}
