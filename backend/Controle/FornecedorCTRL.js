@@ -3,7 +3,6 @@ import conectar from "../Persistencia/Conexao.js";
 
 export default class FornecedorCTRL {
   async gravar(requisicao, resposta) {
-  
     const conexao = await conectar();
     resposta.setHeader("Content-Type", "application/json");
 
@@ -20,7 +19,7 @@ export default class FornecedorCTRL {
           cidade,
           uf,
           cep,
-          email    
+          email,
         } = requisicao.body;
         const prior = 2;
         if (
@@ -54,9 +53,10 @@ export default class FornecedorCTRL {
 
           fornecedor
             .gravar(conexao)
-            .then(() => {
+            .then((fornecedor) => {
               resposta.json({
                 status: true,
+                codigoGerdao: fornecedor.codigo,
                 mensagem: "Fornecedor gravado com sucesso!",
               });
             })
@@ -142,6 +142,7 @@ export default class FornecedorCTRL {
             .then(() => {
               resposta.json({
                 status: true,
+                fornecedor,
                 mensagem: "Fornecedor atualizado com sucesso!",
               });
             })
@@ -179,15 +180,16 @@ export default class FornecedorCTRL {
     if (requisicao.method === "DELETE") {
       if (requisicao.is("application/json")) {
         const { id } = requisicao.params;
-
+        console.log(id)
         if (id) {
           const fornecedor = new Fornecedor();
-          fornecedor.codigo = id;
+       
           fornecedor
-            .excluir(conexao)
+            .excluir(id, conexao)
             .then(() => {
               resposta.json({
                 status: true,
+                fornecedor,
                 mensagem: "Fornecedor excluído com sucesso!",
               });
             })
@@ -226,8 +228,11 @@ export default class FornecedorCTRL {
       const fornecedor = new Fornecedor();
       fornecedor
         .consultar(conexao)
-        .then((fornecedores) => {
-          resposta.json(fornecedores);
+        .then((listaFornecedores) => {
+          resposta.json({
+            status: true,
+            listaFornecedores,
+          });
         })
         .catch((erro) => {
           resposta.json({
@@ -254,15 +259,14 @@ export default class FornecedorCTRL {
         const fornecedor = new Fornecedor();
         fornecedor.codigo = id;
         fornecedor
-          .consultarID(id,conexao)
+          .consultarID(id, conexao)
           .then((fornecedorConsultado) => {
             resposta.json(fornecedorConsultado);
           })
           .catch((erro) => {
             resposta.json({
               status: false,
-              mensagem:
-                "Erro ao consultar fornecedor por id: " + erro.message,
+              mensagem: "Erro ao consultar fornecedor por id: " + erro.message,
             });
           });
       } else {

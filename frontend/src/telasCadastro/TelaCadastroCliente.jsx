@@ -9,15 +9,15 @@ export default function TelaCadastroCliente(props) {
   const [exibirFormulario, setExibirFormulario] = useState(false);
   const [exibirAlert, setExibirAlert] = useState(false);
   const [clienteParaEdicao, setClienteParaEdicao] = useState({
-    cpf: '',
-    nome: '',
-    email: '',
-    endereco: '',
-    numero: '',
-    bairro: '',
-    cidade: '',
-    uf: 'SP',
-    cep: ''
+    cli_cpf: "",
+    cli_nome: "",
+    cli_email: "",
+    cli_endereco: "",
+    cli_numero: "",
+    cli_bairro: "",
+    cli_cidade: "",
+    cli_uf: "SP",
+    cli_cep: "",
   });
   const [modoEdicao, setModoEdicao] = useState(false);
 

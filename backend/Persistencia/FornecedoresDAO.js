@@ -1,11 +1,11 @@
-import Fornecedor from '../Modelo/Fornecedor.js'
+import Fornecedor from "../Modelo/Fornecedor.js";
 export default class FornecedorDAO {
   constructor() {}
 
   async gravar(fornecedor, conexao) {
-    if(fornecedor instanceof Fornecedor )
-    {
-      const sql = "INSERT INTO fornecedores (forn_cnpj, forn_nome, forn_telefone, forn_celular, forn_endereco, forn_numero, forn_bairro, forn_cidade, forn_uf, forn_cep, forn_email,usu_prior) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    if (fornecedor instanceof Fornecedor) {
+      const sql =
+        "INSERT INTO fornecedores (forn_cnpj, forn_nome, forn_telefone, forn_celular, forn_endereco, forn_numero, forn_bairro, forn_cidade, forn_uf, forn_cep, forn_email,usu_prior) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
       const valores = [
         fornecedor.cnpj,
         fornecedor.nome,
@@ -18,7 +18,7 @@ export default class FornecedorDAO {
         fornecedor.uf,
         fornecedor.cep,
         fornecedor.email,
-        fornecedor.prior
+        fornecedor.prior,
       ];
 
       try {
@@ -49,7 +49,7 @@ export default class FornecedorDAO {
         fornecedor.prior,
         fornecedor.codigo,
       ];
-  
+
       try {
         await conexao.execute(sql, valores);
       } catch (error) {
@@ -57,13 +57,30 @@ export default class FornecedorDAO {
       }
     }
   }
-  
+
   async consultar(conexao) {
     const sql = "SELECT * FROM fornecedores";
 
     try {
       const [rows] = await conexao.query(sql);
-      return rows;
+
+      const fornecedores = rows.map((fornecedor) => ({
+        cnpj: fornecedor.forn_cnpj,
+        nome: fornecedor.forn_nome,
+        telefone: fornecedor.forn_telefone,
+        celular: fornecedor.forn_celular,
+        endereco: fornecedor.forn_endereco,
+        numero: fornecedor.forn_numero,
+        bairro: fornecedor.forn_bairro,
+        cidade: fornecedor.forn_cidade,
+        uf: fornecedor.forn_uf,
+        cep: fornecedor.forn_cep,
+        email: fornecedor.forn_email,
+        prior: fornecedor.usu_prior,
+        codigo: fornecedor.forn_codigo,
+      }));
+
+      return fornecedores;
     } catch (error) {
       throw error;
     }
@@ -80,16 +97,12 @@ export default class FornecedorDAO {
     }
   }
 
-  async excluir(fornecedor, conexao) {
-    if(fornecedor instanceof Fornecedor )
-    {
-      const sql = "DELETE FROM fornecedores WHERE codigo = ?";
-
-      try {
-        await conexao.execute(sql, [fornecedor.codigo]);
-      } catch (error) {
-        throw error;
-      }
+  async excluir(id, conexao) {
+    const sql = "DELETE FROM fornecedores WHERE forn_codigo = ?";
+    try {
+      await conexao.execute(sql, [id]);
+    } catch (error) {
+      throw error;
     }
   }
 }

@@ -11,20 +11,22 @@ import {
 } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { incluirCliente, atualizarCliente } from "../../redux/clienteReducer";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function FormCadCliente(props) {
   const estadoInicialCliente = props.clienteParaEdicao;
   
   const clienteVazio = {
-    cpf: "",
-    nome: "",
-    email: "",
-    endereco: "",
-    numero: "",
-    bairro: "",
-    cidade: "",
-    uf: "SP",
-    cep: "",
+    cli_cpf: "",
+    cli_nome: "",
+    cli_email: "",
+    cli_endereco: "",
+    cli_numero: "",
+    cli_bairro: "",
+    cli_cidade: "",
+    cli_uf: "SP",
+    cli_cep: "",
   };
 
   const [cliente, setCliente] = useState(estadoInicialCliente);
@@ -32,7 +34,7 @@ export default function FormCadCliente(props) {
   const [cpfError, setCpfError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [showAlertErro, setShowAlertErro] = useState(false);
-  const { status, mensagem, listaClientes } = useSelector((state)=>state.cliente);
+  const { status, mensagem, listaClientes } = useSelector((state) => state.cliente);
   const dispatch = useDispatch();
 
   function manipularMudancas(e) {
@@ -58,25 +60,23 @@ export default function FormCadCliente(props) {
       setEmailError("");
 
       if (props.modoEdicao) {
-        dispatch(atualizarCliente(cliente))
+        dispatch(atualizarCliente(cliente));
         props.setModoEdicao(false);
         props.setClienteParaEdicao(clienteVazio);
         setCliente(clienteVazio);
         props.exibirFormulario(false);  
         props.setExibirAlert(true);
-
       } else {
-        if (verificarExistenciaCPF(cliente.cpf)) {
+        if (verificarExistenciaCPF(cliente.cli_cpf)) {
           setCpfError("CPF já cadastrado!");
           setShowAlertErro(true);
           setValidated(false);
-        } else if (verificarExistenciaEmail(cliente.email)) {
+        } else if (verificarExistenciaEmail(cliente.cli_email)) {
           setEmailError("Email já cadastrado!");
           setShowAlertErro(true);
           setValidated(false);
         } else {
-          //props.setListaClientes([...props.listaClientes, cliente]);
-          dispatch(incluirCliente(cliente))
+          dispatch(incluirCliente(cliente));
           setCliente(clienteVazio);
           setValidated(false);
           setShowAlertErro(false);
@@ -92,8 +92,10 @@ export default function FormCadCliente(props) {
     e.preventDefault();
   }
 
+
     return (
       <Container  className="container">
+          <ToastContainer />
         <Form noValidate validated={validated} onSubmit={manipularSubmit}>
           <Row>
             <Col md={5}>
@@ -102,9 +104,10 @@ export default function FormCadCliente(props) {
                   <Form.Control
                     type="text"
                     placeholder="000.000.000-00"
-                    name="cpf"
-                    value={cliente.cpf}
+                    name="cli_cpf"
+                    value={cliente.cli_cpf}
                     onChange={manipularMudancas}
+                    readOnly={props.modoEdicao}
                     required
                    
                   />
@@ -121,8 +124,8 @@ export default function FormCadCliente(props) {
                   <Form.Control
                     type="email"
                     placeholder="Informe o email"
-                    name="email"
-                    value={cliente.email}
+                    name="cli_email"
+                    value={cliente.cli_email}
                     onChange={manipularMudancas}
                   />
                 </FloatingLabel>
@@ -139,8 +142,8 @@ export default function FormCadCliente(props) {
                   <Form.Control
                     type="text"
                     placeholder="Informe o nome completo"
-                    name="nome"
-                    value={cliente.nome}
+                    name="cli_nome"
+                    value={cliente.cli_nome}
                     onChange={manipularMudancas}
                     required
                   />
@@ -158,8 +161,8 @@ export default function FormCadCliente(props) {
                   <Form.Control
                     type="text"
                     placeholder="Avenida/Rua/Alameda/Viela ..."
-                    name="endereco"
-                    value={cliente.endereco}
+                    name="cli_endereco"
+                    value={cliente.cli_endereco}
                     onChange={manipularMudancas}
                   />
                 </FloatingLabel>
@@ -174,8 +177,8 @@ export default function FormCadCliente(props) {
                   <Form.Control
                     type="number"
                     placeholder="Nº"
-                    name="numero"
-                    value={cliente.numero}
+                    name="cli_numero"
+                    value={cliente.cli_numero}
                     onChange={manipularMudancas}
                   />
                 </FloatingLabel>
@@ -192,8 +195,8 @@ export default function FormCadCliente(props) {
                   <Form.Control
                     type="text"
                     placeholder="Bairro/Vila..."
-                    name="bairro"
-                    value={cliente.bairro}
+                    name="cli_bairro"
+                    value={cliente.cli_bairro}
                     onChange={manipularMudancas}
                   />
                 </FloatingLabel>
@@ -208,8 +211,8 @@ export default function FormCadCliente(props) {
                   <Form.Control
                     type="text"
                     placeholder="Cidade"
-                    name="cidade"
-                    value={cliente.cidade}
+                    name="cli_cidade"
+                    value={cliente.cli_cidade}
                     onChange={manipularMudancas}
                   />
                 </FloatingLabel>
@@ -224,8 +227,8 @@ export default function FormCadCliente(props) {
                   <Form.Select
                     className="divEstilo"
                     aria-label="Unidades Federativas brasileiras"
-                    name="uf"
-                    value={cliente.uf}
+                    name="cli_uf"
+                    value={cliente.cli_uf}
                     onChange={manipularMudancas}
                   >
                     <option value="SP" selected>
@@ -269,8 +272,8 @@ export default function FormCadCliente(props) {
                   <Form.Control
                     type="text"
                     placeholder="00000-000"
-                    name="cep"
-                    value={cliente.cep}
+                    name="cli_cep"
+                    value={cliente.cli_cep}
                     onChange={manipularMudancas}
                   />
                 </FloatingLabel>

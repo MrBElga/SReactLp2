@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Container, Form, Row, Col, FloatingLabel, Button, Alert } from "react-bootstrap";
+import { Container, Form, Row, Col, FloatingLabel, Button, Alert,Spinner } from "react-bootstrap";
 import "./form.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from "react-redux";
 import { incluirCategoria, atualizarCategoria } from "../../redux/categoriaReducer";
+import ESTADO from '../../recurso/estado';
 
 const FormCadCategoria = (props) => {
   const categoriaIn = props.categoriaParaEdicao;
   const categoriaVazia = {
-    cat_codigo:0,
+    cat_codigo: 0,
     cat_nome: "",
     cat_descricao: "",
   };
@@ -35,7 +38,6 @@ const FormCadCategoria = (props) => {
     if (form.checkValidity()) {
       if (!props.modoEdicao) {
         if (listaCategorias.some((itemCategoria) => itemCategoria.cat_nome === categoria.cat_nome)) {
-
           setCategoriaDuplicada(true);
         } else {
           dispatch(incluirCategoria(categoria));
@@ -60,8 +62,27 @@ const FormCadCategoria = (props) => {
   }
 
 
+  if (status === ESTADO.PENDENTE) {
+    toast(({ closeToast }) =>
+        <div>
+            <Spinner animation="border" role="status"></Spinner>
+            <p>Buscando categorias....</p>
+        </div>
+    ,{toastId:status});
+}
+else if (status === ESTADO.ERRO) {
+    toast.error(({ closeToast }) =>
+        <div>
+            <p>{mensagem}</p>
+
+        </div>
+    , {toastId: status});
+}
+else {
+    toast.dismiss();
   return (
     <Container>
+      <ToastContainer />
       <Form noValidate validated={validated} onSubmit={manipularSubmit}>
         <Row>
           <Col>
@@ -124,6 +145,7 @@ const FormCadCategoria = (props) => {
       </Form>
     </Container>
   );
+ }
 };
 
 export default FormCadCategoria;

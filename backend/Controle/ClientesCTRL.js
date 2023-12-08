@@ -2,7 +2,6 @@ import Cliente from "../Modelo/Clientes.js";
 import conectar from "../Persistencia/Conexao.js";
 
 export default class ClienteCTRL {
-
   async gravar(requisicao, resposta) {
     const conexao = await conectar();
     resposta.setHeader("Content-Type", "application/json");
@@ -10,65 +9,58 @@ export default class ClienteCTRL {
     if (requisicao.method === "POST") {
       if (requisicao.is("application/json")) {
         const {
-          cpf,
-          nome,
-          telefone,
-          celular,
-          endereco,
-          numero,
-          bairro,
-          cidade,
-          uf,
-          cep,
-          email
+          cli_cpf,
+          cli_nome,
+          cli_endereco,
+          cli_numero,
+          cli_bairro,
+          cli_cidade,
+          cli_uf,
+          cli_cep,
+          cli_email,
         } = requisicao.body;
         console.log(
-          cpf,
-          nome,
-          telefone,
-          celular,
-          endereco,
-          numero,
-          bairro,
-          cidade,
-          uf,
-          cep,
-          email
+          cli_cpf,
+          cli_nome,
+          cli_endereco,
+          cli_numero,
+          cli_bairro,
+          cli_cidade,
+          cli_uf,
+          cli_cep,
+          cli_email
         );
-        const prior = 3;
+        const cli_prior = 3;
         if (
-          cpf &&
-          nome &&
-          telefone &&
-          celular &&
-          endereco &&
-          numero &&
-          bairro &&
-          cidade &&
-          uf &&
-          cep &&
-          email &&
-          prior
+          cli_cpf &&
+          cli_nome &&
+          cli_endereco &&
+          cli_numero &&
+          cli_bairro &&
+          cli_cidade &&
+          cli_uf &&
+          cli_cep &&
+          cli_email &&
+          cli_prior
         ) {
           const cliente = new Cliente(
-            cpf,
-            nome,
-            telefone,
-            celular,
-            endereco,
-            numero,
-            bairro,
-            cidade,
-            uf,
-            cep,
-            email,
-            prior
+            cli_cpf,
+            cli_nome,
+            cli_endereco,
+            cli_numero,
+            cli_bairro,
+            cli_cidade,
+            cli_uf,
+            cli_cep,
+            cli_email,
+            cli_prior
           );
           cliente
             .gravar(conexao)
-            .then(() => {
+            .then((cliente) => {
               resposta.json({
                 status: true,
+                codigoGerdao: cliente.cli_codigo,
                 mensagem: "Cliente gravado com sucesso!",
               });
             })
@@ -102,36 +94,69 @@ export default class ClienteCTRL {
   async atualizar(requisicao, resposta) {
     const conexao = await conectar();
     resposta.setHeader("Content-Type", "application/json");
-  
+
     if (requisicao.method === "PUT") {
       if (requisicao.is("application/json")) {
-        const dados = requisicao.body;
-        const cliente = new Cliente(
-          dados.cpf,
-          dados.nome,
-          dados.telefone,
-          dados.celular,
-          dados.endereco,
-          dados.numero,
-          dados.bairro,
-          dados.cidade,
-          dados.uf,
-          dados.cep,
-          dados.email,
-          3  // Prioridade fixa como 3, conforme seu padrão
-        );
-        cliente.codigo = requisicao.params.id;
-  
-        try {
-          await cliente.atualizar(conexao);
-          resposta.json({
-            status: true,
-            mensagem: "Cliente atualizado com sucesso!",
-          });
-        } catch (error) {
+        const { body, params } = requisicao;
+        const { id } = params;
+        const cli_prior = 3;
+
+        const {
+          cli_cpf,
+          cli_nome,
+          cli_endereco,
+          cli_numero,
+          cli_bairro,
+          cli_cidade,
+          cli_uf,
+          cli_cep,
+          cli_email,
+        } = body;
+        if (
+          cli_cpf &&
+          cli_nome &&
+          cli_endereco &&
+          cli_numero &&
+          cli_bairro &&
+          cli_cidade &&
+          cli_uf &&
+          cli_cep &&
+          cli_email
+        ) {
+          const cliente = new Cliente(
+            cli_cpf,
+            cli_nome,
+            cli_endereco,
+            cli_numero,
+            cli_bairro,
+            cli_cidade,
+            cli_uf,
+            cli_cep,
+            cli_email,
+            cli_prior
+          );
+      
+
+          cliente.cli_codigo = id;
+
+          try {
+            await cliente.atualizar(conexao);
+            resposta.json({
+              status: true,
+              cliente,
+              mensagem: "Cliente atualizado com sucesso!",
+            });
+          } catch (error) {
+            resposta.json({
+              status: false,
+              mensagem: "Erro ao atualizar o cliente: " + error.message,
+            });
+          }
+        } else {
           resposta.json({
             status: false,
-            mensagem: "Erro ao atualizar o cliente: " + error.message,
+            mensagem:
+              "Verifique a documentação da API e informe todos os dados necessários de uma categoria!",
           });
         }
       } else {
@@ -147,7 +172,6 @@ export default class ClienteCTRL {
       });
     }
   }
-  
 
   async excluir(requisicao, resposta) {
     const conexao = await conectar();
@@ -156,15 +180,15 @@ export default class ClienteCTRL {
     if (requisicao.method === "DELETE") {
       if (requisicao.is("application/json")) {
         const id = requisicao.params.id;
-
+        console.log(id);
         if (id) {
           const cliente = new Cliente();
-          cliente.codigo = id;
           cliente
-            .excluir(conexao)
+            .excluir(id,conexao)
             .then(() => {
               resposta.json({
                 status: true,
+                cliente,
                 mensagem: "Cliente excluído com sucesso!",
               });
             })
@@ -202,8 +226,11 @@ export default class ClienteCTRL {
       const cliente = new Cliente();
       cliente
         .consultar(conexao)
-        .then((clientes) => {
-          resposta.json(clientes);
+        .then((listaClientes) => {
+          resposta.json({
+            status: true,
+            listaClientes,
+          });
         })
         .catch((erro) => {
           resposta.json({
@@ -229,7 +256,7 @@ export default class ClienteCTRL {
       if (id) {
         const cliente = new Cliente(id);
         cliente
-          .consultarId(id,conexao)
+          .consultarId(id, conexao)
           .then((clienteConsultado) => {
             resposta.json(clienteConsultado);
           })

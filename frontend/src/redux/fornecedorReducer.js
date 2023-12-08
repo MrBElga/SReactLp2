@@ -5,9 +5,11 @@ const urlBase = "http://localhost:4000/fornecedor";
 
 // Thunks
 export const buscarFornecedores = createAsyncThunk('buscarFornecedores', async () => {
+
   try {
     const resposta = await fetch(urlBase, { method: "GET" });
     const dados = await resposta.json();
+    console.log(dados)
     return dados;
   } catch (erro) {
     return {
@@ -37,11 +39,31 @@ export const incluirFornecedor = createAsyncThunk('incluirFornecedor', async (fo
   }
 });
 
-export const excluirFornecedor = createAsyncThunk('excluirFornecedor', async (cnpj) => {
+export const excluirFornecedor  = createAsyncThunk('excluirFornecedor', async (fornecedor) => {
+  console.log(fornecedor)
   try {
-    const resposta = await fetch(`${urlBase}/${cnpj}`, { method: "DELETE" });
+    const resposta = await fetch(`${urlBase}/${fornecedor.codigo}`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(fornecedor)
+    });
+
     const dados = await resposta.json();
-    return dados;
+    console.log(dados)
+    if (dados.status) {
+      return {
+        status: dados.status,
+        fornecedor,
+        mensagem: dados.mensagem
+      };
+    } else {
+      return {
+        status: dados.status,
+        mensagem: dados.mensagem
+      };
+    }
   } catch (erro) {
     return {
       status: false,
@@ -52,7 +74,7 @@ export const excluirFornecedor = createAsyncThunk('excluirFornecedor', async (cn
 
 export const atualizarFornecedor = createAsyncThunk('atualizarFornecedor', async (fornecedor) => {
   try {
-    const resposta = await fetch(`${urlBase}/${fornecedor.cnpj}`, {
+    const resposta = await fetch(`${urlBase}/${fornecedor.codigo}`, {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json'
@@ -105,6 +127,7 @@ const fornecedorSlice = createSlice({
       })
       .addCase(incluirFornecedor.fulfilled, (state, action) => {
         if (action.payload.status) {
+          console.log(action.payload.fornecedor)
           state.status = ESTADO.OCIOSO;
           state.mensagem = action.payload.mensagem;
           state.listaFornecedores.push(action.payload.fornecedor);
@@ -121,27 +144,31 @@ const fornecedorSlice = createSlice({
         if (action.payload.status) {
           state.status = ESTADO.OCIOSO;
           state.mensagem = action.payload.mensagem;
-          state.listaFornecedores = state.listaFornecedores.filter(fornecedor => fornecedor.cnpj !== action.payload.cnpj);
+      
+          state.listaFornecedores = state.listaFornecedores.filter(fornecedor => fornecedor.cnpj !== action.payload.fornecedor.cnpj);
         } else {
           state.status = ESTADO.ERRO;
           state.mensagem = action.payload.mensagem;
         }
       })
+      
       .addCase(atualizarFornecedor.pending, (state) => {
         state.status = ESTADO.PENDENTE;
         state.mensagem = 'Processando a requisição...';
       })
       .addCase(atualizarFornecedor.fulfilled, (state, action) => {
         if (action.payload.status) {
+          console.log(action.payload.fornecedor)
           state.status = ESTADO.OCIOSO;
           state.mensagem = action.payload.mensagem;
-          const listaTemporariaFornecedores = state.listaFornecedores.filter(fornecedor => fornecedor.cnpj !== action.payload.cnpj);
+          const listaTemporariaFornecedores = state.listaFornecedores.filter(fornecedor => fornecedor.cnpj !== action.payload.fornecedor.cnpj);
           state.listaFornecedores = [...listaTemporariaFornecedores, action.payload.fornecedor];
         } else {
           state.status = ESTADO.ERRO;
           state.mensagem = action.payload.mensagem;
         }
       })
+      
   }
 });
 

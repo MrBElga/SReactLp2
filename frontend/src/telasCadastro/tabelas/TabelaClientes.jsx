@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Container, Table, Button, Modal } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { buscarClientes, excluirCliente } from "../../redux/clienteReducer";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import "./tabela.css";
 
 export default function TabelaClientes(props) {
@@ -14,14 +16,14 @@ export default function TabelaClientes(props) {
     dispatch(buscarClientes());
   }, [dispatch]);
 
-  function excluirCliente(cliente) {
+  function remover(cliente) {
     setClienteToDelete(cliente);
     setShowModal(true);
   }
 
   function confirmarExclusao() {
     if (clienteToDelete) {
-      dispatch(excluirCliente(clienteToDelete.cpf));
+      dispatch(excluirCliente(clienteToDelete));
       setShowModal(false);
       setClienteToDelete(null);
     }
@@ -40,6 +42,7 @@ export default function TabelaClientes(props) {
 
   return (
     <Container>
+      <ToastContainer />
       <Button
         type="button"
         onClick={() => {
@@ -65,19 +68,19 @@ export default function TabelaClientes(props) {
         <tbody>
           {listaClientes.map((cliente) => {
             return (
-              <tr key={cliente.cpf}>
-                <td>{cliente.cpf}</td>
-                <td>{cliente.nome}</td>
-                <td>{cliente.email}</td>
-                <td>{cliente.endereco + ", n " + cliente.numero}</td>
-                <td>{cliente.bairro}</td>
-                <td>{cliente.cidade}/{cliente.uf}</td>
-                <td>{cliente.cep}</td>
+              <tr key={cliente.cli_cpf}>
+                <td>{cliente.cli_cpf}</td>
+                <td>{cliente.cli_nome}</td>
+                <td>{cliente.cli_email}</td>
+                <td>{cliente.cli_endereco + ", n " + cliente.cli_numero}</td>
+                <td>{cliente.cli_cpf}</td>
+                <td>{cliente.cli_cidade}/{cliente.cli_uf}</td>
+                <td>{cliente.cli_cep}</td>
                 <td>
                   <Button
                     className="btn-excluir"
                     onClick={() => {
-                      excluirCliente(cliente);
+                      remover(cliente);
                     }}
                   >
                     Excluir

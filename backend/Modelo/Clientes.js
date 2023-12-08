@@ -1,188 +1,167 @@
 import ClientesDAO from "../Persistencia/ClientesDAO.js";
 
 class Clientes {
-  #codigo;
-  #cpf;
-  #nome;
-  #telefone;
-  #celular;
-  #endereco;
-  #numero;
-  #bairro;
-  #cidade;
-  #uf;
-  #cep;
-  #email;
-  #prior;
+  #cli_codigo;
+  #cli_cpf;
+  #cli_nome;
+  #cli_endereco;
+  #cli_numero;
+  #cli_bairro;
+  #cli_cidade;
+  #cli_uf;
+  #cli_cep;
+  #cli_email;
+  #cli_prior;
 
   constructor(
-    cpf,
-    nome,
-    telefone,
-    celular,
-    endereco,
-    numero,
-    bairro,
-    cidade,
-    uf,
-    cep,
-    email,
-    prior,
-    codigo = 0
+    cli_cpf='',
+    cli_nome='',
+    cli_endereco='',
+    cli_numero='',
+    cli_bairro='',
+    cli_cidade='',
+    cli_uf='',
+    cli_cep='',
+    cli_email='',
+    cli_prior='',
+    cli_codigo = 0
   ) {
-    this.#codigo = codigo;
-    this.#cpf = cpf;
-    this.#nome = nome;
-    this.#telefone = telefone;
-    this.#celular = celular;
-    this.#endereco = endereco;
-    this.#numero = numero;
-    this.#bairro = bairro;
-    this.#cidade = cidade;
-    this.#uf = uf;
-    this.#cep = cep;
-    this.#email = email;
-    this.#prior = prior;
+    //console.log(cli_cpf, cli_nome, cli_endereco, cli_numero, cli_bairro, cli_cidade, cli_uf, cli_cep, cli_email, cli_prior, cli_codigo);
+
+    this.#cli_codigo = cli_codigo;
+    this.#cli_cpf = cli_cpf;
+    this.#cli_nome = cli_nome;
+    this.#cli_endereco = cli_endereco;
+    this.#cli_numero = cli_numero;
+    this.#cli_bairro = cli_bairro;
+    this.#cli_cidade = cli_cidade;
+    this.#cli_uf = cli_uf;
+    this.#cli_cep = cli_cep;
+    this.#cli_email = cli_email;
+    this.#cli_prior = cli_prior;
   }
 
   toJSON() {
     return {
-      codigo: this.#codigo,
-      cpf: this.#cpf,
-      nome: this.#nome,
-      telefone: this.#telefone,
-      celular: this.#celular,
-      endereco: this.#endereco,
-      numero: this.#numero,
-      bairro: this.#bairro,
-      cidade: this.#cidade,
-      uf: this.#uf,
-      cep: this.#cep,
-      email: this.#email,
-      prior: this.#prior,
+      cli_codigo: this.#cli_codigo,
+      cli_cpf: this.#cli_cpf,
+      cli_nome: this.#cli_nome,
+      cli_endereco: this.#cli_endereco,
+      cli_numero: this.#cli_numero,
+      cli_bairro: this.#cli_bairro,
+      cli_cidade: this.#cli_cidade,
+      cli_uf: this.#cli_uf,
+      cli_cep: this.#cli_cep,
+      cli_email: this.#cli_email,
+      cli_prior: this.#cli_prior,
     };
   }
 
-  get codigo() {
-    return this.#codigo;
+  get cli_codigo() {
+    return this.#cli_codigo;
   }
 
-  set codigo(codigo) {
-    if (codigo > 0) this.#codigo = codigo;
+  set cli_codigo(cli_codigo) {
+    if (cli_codigo > 0) this.#cli_codigo = cli_codigo;
   }
 
-  get cpf() {
-    return this.#cpf;
+  get cli_cpf() {
+    return this.#cli_cpf;
   }
 
-  set cpf(cpf) {
-    this.#cpf = cpf;
+  set cli_cpf(cli_cpf) {
+    this.#cli_cpf = cli_cpf;
   }
 
-  get nome() {
-    return this.#nome;
+  get cli_nome() {
+    return this.#cli_nome;
   }
 
-  set nome(nome) {
-    this.#nome = nome;
+  set cli_nome(cli_nome) {
+    this.#cli_nome = cli_nome;
   }
 
-  get telefone() {
-    return this.#telefone;
+  get cli_endereco() {
+    return this.#cli_endereco;
   }
 
-  set telefone(telefone) {
-    this.#telefone = telefone;
+  set cli_endereco(cli_endereco) {
+    this.#cli_endereco = cli_endereco;
   }
 
-  get celular() {
-    return this.#celular;
+  get cli_numero() {
+    return this.#cli_numero;
   }
 
-  set celular(celular) {
-    this.#celular = celular;
+  set cli_numero(cli_numero) {
+    this.#cli_numero = cli_numero;
   }
 
-  get endereco() {
-    return this.#endereco;
+  get cli_bairro() {
+    return this.#cli_bairro;
   }
 
-  set endereco(endereco) {
-    this.#endereco = endereco;
+  set cli_bairro(cli_bairro) {
+    this.#cli_bairro = cli_bairro;
   }
 
-  get numero() {
-    return this.#numero;
+  get cli_cidade() {
+    return this.#cli_cidade;
   }
 
-  set numero(numero) {
-    this.#numero = numero;
+  set cli_cidade(cli_cidade) {
+    this.#cli_cidade = cli_cidade;
   }
 
-  get bairro() {
-    return this.#bairro;
+  get cli_uf() {
+    return this.#cli_uf;
   }
 
-  set bairro(bairro) {
-    this.#bairro = bairro;
+  set cli_uf(cli_uf) {
+    this.#cli_uf = cli_uf;
   }
 
-  get cidade() {
-    return this.#cidade;
+  get cli_cep() {
+    return this.#cli_cep;
   }
 
-  set cidade(cidade) {
-    this.#cidade = cidade;
+  set cli_cep(cli_cep) {
+    this.#cli_cep = cli_cep;
   }
 
-  get uf() {
-    return this.#uf;
+  get cli_email() {
+    return this.#cli_email;
   }
 
-  set uf(uf) {
-    this.#uf = uf;
+  set cli_email(cli_email) {
+    this.#cli_email = cli_email;
+  }
+  get cli_prior() {
+    return this.#cli_prior;
   }
 
-  get cep() {
-    return this.#cep;
-  }
-
-  set cep(cep) {
-    this.#cep = cep;
-  }
-
-  get email() {
-    return this.#email;
-  }
-
-  set email(email) {
-    this.#email = email;
-  }
-  get prior() {
-    return this.#prior;
-  }
-
-  set prior(prior) {
-    this.#prior = prior;
+  set cli_prior(cli_prior) {
+    this.#cli_prior = cli_prior;
   }
 
   toString() {
-    return `Cliente - Código: ${this.#codigo}, Nome: ${this.#nome}, CPF: ${
-      this.#cpf
-    }, Telefone: ${this.#telefone}, Celular: ${this.#celular}, Endereço: ${
-      this.#endereco
-    }, Número: ${this.#numero}, Bairro: ${this.#bairro}, Cidade: ${
-      this.#cidade
-    }, UF: ${this.#uf}, CEP: ${this.#cep}, Email: ${this.#email}, prior: ${
-      this.#prior
+    return `Cliente - Código: ${this.#cli_codigo}, cli_nome: ${this.#cli_nome}, cli_cpf: ${
+      this.#cli_cpf
+    }, Endereço: ${
+      this.#cli_endereco
+    }, Número: ${this.#cli_numero}, cli_bairro: ${this.#cli_bairro}, cli_cidade: ${
+      this.#cli_cidade
+    }, cli_uf: ${this.#cli_uf}, cli_cep: ${this.#cli_cep}, cli_email: ${this.#cli_email}, cli_prior: ${
+      this.#cli_prior
     }`;
   }
+  
 
   async gravar(conexao) {
     const clientesDAO = new ClientesDAO();
 
     const id = await clientesDAO.gravar(this, conexao);
-    this.#codigo = id;
+    this.#cli_codigo = id;
   }
 
   async atualizar(conexao) {
@@ -191,9 +170,9 @@ class Clientes {
 
   }
 
-  async excluir(conexao) {
+  async excluir(id,conexao) {
     const clientesDAO = new ClientesDAO();
-    await clientesDAO.excluir(this, conexao);
+    await clientesDAO.excluir(id, conexao);
   }
 
   async consultar(conexao) {

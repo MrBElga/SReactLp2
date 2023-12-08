@@ -17,14 +17,14 @@ export default function TabelaFornecedores(props) {
     dispatch(buscarFornecedores());
   }, [dispatch]);
 
-  function excluirFornecedor(fornecedor) {
+  function remover(fornecedor) {
     setFornecedorToDelete(fornecedor);
     setShowModal(true);
   }
 
   function confirmarExclusao() {
     if (fornecedorToDelete) {
-      dispatch(excluirFornecedor(fornecedorToDelete.cnpj));
+      dispatch(excluirFornecedor(fornecedorToDelete));
       setShowModal(false);
       setFornecedorToDelete(null);
     }
@@ -65,31 +65,32 @@ export default function TabelaFornecedores(props) {
           </tr>
         </thead>
         <tbody>
-          {listaFornecedores.map((fornecedor) => {
-            return (
-              <tr key={fornecedor.cnpj}>
-                <td>{fornecedor.nome}</td>
-                <td>{fornecedor.cnpj}</td>
-                <td>{fornecedor.endereco}</td>
-                <td>{fornecedor.numero}</td>
-                <td>
-                  {fornecedor.cidade}/{fornecedor.uf}
-                </td>
-                <td>{fornecedor.cep}</td>
-                <td>
-                  <Button
-                    className="btn-excluir"
-                    onClick={() => {
-                      excluirFornecedor(fornecedor);
-                    }}
-                  >
-                    Excluir
-                  </Button>
-                  <Button className="btn-editar" onClick={() => { editarFornecedor(fornecedor); }}>Editar</Button>
-                </td>
-              </tr>
-            );
-          })}
+          {listaFornecedores.map((fornecedor) => (
+            <tr key={fornecedor.cnpj}>
+              <td>{fornecedor.nome}</td>
+              <td>{fornecedor.cnpj}</td>
+              <td>{fornecedor.endereco}</td>
+              <td>{fornecedor.numero}</td>
+              <td>
+                {fornecedor.cidade}/{fornecedor.uf}
+              </td>
+              <td>{fornecedor.cep}</td>
+              <td>
+                <Button
+                  className="btn-excluir"
+                  onClick={() => remover(fornecedor)}
+                >
+                  Excluir
+                </Button>
+                <Button
+                  className="btn-editar"
+                  onClick={() => editarFornecedor(fornecedor)}
+                >
+                  Editar
+                </Button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </Table>
 

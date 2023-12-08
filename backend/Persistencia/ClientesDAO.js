@@ -6,21 +6,20 @@ export default class ClientesDAO {
     if(cliente instanceof Cliente)
     {
       const sql =
-        "INSERT INTO clientes (cli_cpf, cli_nome, cli_telefone, cli_celular, cli_endereco, cli_numero, cli_bairro, cli_cidade, cli_uf, cli_cep, cli_email, usu_prior) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        "INSERT INTO clientes (cli_cpf, cli_nome, cli_endereco, cli_numero, cli_bairro, cli_cidade, cli_uf, cli_cep, cli_email, usu_prior) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       const valores = [
-        cliente.cpf,
-        cliente.nome,
-        cliente.telefone,
-        cliente.celular,
-        cliente.endereco,
-        cliente.numero,
-        cliente.bairro,
-        cliente.cidade,
-        cliente.uf,
-        cliente.cep,
-        cliente.email,
-        cliente.prior,
+        cliente.cli_cpf,
+        cliente.cli_nome,
+        cliente.cli_endereco,
+        cliente.cli_numero,
+        cliente.cli_bairro,
+        cliente.cli_cidade,
+        cliente.cli_uf,
+        cliente.cli_cep,
+        cliente.cli_email,
+        cliente.cli_prior,
       ];
+      
 
       try {
         const [result] = await conexao.execute(sql, valores);
@@ -32,25 +31,34 @@ export default class ClientesDAO {
   }
 
   async atualizar(cliente, conexao) {
-    
+    console.log(   
+      cliente.cli_cpf,
+      cliente.cli_nome,
+      cliente.cli_endereco,
+      cliente.cli_numero,
+      cliente.cli_bairro,
+      cliente.cli_cidade,
+      cliente.cli_uf,
+      cliente.cli_cep,
+      cliente.cli_email,
+      cliente.cli_prior,
+      cliente.cli_codigo)
     if(cliente instanceof Cliente)
     {
       const sql = 
-        "UPDATE clientes SET cli_cpf = ?, cli_nome = ?, cli_telefone = ?, cli_celular = ?, cli_endereco = ?, cli_numero = ?, cli_bairro = ?, cli_cidade = ?, cli_uf = ?, cli_cep = ?, cli_email = ?, usu_prior = ? WHERE cli_codigo = ?";
+        "UPDATE clientes SET cli_cpf = ?, cli_nome = ?, cli_endereco = ?, cli_numero = ?, cli_bairro = ?, cli_cidade = ?, cli_uf = ?, cli_cep = ?, cli_email = ?, usu_prior = ? WHERE cli_codigo = ?";
       const valores = [
-        cliente.cpf,
-        cliente.nome,
-        cliente.telefone,
-        cliente.celular,
-        cliente.endereco,
-        cliente.numero,
-        cliente.bairro,
-        cliente.cidade,
-        cliente.uf,
-        cliente.cep,
-        cliente.email,
-        cliente.prior,
-        cliente.codigo
+        cliente.cli_cpf,
+        cliente.cli_nome,
+        cliente.cli_endereco,
+        cliente.cli_numero,
+        cliente.cli_bairro,
+        cliente.cli_cidade,
+        cliente.cli_uf,
+        cliente.cli_cep,
+        cliente.cli_email,
+        cliente.cli_prior,
+        cliente.cli_codigo
       ];
 
       try {
@@ -84,15 +92,13 @@ export default class ClientesDAO {
   }
 
   async excluir(cliente, conexao) {
-    if(cliente instanceof Cliente)
-    {
+
       const sql = "DELETE FROM clientes WHERE cli_codigo = ?";
 
       try {
-        await conexao.execute(sql, [cliente.codigo]);
+        await conexao.execute(sql, [cliente]);
       } catch (error) {
         throw error;
       }
     }
-  }
 }

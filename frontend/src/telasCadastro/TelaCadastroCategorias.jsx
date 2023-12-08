@@ -32,6 +32,7 @@ export default function TelaCadastroCategoria(props) {
   return (
     <>
       <Pagina>
+       
         <Container className="container-centralizadoTelas">
           {exibirFormulario ? (
             <FormCadCategoria
@@ -55,12 +56,13 @@ export default function TelaCadastroCategoria(props) {
             />
           )}
         </Container>
-        {
-          exibirAlert&&( <Alert variant="success">
-                          Categoria cadastrada com sucesso!!
-                        </Alert>)
-        }
+       
       </Pagina>
+      {
+            exibirAlert&&( <Alert variant="success">
+                            Categoria cadastrada com sucesso!!
+                          </Alert>)
+        }
     </>
   );
 }

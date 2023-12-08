@@ -1,7 +1,7 @@
 import Produto from "../Modelo/Produtos.js";
 import Categoria from "../Modelo/Categoria.js";
 export default class ProdutoDAO {
-  constructor() {}
+
 
   async gravar(produto, conexao) {
 
