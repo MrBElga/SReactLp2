@@ -60,7 +60,7 @@ export default function TabelaClientes(props) {
     } else if (status === ESTADO.SUCESSO) {
       toast.success(({ closeToast }) => (
         <div>
-          <p>Cliente cadastrado/atualizado com sucesso!</p>
+          <p>{mensagem}</p>
         </div>
       ));
     }

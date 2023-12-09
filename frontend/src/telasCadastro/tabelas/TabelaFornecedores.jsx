@@ -66,7 +66,7 @@ export default function TabelaFornecedores(props) {
     } else if (status === ESTADO.SUCESSO) {
       toast.success(({ closeToast }) => (
         <div>
-          <p>Fornecedor cadastrado/atualizado com sucesso!</p>
+          <p>{mensagem}</p>
         </div>
       ));
     }
