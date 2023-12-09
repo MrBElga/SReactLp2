@@ -11,6 +11,9 @@ import {
 } from "react-bootstrap";
 import { useSelector, useDispatch } from 'react-redux';
 import { incluirFornecedor, atualizarFornecedor } from '../../redux/fornecedorReducer';
+import ESTADO from "../../recurso/estado.js";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FormCadFornecedor = (props) => {
   const estadoInicialFornecedor = props.fornecedorParaEdicao;
@@ -94,7 +97,24 @@ const FormCadFornecedor = (props) => {
     e.stopPropagation();
     e.preventDefault();
   };
-
+  useEffect(() => {
+    if (status === ESTADO.PENDENTE) {
+      toast(({ closeToast }) => (
+        <div>
+          <Spinner animation="border" role="status"></Spinner>
+          <p>Enviando dados do Fornecedor....</p>
+        </div>
+      ));
+    } else if (status === ESTADO.ERRO) {
+      toast.error(({ closeToast }) => (
+        <div>
+          <p>{mensagem}</p>
+        </div>
+      ));
+    } else if (status === ESTADO.SUCESSO) {
+      toast.dismiss();
+    }
+  }, [status, mensagem]);
   return (
     <Container>
       <Form noValidate validated={validated} onSubmit={manipularSubmit}>

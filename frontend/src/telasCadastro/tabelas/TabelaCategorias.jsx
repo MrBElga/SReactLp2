@@ -71,7 +71,7 @@ export default function TabelaCategorias(props) {
     } else if (status === ESTADO.SUCESSO) {
       toast.success(({ closeToast }) => (
         <div>
-          <p>Categoria cadastrado/atualizado com sucesso!</p>
+          <p>{mensagem}</p>
         </div>
       ));
     }

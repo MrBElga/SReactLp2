@@ -20,12 +20,7 @@ export default function TabelaProdutos(props) {
     dispatch(buscarProdutos());
   }, [dispatch,produtoToDelete]);
 
-  function apagarMensagens() {
-    setTimeout(() => {
-      toast.dismiss();
-    }, 2000);
-    return null;
-  }
+
 
   const customModalStyle = {
     color: "black",
@@ -64,7 +59,7 @@ export default function TabelaProdutos(props) {
       toast(({ closeToast }) => (
         <div>
           <Spinner animation="border" role="status"></Spinner>
-          <p>Enviando dados do produto....</p>
+          <p>Enviando dados do Produtos....</p>
         </div>
       ));
     } else if (status === ESTADO.ERRO) {
@@ -74,9 +69,14 @@ export default function TabelaProdutos(props) {
         </div>
       ));
     } else if (status === ESTADO.SUCESSO) {
-      toast.dismiss();
+      toast.success(({ closeToast }) => (
+        <div>
+          <p>{mensagem}</p>
+        </div>
+      ));
     }
   }, [status, mensagem]);
+  
 
   return (
     <Container>

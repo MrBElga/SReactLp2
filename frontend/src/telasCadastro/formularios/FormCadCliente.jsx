@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./form.css";
 import {
   Button,
@@ -104,27 +104,24 @@ export default function FormCadCliente(props) {
     e.preventDefault();
   }
 
-  if (status === ESTADO.PENDENTE) {
-    toast(
-      ({ closeToast }) => (
+  useEffect(() => {
+    if (status === ESTADO.PENDENTE) {
+      toast(({ closeToast }) => (
         <div>
           <Spinner animation="border" role="status"></Spinner>
-          <p>Buscando categorias....</p>
+          <p>Enviando dados do Cliente....</p>
         </div>
-      ),
-      { toastId: status }
-    );
-  } else if (status === ESTADO.ERRO) {
-    toast.error(
-      ({ closeToast }) => (
+      ));
+    } else if (status === ESTADO.ERRO) {
+      toast.error(({ closeToast }) => (
         <div>
           <p>{mensagem}</p>
         </div>
-      ),
-      { toastId: status }
-    );
-  } else {
-    toast.dismiss();
+      ));
+    } else if (status === ESTADO.SUCESSO) {
+      toast.dismiss();
+    }
+  }, [status, mensagem]);
     return (
       <Container className="container">
         <ToastContainer />
@@ -342,5 +339,5 @@ export default function FormCadCliente(props) {
         </Form>
       </Container>
     );
-  }
+  
 }

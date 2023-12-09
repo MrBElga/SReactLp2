@@ -32,11 +32,7 @@ export default function FormCadProduto(props) {
   const [produto, setProduto] = useState(estadoInicialProduto);
   const [validated, setValidated] = useState(false);
 
-  const {
-    estado: estadoCat,
-    mensagem: mensagemCat,
-    listaCategorias,
-  } = useSelector((state) => state.categoria);
+  const {estadoCat,mensagemCat,listaCategorias,} = useSelector((state) => state.categoria);
 
   const { status, mensagem, listaProdutos } = useSelector(
     (state) => state.produto
@@ -111,7 +107,7 @@ export default function FormCadProduto(props) {
       toast(({ closeToast }) => (
         <div>
           <Spinner animation="border" role="status"></Spinner>
-          <p>Enviando dados do Categoria....</p>
+          <p>Enviando dados do Produtos....</p>
         </div>
       ));
     } else if (status === ESTADO.ERRO) {
