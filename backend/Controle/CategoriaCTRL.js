@@ -54,13 +54,13 @@ export default class CategoriaCTRL {
         console.log(cat_nome, cat_descricao)
         if (id && cat_nome && cat_descricao) {
           const categoria = new Categoria(cat_nome, cat_descricao);
-          categoria.codigo = id;
+          categoria.cat_codigo = id;
           categoria
             .atualizar(conexao)
             .then(() => {
               resposta.json({
                 status: true,
-                listaCategorias,
+                categoria,
               })
             })
             .catch((erro) => {

@@ -1,13 +1,15 @@
 import { Container, Table, Spinner, Button, Modal } from "react-bootstrap";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ESTADO from "../../recurso/estado.js";
 import { buscarProdutos, excluirProduto } from "../../redux/produtoReducer";
+
 import "./tabela.css";
 
 export default function TabelaProdutos(props) {
-  const { estado, mensagem, listaProdutos } = useSelector(
+  const { status, mensagem, listaProdutos } = useSelector(
     (state) => state.produto
   );
   const dispatch = useDispatch();
@@ -57,30 +59,28 @@ export default function TabelaProdutos(props) {
     props.exibirFormulario(true);
   }
 
+  useEffect(() => {
+    if (status === ESTADO.PENDENTE) {
+      toast(({ closeToast }) => (
+        <div>
+          <Spinner animation="border" role="status"></Spinner>
+          <p>Enviando dados do produto....</p>
+        </div>
+      ));
+    } else if (status === ESTADO.ERRO) {
+      toast.error(({ closeToast }) => (
+        <div>
+          <p>{mensagem}</p>
+        </div>
+      ));
+    } else if (status === ESTADO.SUCESSO) {
+      toast.dismiss();
+    }
+  }, [status, mensagem]);
+
   return (
     <Container>
-      {estado === ESTADO.ERRO
-        ? toast.error(
-            ({ closeToast }) => (
-              <div>
-                <p>{mensagem}</p>
-              </div>
-            ),
-            { toastId: estado }
-          )
-        : null}
-      {estado === ESTADO.PENDENTE
-        ? toast(
-            ({ closeToast }) => (
-              <div>
-                <Spinner animation="border" role="status"></Spinner>
-                <p>Processando a requisição...</p>
-              </div>
-            ),
-            { toastId: estado }
-          )
-        : null}
-      {estado === ESTADO.OCIOSO ? apagarMensagens() : null}
+     <ToastContainer/>
       <Button
         type="button"
         onClick={() => {

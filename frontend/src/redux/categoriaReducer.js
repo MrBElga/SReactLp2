@@ -107,7 +107,7 @@ export const atualizarCategoria = createAsyncThunk('atualizarCategoria', async (
       body: JSON.stringify(categoria)
     });
     const dados = await resposta.json();
-  
+    console.log(dados)
     return dados;
   } catch (erro) {
     return {
@@ -181,11 +181,12 @@ const categoriaSlice = createSlice({
       })
       .addCase(atualizarCategoria.fulfilled, (state, action) => {
         if (action.payload.status) {
+          console.log(action.payload)
           state.status = ESTADO.OCIOSO;
           state.mensagem = action.payload.mensagem;
           
-          console.log(action.payload.listaCategorias)
-          const listaTemporariaCategorias = state.listaCategorias.filter(categoria => categoria.cat_nome !== action.payload.listaCategorias.cat_nome);
+         
+          const listaTemporariaCategorias = state.listaCategorias.filter(categoria => categoria.cat_nome !== action.payload.categoria.cat_nome);
           
   
           state.listaCategorias = [...listaTemporariaCategorias, action.payload.listaCategorias];

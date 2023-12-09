@@ -31,7 +31,14 @@ const FormCadCategoria = (props) => {
       [componente.name]: componente.value,
     });
   }
-
+  const limparDados = () => {
+    setCategoria(categoriaVazia);
+    props.setModoEdicao(false);
+    props.setCategoriaParaEdicao(categoriaVazia);
+    setValidated(false);
+    props.exibirFormulario(false);
+  
+  };
   function manipularSubmit(e) {
     const form = e.currentTarget;
 
@@ -43,10 +50,12 @@ const FormCadCategoria = (props) => {
           dispatch(incluirCategoria(categoria));
           props.setExibirAlert(true);
           props.exibirFormulario(false);
+  
         }
       } else {
         dispatch(atualizarCategoria(categoria));
         props.setModoEdicao(false);
+        props.setCategoriaParaEdicao(categoriaVazia);
         props.setExibirAlert(true);
         props.exibirFormulario(false);
       }
@@ -129,9 +138,7 @@ else {
             <Button
               type="button"
               variant={"secondary"}
-              onClick={() => {
-                props.exibirFormulario(false);
-              }}
+              onClick={limparDados}
             >
               Voltar
             </Button>

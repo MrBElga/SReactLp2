@@ -7,16 +7,18 @@ import {
   Row,
   Col,
   FloatingLabel,
-  Alert, Spinner
+  Alert,
+  Spinner,
 } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { incluirCliente, atualizarCliente } from "../../redux/clienteReducer";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import ESTADO from "../../recurso/estado.js";
 
 export default function FormCadCliente(props) {
   const estadoInicialCliente = props.clienteParaEdicao;
-  
+
   const clienteVazio = {
     cli_cpf: "",
     cli_nome: "",
@@ -34,7 +36,9 @@ export default function FormCadCliente(props) {
   const [cpfError, setCpfError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [showAlertErro, setShowAlertErro] = useState(false);
-  const { status, mensagem, listaClientes } = useSelector((state) => state.cliente);
+  const { status, mensagem, listaClientes } = useSelector(
+    (state) => state.cliente
+  );
   const dispatch = useDispatch();
 
   function manipularMudancas(e) {
@@ -53,6 +57,14 @@ export default function FormCadCliente(props) {
     return listaClientes.some((itemCliente) => itemCliente.email === email);
   }
 
+  const limparDados = () => {
+    setCliente(clienteVazio);
+    props.setModoEdicao(false);
+    props.setClienteParaEdicao(clienteVazio)
+    setValidated(false);
+    props.exibirFormulario(false);
+  
+  };
   function manipularSubmit(e) {
     const form = e.currentTarget;
     if (form.checkValidity()) {
@@ -64,7 +76,7 @@ export default function FormCadCliente(props) {
         props.setModoEdicao(false);
         props.setClienteParaEdicao(clienteVazio);
         setCliente(clienteVazio);
-        props.exibirFormulario(false);  
+        props.exibirFormulario(false);
         props.setExibirAlert(true);
       } else {
         if (verificarExistenciaCPF(cliente.cli_cpf)) {
@@ -92,10 +104,30 @@ export default function FormCadCliente(props) {
     e.preventDefault();
   }
 
-
+  if (status === ESTADO.PENDENTE) {
+    toast(
+      ({ closeToast }) => (
+        <div>
+          <Spinner animation="border" role="status"></Spinner>
+          <p>Buscando categorias....</p>
+        </div>
+      ),
+      { toastId: status }
+    );
+  } else if (status === ESTADO.ERRO) {
+    toast.error(
+      ({ closeToast }) => (
+        <div>
+          <p>{mensagem}</p>
+        </div>
+      ),
+      { toastId: status }
+    );
+  } else {
+    toast.dismiss();
     return (
-      <Container  className="container">
-          <ToastContainer />
+      <Container className="container">
+        <ToastContainer />
         <Form noValidate validated={validated} onSubmit={manipularSubmit}>
           <Row>
             <Col md={5}>
@@ -109,7 +141,6 @@ export default function FormCadCliente(props) {
                     onChange={manipularMudancas}
                     readOnly={props.modoEdicao}
                     required
-                   
                   />
                 </FloatingLabel>
                 <Form.Control.Feedback type="invalid">
@@ -288,29 +319,28 @@ export default function FormCadCliente(props) {
               <Button type="submit" variant={"primary"}>
                 {props.modoEdicao ? "Alterar" : "Cadastrar"}
               </Button>
-          
+
               <Button
                 type="button"
                 variant={"secondary"}
-                onClick={() => {
-                  props.exibirFormulario(false);
-                 
-                  setShowAlertErro(false)
-                }}
+                onClick={limparDados}
               >
                 Voltar
               </Button>
             </Col>
           </Row>
-       
-       {showAlertErro && (
-        <Alert variant="danger" onClose={() => setShowAlertErro(false)} dismissible>
-          {emailError||cpfError}
-        
-        </Alert>
-      )}
-        </Form>
 
+          {showAlertErro && (
+            <Alert
+              variant="danger"
+              onClose={() => setShowAlertErro(false)}
+              dismissible
+            >
+              {emailError || cpfError}
+            </Alert>
+          )}
+        </Form>
       </Container>
     );
   }
+}
