@@ -60,7 +60,7 @@ export default class ClienteCTRL {
             .then((cliente) => {
               resposta.json({
                 status: true,
-                codigoGerdao: cliente.cli_codigo,
+                codigoGerdao: cliente,
                 mensagem: "Cliente gravado com sucesso!",
               });
             })

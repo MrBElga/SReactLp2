@@ -22,11 +22,7 @@ export default function TabelaCategorias(props) {
     dispatch(buscarCategorias());
   }, [dispatch, categoriaToDelete]);
 
-  function apagarMensagens() {
-    setTimeout(() => {
-      toast.dismiss();
-    }, 2000);
-  }
+
 
   const customModalStyle = {
     color: "black",
@@ -58,27 +54,28 @@ export default function TabelaCategorias(props) {
     props.setModoEdicao(true);
     props.exibirFormulario(true);
   }
-  if (status === ESTADO.PENDENTE) {
-    toast(
-      ({ closeToast }) => (
+  useEffect(() => {
+    if (status === ESTADO.PENDENTE) {
+      toast(({ closeToast }) => (
         <div>
           <Spinner animation="border" role="status"></Spinner>
-          <p>Buscando categorias....</p>
+          <p>Enviando dados do Categoria....</p>
         </div>
-      ),
-      { toastId: status }
-    );
-  } else if (status === ESTADO.ERRO) {
-    toast.error(
-      ({ closeToast }) => (
+      ));
+    } else if (status === ESTADO.ERRO) {
+      toast.error(({ closeToast }) => (
         <div>
           <p>{mensagem}</p>
         </div>
-      ),
-      { toastId: status }
-    );
-  } else {
-    toast.dismiss();
+      ));
+    } else if (status === ESTADO.SUCESSO) {
+      toast.success(({ closeToast }) => (
+        <div>
+          <p>Categoria cadastrado/atualizado com sucesso!</p>
+        </div>
+      ));
+    }
+  }, [status, mensagem]);
     return (
       <Container>
         <ToastContainer />
@@ -143,5 +140,5 @@ export default function TabelaCategorias(props) {
         </Modal>
       </Container>
     );
-  }
+  
 }

@@ -12,7 +12,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { incluirProduto, atualizarProduto } from "../../redux/produtoReducer";
 import { buscarCategorias } from "../../redux/categoriaReducer";
 import ESTADO from "../../recurso/estado.js";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function FormCadProduto(props) {
   const estadoInicialProduto = props.produtoParaEdicao;
@@ -75,6 +76,14 @@ export default function FormCadProduto(props) {
       },
     });
   }
+  const limparDados = () => {
+    setProduto(ProdutoVazio);
+    props.setModoEdicao(false);
+    props.setProdutoParaEdicao(ProdutoVazio);
+    setValidated(false);
+    props.exibirFormulario(false);
+  
+  };
   function manipularSubmit(e) {
     const form = e.currentTarget;
     if (form.checkValidity()) {
@@ -97,9 +106,27 @@ export default function FormCadProduto(props) {
     e.stopPropagation();
     e.preventDefault();
   }
-
+  useEffect(() => {
+    if (status === ESTADO.PENDENTE) {
+      toast(({ closeToast }) => (
+        <div>
+          <Spinner animation="border" role="status"></Spinner>
+          <p>Enviando dados do Categoria....</p>
+        </div>
+      ));
+    } else if (status === ESTADO.ERRO) {
+      toast.error(({ closeToast }) => (
+        <div>
+          <p>{mensagem}</p>
+        </div>
+      ));
+    } else if (status === ESTADO.SUCESSO) {
+      toast.dismiss();
+    }
+  }, [status, mensagem]);
   return (
     <Container className="container">
+       <ToastContainer />
       <Form noValidate validated={validated} onSubmit={manipularSubmit}>
         <Row>
           <Col md={6}>
@@ -219,9 +246,7 @@ export default function FormCadProduto(props) {
             <Button
               type="button"
               variant={"secondary"}
-              onClick={() => {
-                props.exibirFormulario(false);
-              }}
+              onClick={limparDados}
             >
               Voltar
             </Button>
@@ -230,4 +255,5 @@ export default function FormCadProduto(props) {
       </Form>
     </Container>
   );
+  
 }
