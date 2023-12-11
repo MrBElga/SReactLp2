@@ -18,9 +18,7 @@ export default function TabelaProdutos(props) {
 
   useEffect(() => {
     dispatch(buscarProdutos());
-  }, [dispatch,produtoToDelete]);
-
-
+  }, [dispatch, produtoToDelete]);
 
   const customModalStyle = {
     color: "black",
@@ -31,17 +29,15 @@ export default function TabelaProdutos(props) {
     setShowModal(true);
   }
 
-
   function confirmarExclusao() {
     if (produtoToDelete) {
       dispatch(excluirProduto(produtoToDelete)).then(() => {
-        dispatch(buscarProdutos());  
+        dispatch(buscarProdutos());
         setShowModal(false);
         setProdutoToDelete(null);
       });
     }
   }
-  
 
   function cancelarExclusao() {
     setShowModal(false);
@@ -55,97 +51,101 @@ export default function TabelaProdutos(props) {
   }
 
   if (status === ESTADO.PENDENTE) {
-    toast(({ closeToast }) =>
+    toast(
+      ({ closeToast }) => (
         <div>
-            <Spinner animation="border" role="status"></Spinner>
-            <p>Buscando categorias....</p>
+          <Spinner animation="border" role="status"></Spinner>
+          <p>Buscando produtos....</p>
         </div>
-    ,{toastId:status});
-}
-else if (status === ESTADO.ERRO) {
-    toast.error(({ closeToast }) =>
+      ),
+      { toastId: status }
+    );
+  } else if (status === ESTADO.ERRO) {
+    toast.error(
+      ({ closeToast }) => (
         <div>
-            <p>{mensagem}</p>
-
+          <p>{mensagem}</p>
         </div>
-    , {toastId: status});
-}
-else {
+      ),
+      { toastId: status }
+    );
+  } else {
     toast.dismiss();
-  return (
-    <Container>
-     <ToastContainer/>
-      <Button
-        type="button"
-        onClick={() => {
-          props.exibirFormulario(true);
-        }}
-        variant="primary"
-      >
-        Novo Produto
-      </Button>
-      <Table className="table-custom" striped bordered hover>
-        <thead>
-          <tr>
-            <th>Nome do Produto</th>
-            <th>Descrição</th>
-            <th>Preço</th>
-            <th>Unidades</th>
-            <th>Categoria</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-        
-          {listaProdutos.map((produto) => {
-            return (
-              <tr key={produto.nome}>
-                <td>{produto.nome}</td>
-                <td>{produto.descricao}</td>
-                <td>R$ {produto.preco}</td>
-                <td>{produto.estoque} unidades</td>
-                <td>{produto.categoria.nomeCategoria}</td>
+    return (
+      <Container>
+        <ToastContainer />
+        <Button
+          type="button"
+          onClick={() => {
+            props.exibirFormulario(true);
+          }}
+          variant="primary"
+        >
+          Novo Produto
+        </Button>
+        <Table className="table-custom" striped bordered hover>
+          <thead>
+            <tr>
+              <th>Nome do Produto</th>
+              <th>Descrição</th>
+              <th>Preço</th>
+              <th>Unidades</th>
+              <th>Categoria</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {listaProdutos.map((produto) => {
+              return (
+                <tr key={produto.nome}>
+                  <td>{produto.nome}</td>
+                  <td>{produto.descricao}</td>
+                  <td>R$ {produto.preco}</td>
+                  <td>{produto.estoque} unidades</td>
+                  <td>{produto.categoria.nomeCategoria}</td>
 
-                <td>
-                  <Button
-                    className="btn-excluir"
-                    onClick={() => {
-                      Remover(produto);
-                    }}
-                  >
-                    Excluir
-                  </Button>
-                  <Button
-                    className="btn-editar"
-                    onClick={() => {
-                      editarProduto(produto);
-                    }}
-                  >
-                    Editar
-                  </Button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
-      <Modal show={showModal} onHide={cancelarExclusao} centered>
-        <Modal.Header closeButton>
-          <Modal.Title style={customModalStyle}>Confirmar Exclusão</Modal.Title>
-        </Modal.Header>
-        <Modal.Body style={customModalStyle}>
-          Tem certeza de que deseja excluir este produto?
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={cancelarExclusao}>
-            Cancelar
-          </Button>
-          <Button variant="danger" onClick={confirmarExclusao}>
-            Excluir
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </Container>
-  );
+                  <td>
+                    <Button
+                      className="btn-excluir"
+                      onClick={() => {
+                        Remover(produto);
+                      }}
+                    >
+                      Excluir
+                    </Button>
+                    <Button
+                      className="btn-editar"
+                      onClick={() => {
+                        editarProduto(produto);
+                      }}
+                    >
+                      Editar
+                    </Button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+        <Modal show={showModal} onHide={cancelarExclusao} centered>
+          <Modal.Header closeButton>
+            <Modal.Title style={customModalStyle}>
+              Confirmar Exclusão
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body style={customModalStyle}>
+            Tem certeza de que deseja excluir este produto?
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={cancelarExclusao}>
+              Cancelar
+            </Button>
+            <Button variant="danger" onClick={confirmarExclusao}>
+              Excluir
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </Container>
+    );
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./form.css";
 import {
   Button,
@@ -60,10 +60,9 @@ export default function FormCadCliente(props) {
   const limparDados = () => {
     setCliente(clienteVazio);
     props.setModoEdicao(false);
-    props.setClienteParaEdicao(clienteVazio)
+    props.setClienteParaEdicao(clienteVazio);
     setValidated(false);
     props.exibirFormulario(false);
-  
   };
   function manipularSubmit(e) {
     const form = e.currentTarget;
@@ -105,22 +104,25 @@ export default function FormCadCliente(props) {
   }
 
   if (status === ESTADO.PENDENTE) {
-    toast(({ closeToast }) =>
+    toast(
+      ({ closeToast }) => (
         <div>
-            <Spinner animation="border" role="status"></Spinner>
-            <p>Buscando categorias....</p>
+          <Spinner animation="border" role="status"></Spinner>
+          <p>Buscando clientes....</p>
         </div>
-    ,{toastId:status});
-}
-else if (status === ESTADO.ERRO) {
-    toast.error(({ closeToast }) =>
+      ),
+      { toastId: status }
+    );
+  } else if (status === ESTADO.ERRO) {
+    toast.error(
+      ({ closeToast }) => (
         <div>
-            <p>{mensagem}</p>
-
+          <p>{mensagem}</p>
         </div>
-    , {toastId: status});
-}
-else {
+      ),
+      { toastId: status }
+    );
+  } else {
     toast.dismiss();
     return (
       <Container className="container">
@@ -317,11 +319,7 @@ else {
                 {props.modoEdicao ? "Alterar" : "Cadastrar"}
               </Button>
 
-              <Button
-                type="button"
-                variant={"secondary"}
-                onClick={limparDados}
-              >
+              <Button type="button" variant={"secondary"} onClick={limparDados}>
                 Voltar
               </Button>
             </Col>

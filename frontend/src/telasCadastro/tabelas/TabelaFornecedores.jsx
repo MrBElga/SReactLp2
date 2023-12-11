@@ -50,30 +50,33 @@ export default function TabelaFornecedores(props) {
   }
 
   if (status === ESTADO.PENDENTE) {
-    toast(({ closeToast }) =>
+    toast(
+      ({ closeToast }) => (
         <div>
-            <Spinner animation="border" role="status"></Spinner>
-            <p>Buscando categorias....</p>
+          <Spinner animation="border" role="status"></Spinner>
+          <p>Buscando fornecedores....</p>
         </div>
-    ,{toastId:status});
-}
-else if (status === ESTADO.ERRO) {
-    toast.error(({ closeToast }) =>
+      ),
+      { toastId: status }
+    );
+  } else if (status === ESTADO.ERRO) {
+    toast.error(
+      ({ closeToast }) => (
         <div>
-            <p>{mensagem}</p>
-
+          <p>{mensagem}</p>
         </div>
-    , {toastId: status});
-}
-else {
+      ),
+      { toastId: status }
+    );
+  } else {
     toast.dismiss();
     return (
       <Container>
-        <ToastContainer/>
+        <ToastContainer />
         <Button
           type="button"
           onClick={() => {
-            props.exibirFormulario(true);
+            props.setExibirFormulario(true);
           }}
           variant="primary"
         >

@@ -42,7 +42,8 @@ export default function TelaCadastroFornecedor(props) {
         <Container className="container-centralizadoTelas">
           {exibirFormulario ? (
             <FormCadFornecedor
-              exibirFormulario={setExibirFormulario}
+              exibirFormulario={exibirFormulario}
+              setExibirFormulario={setExibirFormulario}
               fornecedorParaEdicao={fornecedorParaEdicao}
               setFornecedorParaEdicao={setFornecedorParaEdicao}
               modoEdicao={modoEdicao}
@@ -52,7 +53,8 @@ export default function TelaCadastroFornecedor(props) {
             />
           ) : (
             <TabelaFornecedor
-              exibirFormulario={setExibirFormulario}
+              exibirFormulario={exibirFormulario}
+              setExibirFormulario={setExibirFormulario}
               fornecedorParaEdicao={fornecedorParaEdicao}
               setFornecedorParaEdicao={setFornecedorParaEdicao}
               modoEdicao={modoEdicao}

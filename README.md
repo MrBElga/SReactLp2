@@ -9,6 +9,4 @@ Front
   - mod
 - Produtos
   - Adcionar Fotos nos produtos
-  - Adicionar Vendas
-    
 

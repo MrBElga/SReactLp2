@@ -38,7 +38,7 @@ export default function FormCadVenda(props) {
     (state) => state.produto
   );
 
-  const { estadoCliente, mensagemCliente, listaClientes } = useSelector( 
+  const { estadoCliente, mensagemCliente, listaClientes } = useSelector(
     (state) => state.cliente
   );
 
@@ -48,7 +48,7 @@ export default function FormCadVenda(props) {
 
   useEffect(() => {
     dispatch(buscarProdutos());
-    dispatch(buscarClientes()); 
+    dispatch(buscarClientes());
   }, [dispatch]);
 
   function selecionaProduto(e) {
@@ -105,102 +105,102 @@ export default function FormCadVenda(props) {
   };
 
   if (status === ESTADO.PENDENTE) {
-    toast(({ closeToast }) =>
+    toast(
+      ({ closeToast }) => (
         <div>
-            <Spinner animation="border" role="status"></Spinner>
-            <p>Buscando categorias....</p>
+          <Spinner animation="border" role="status"></Spinner>
+          <p>Buscando vendas....</p>
         </div>
-    ,{toastId:status});
-}
-else if (status === ESTADO.ERRO) {
-    toast.error(({ closeToast }) =>
+      ),
+      { toastId: status }
+    );
+  } else if (status === ESTADO.ERRO) {
+    toast.error(
+      ({ closeToast }) => (
         <div>
-            <p>{mensagem}</p>
-
+          <p>{mensagem}</p>
         </div>
-    , {toastId: status});
-}
-else {
+      ),
+      { toastId: status }
+    );
+  } else {
     toast.dismiss();
-  return (
-    <Container className="container">
-      <ToastContainer />
-      <Form noValidate validated={validated} onSubmit={manipularSubmit}>
-        <Row>
-          <Col md={6}>
-            <Form.Group>
-              <FloatingLabel label="Produto:" className="mb-3">
-                <Form.Select
-                  aria-label="Produto"
-                  id="produto"
-                  name="produto"
-                  onChange={selecionaProduto}
-                  value={venda.produto ? venda.produto.codigo : "0"}
-                  style={{ backgroundColor: "#020202", color: "#f0f0f0" }}
-                  required
-                >
-                  <option value="0" defaultValue>
-                    Selecione um produto
-                  </option>
-                  {listaProdutos?.map((produto) => (
-                    <option
-                      key={produto.codigo}
-                      value={produto.codigo}
-                    >
-                      {produto.nome}
+    return (
+      <Container className="container">
+        <ToastContainer />
+        <Form noValidate validated={validated} onSubmit={manipularSubmit}>
+          <Row>
+            <Col md={6}>
+              <Form.Group>
+                <FloatingLabel label="Produto:" className="mb-3">
+                  <Form.Select
+                    aria-label="Produto"
+                    id="produto"
+                    name="produto"
+                    onChange={selecionaProduto}
+                    value={venda.produto ? venda.produto.codigo : "0"}
+                    style={{ backgroundColor: "#020202", color: "#f0f0f0" }}
+                    required
+                  >
+                    <option value="0" defaultValue>
+                      Selecione um produto
                     </option>
-                  ))}
-                </Form.Select>
-              </FloatingLabel>
-              <Form.Control.Feedback type="invalid">
-                Selecione um produto!
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group>
-              <FloatingLabel label="Cliente:" className="mb-3">
-                <Form.Select
-                  aria-label="Cliente"
-                  id="cliente"
-                  name="cliente"
-                  onChange={selecionaCliente}
-                  value={venda.cliente ? venda.cliente.codigo : "0"}
-                  style={{ backgroundColor: "#020202", color: "#f0f0f0" }}
-                  required
-                >
-                  <option value="0" defaultValue>
-                    Selecione um cliente
-                  </option>
-                  {listaClientes?.map((cliente) => (
-                    <option
-                      key={cliente.cli_codigo}
-                      value={cliente.cli_codigo}
-                    >
-                      {cliente.cli_nome}
+                    {listaProdutos?.map((produto) => (
+                      <option key={produto.codigo} value={produto.codigo}>
+                        {produto.nome}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </FloatingLabel>
+                <Form.Control.Feedback type="invalid">
+                  Selecione um produto!
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group>
+                <FloatingLabel label="Cliente:" className="mb-3">
+                  <Form.Select
+                    aria-label="Cliente"
+                    id="cliente"
+                    name="cliente"
+                    onChange={selecionaCliente}
+                    value={venda.cliente ? venda.cliente.codigo : "0"}
+                    style={{ backgroundColor: "#020202", color: "#f0f0f0" }}
+                    required
+                  >
+                    <option value="0" defaultValue>
+                      Selecione um cliente
                     </option>
-                  ))}
-                </Form.Select>
-              </FloatingLabel>
-              <Form.Control.Feedback type="invalid">
-                Selecione um cliente!
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={6} className="d-flex justify-content-end">
-            <Button type="submit" variant={"primary"}>
-              {props.modoEdicao ? "Alterar" : "Cadastrar"}
-            </Button>
+                    {listaClientes?.map((cliente) => (
+                      <option
+                        key={cliente.cli_codigo}
+                        value={cliente.cli_codigo}
+                      >
+                        {cliente.cli_nome}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </FloatingLabel>
+                <Form.Control.Feedback type="invalid">
+                  Selecione um cliente!
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6} className="d-flex justify-content-end">
+              <Button type="submit" variant={"primary"}>
+                {props.modoEdicao ? "Alterar" : "Cadastrar"}
+              </Button>
 
-            <Button type="button" variant={"secondary"} onClick={limparDados}>
-              Voltar
-            </Button>
-          </Col>
-        </Row>
-      </Form>
-    </Container>
-  );
+              <Button type="button" variant={"secondary"} onClick={limparDados}>
+                Voltar
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </Container>
+    );
   }
 }

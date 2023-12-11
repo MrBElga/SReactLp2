@@ -22,8 +22,6 @@ export default function TabelaCategorias(props) {
     dispatch(buscarCategorias());
   }, [dispatch, categoriaToDelete]);
 
-
-
   const customModalStyle = {
     color: "black",
   };
@@ -55,22 +53,25 @@ export default function TabelaCategorias(props) {
     props.exibirFormulario(true);
   }
   if (status === ESTADO.PENDENTE) {
-    toast(({ closeToast }) =>
+    toast(
+      ({ closeToast }) => (
         <div>
-            <Spinner animation="border" role="status"></Spinner>
-            <p>Buscando categorias....</p>
+          <Spinner animation="border" role="status"></Spinner>
+          <p>Buscando categorias....</p>
         </div>
-    ,{toastId:status});
-}
-else if (status === ESTADO.ERRO) {
-    toast.error(({ closeToast }) =>
+      ),
+      { toastId: status }
+    );
+  } else if (status === ESTADO.ERRO) {
+    toast.error(
+      ({ closeToast }) => (
         <div>
-            <p>{mensagem}</p>
-
+          <p>{mensagem}</p>
         </div>
-    , {toastId: status});
-}
-else {
+      ),
+      { toastId: status }
+    );
+  } else {
     toast.dismiss();
     return (
       <Container>
