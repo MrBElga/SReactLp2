@@ -54,28 +54,24 @@ export default function TabelaCategorias(props) {
     props.setModoEdicao(true);
     props.exibirFormulario(true);
   }
-  useEffect(() => {
-    if (status === ESTADO.PENDENTE) {
-      toast(({ closeToast }) => (
+  if (status === ESTADO.PENDENTE) {
+    toast(({ closeToast }) =>
         <div>
-          <Spinner animation="border" role="status"></Spinner>
-          <p>Enviando dados do Categoria....</p>
+            <Spinner animation="border" role="status"></Spinner>
+            <p>Buscando categorias....</p>
         </div>
-      ));
-    } else if (status === ESTADO.ERRO) {
-      toast.error(({ closeToast }) => (
+    ,{toastId:status});
+}
+else if (status === ESTADO.ERRO) {
+    toast.error(({ closeToast }) =>
         <div>
-          <p>{mensagem}</p>
+            <p>{mensagem}</p>
+
         </div>
-      ));
-    } else if (status === ESTADO.SUCESSO) {
-      toast.success(({ closeToast }) => (
-        <div>
-          <p>{mensagem}</p>
-        </div>
-      ));
-    }
-  }, [status, mensagem]);
+    , {toastId: status});
+}
+else {
+    toast.dismiss();
     return (
       <Container>
         <ToastContainer />
@@ -140,5 +136,5 @@ export default function TabelaCategorias(props) {
         </Modal>
       </Container>
     );
-  
+  }
 }
