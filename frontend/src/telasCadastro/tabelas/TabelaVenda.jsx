@@ -1,4 +1,4 @@
-import { Container, Table, Button, Modal } from "react-bootstrap";
+import { Container, Table, Button, Modal, Spinner } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState, useEffect } from "react";
@@ -50,16 +50,24 @@ export default function TabelaVendas(props) {
     console.log("Editar venda:", venda);
   };
 
-  useEffect(() => {
-    if (status === ESTADO.PENDENTE) {
-      toast.info("Enviando dados das vendas...");
-    } else if (status === ESTADO.ERRO) {
-      toast.error(mensagem);
-    } else if (status === ESTADO.SUCESSO) {
-      toast.success(mensagem);
-    }
-  }, [status, mensagem]);
+  if (status === ESTADO.PENDENTE) {
+    toast(({ closeToast }) =>
+        <div>
+            <Spinner animation="border" role="status"></Spinner>
+            <p>Buscando categorias....</p>
+        </div>
+    ,{toastId:status});
+}
+else if (status === ESTADO.ERRO) {
+    toast.error(({ closeToast }) =>
+        <div>
+            <p>{mensagem}</p>
 
+        </div>
+    , {toastId: status});
+}
+else {
+    toast.dismiss();
   return (
     <Container>
       <ToastContainer />
@@ -118,4 +126,5 @@ export default function TabelaVendas(props) {
       </Modal>
     </Container>
   );
+  }
 }

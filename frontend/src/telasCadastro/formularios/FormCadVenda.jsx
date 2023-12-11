@@ -104,25 +104,24 @@ export default function FormCadVenda(props) {
     props.exibirFormulario(false);
   };
 
-  useEffect(() => {
-    if (status === ESTADO.PENDENTE) {
-      toast(({ closeToast }) => (
+  if (status === ESTADO.PENDENTE) {
+    toast(({ closeToast }) =>
         <div>
-          <Spinner animation="border" role="status"></Spinner>
-          <p>Enviando dados da Venda....</p>
+            <Spinner animation="border" role="status"></Spinner>
+            <p>Buscando categorias....</p>
         </div>
-      ));
-    } else if (status === ESTADO.ERRO) {
-      toast.error(({ closeToast }) => (
+    ,{toastId:status});
+}
+else if (status === ESTADO.ERRO) {
+    toast.error(({ closeToast }) =>
         <div>
-          <p>{mensagem}</p>
-        </div>
-      ));
-    } else if (status === ESTADO.SUCESSO) {
-      toast.dismiss();
-    }
-  }, [status, mensagem]);
+            <p>{mensagem}</p>
 
+        </div>
+    , {toastId: status});
+}
+else {
+    toast.dismiss();
   return (
     <Container className="container">
       <ToastContainer />
@@ -203,4 +202,5 @@ export default function FormCadVenda(props) {
       </Form>
     </Container>
   );
+  }
 }

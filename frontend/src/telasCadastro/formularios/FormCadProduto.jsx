@@ -102,24 +102,24 @@ export default function FormCadProduto(props) {
     e.stopPropagation();
     e.preventDefault();
   }
-  useEffect(() => {
-    if (status === ESTADO.PENDENTE) {
-      toast(({ closeToast }) => (
+  if (status === ESTADO.PENDENTE) {
+    toast(({ closeToast }) =>
         <div>
-          <Spinner animation="border" role="status"></Spinner>
-          <p>Enviando dados do Produtos....</p>
+            <Spinner animation="border" role="status"></Spinner>
+            <p>Buscando categorias....</p>
         </div>
-      ));
-    } else if (status === ESTADO.ERRO) {
-      toast.error(({ closeToast }) => (
+    ,{toastId:status});
+}
+else if (status === ESTADO.ERRO) {
+    toast.error(({ closeToast }) =>
         <div>
-          <p>{mensagem}</p>
+            <p>{mensagem}</p>
+
         </div>
-      ));
-    } else if (status === ESTADO.SUCESSO) {
-      toast.dismiss();
-    }
-  }, [status, mensagem]);
+    , {toastId: status});
+}
+else {
+    toast.dismiss();
   return (
     <Container className="container">
        <ToastContainer />
@@ -251,5 +251,5 @@ export default function FormCadProduto(props) {
       </Form>
     </Container>
   );
-  
+ }
 }
