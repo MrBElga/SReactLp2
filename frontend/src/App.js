@@ -7,6 +7,7 @@ import ContextoUsuario from "./contextos/ContextoGlobal";
 import TelaCadastroProduto from './telasCadastro/TelaCadastroProduto';
 import TelaCadastroCategoria from './telasCadastro/TelaCadastroCategorias';
 import TelaLogin from './login/TelaLogin';
+import TelaVenda from './telasCadastro/TelaCadastroVenda.jsx'
 import Tela404 from './telasCadastro/Tela404';
 import Pagina from './templates/Pagina';
 import Home from './homePage/homePage'
@@ -50,7 +51,7 @@ function App() {
                   <Route path="/fornecedor" element={<TelaCadastroFornecedor />} />
                   <Route path="/produto" element={<TelaCadastroProduto />} />
                   <Route path="/categoria" element={<TelaCadastroCategoria />} />
-                
+                  <Route path="/venda" element={<TelaVenda/>} />
                   <Route path="*" element={<Tela404 />} />
                 </>
               )}

@@ -23,6 +23,8 @@ import categoriaIconOn from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v
 import produtosIconOn from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/3_Menu-2/Items_on.svg';
 import forumIconOn from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/1_Menu-1/Message_on.svg';
 import contaIconOn from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/1_Menu-1/Man_on.svg';
+import vendasIcon from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/3_Menu-2/Guild_on.svg';
+import vendasIconOn from './Image/SAO_icons/SAO_All-in-one_v4.000/SAO_Icons_v3.300/3_Menu-2/Guild_on.svg';
 
 export default function Menu(props) {
   const [activeIcon, setActiveIcon] = useState(null);
@@ -54,6 +56,7 @@ export default function Menu(props) {
     forum: activeIcon === 'forum' ? forumIconOn : forumIcon,
     conta: activeIcon === 'conta' ? contaIconOn : contaIcon,
     config: activeIcon === 'config' ? configIconOn : configIcon,
+    vendas: activeIcon === 'vendas' ? vendasIconOn : vendasIcon,
   };
 
   const isMenuActive = activeIcon === 'config';
@@ -142,6 +145,14 @@ export default function Menu(props) {
                   >
                     <img src={iconMappings.login} alt="logout" className="menu-icon" /> Logout
                   </NavDropdown.Item>
+                  <NavDropdown.Item
+                  as={Link}
+                  to="/venda"
+                  className="nav-link"
+                  eventKey="vendas"
+                 >
+                  <img src={iconMappings.vendas} alt="vendas" className="menu-icon" /> Vendas
+                </NavDropdown.Item>
                 </NavDropdown>
               )}
             </>
