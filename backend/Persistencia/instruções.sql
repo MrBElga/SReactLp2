@@ -59,6 +59,14 @@ CREATE TABLE produtos (
     FOREIGN KEY (cat_codigo) REFERENCES categorias (cat_codigo)
 );
 
+CREATE TABLE vendas(
+    ven_codigo INT AUTO_INCREMENT PRIMARY KEY,
+    prod_codigo INT,
+    cli_codigo INT,
+    FOREIGN KEY (prod_codigo) REFERENCES produtos (prod_codigo),
+    FOREIGN KEY (cli_codigo) REFERENCES clientes (cli_codigo)
+);
+
 INSERT INTO adm (adm_nome, adm_senha, usu_prior) VALUES
 ('Admin 1', 'pass123', 1),
 ('Admin 2', 'securePass', 1),
@@ -179,3 +187,16 @@ INSERT INTO produtos (prod_nome, prod_descricao, prod_preco, prod_estoque, cat_c
 ('Cetro do Infinito', 'Concede poderes para controlar o tempo.', 1999.99, 1, 10),
 ('Artefato do Destino', 'Item que determina o desfecho de batalhas cruciais.', 2499.99, 1, 10);
 
+INSERT INTO vendas (prod_codigo, cli_codigo) VALUES
+(1, 1),
+(2, 2),
+(3, 1),
+(4, 3),
+(5, 5),
+(6, 4),
+(7, 6),
+(8, 7),
+(9, 8),
+(10, 9),
+(11, 10),
+(12, 1);

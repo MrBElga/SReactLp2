@@ -3,6 +3,7 @@ import clienteSlice from './clienteReducer';
 import categoriaSlice from './categoriaReducer'
 import fornecedorSlice from './fornecedorReducer'
 import produtoSlice from './produtoReducer'
+import vendaSlice from './vendaReducer'
 
 const store = configureStore({
     reducer:{
@@ -10,6 +11,7 @@ const store = configureStore({
         categoria: categoriaSlice,
         fornecedor: fornecedorSlice,
         produto: produtoSlice,
+        venda: vendaSlice,
     }
 });
 
